@@ -1,0 +1,7 @@
+docs/
+dist/
+tmp/
+node_modules/
+vendor/
+live-dist/
+.idea/

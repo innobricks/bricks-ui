@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Bricks--单元测试</title>
+    <link rel="stylesheet" href="../qunit/qunit.css">
+    <script src="../qunit/qunit.js"></script>
+    <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script src="../handlebars/handlebars.js"></script>
+
+    <script type="text/javascript">
+      window.loadScript = function(url) {
+        document.write(unescape('%3Cscript src="'+url+'"%3E%3C/script%3E'));
+      };
+    </script>
+
+    <script src="./qunit_configuration.js"></script>
+
+    <script src="./ember_configuration.js"></script>
+    <script src="../ember/ember.js"></script>
+    <script>
+      var dist = QUnit.urlParams.dist;
+
+      if (dist) {
+        loadScript('../bricks.' + dist + '.js');
+      } else {
+        loadScript('../bricks.js');
+      }
+    </script>
+
+    <script src="../bricks-tests.js"></script>
+    <script>
+      var packages     = QUnit.urlParams.package;
+      packages = (packages && packages.split(',')) || [".*"];
+      var packageRegexp   = new RegExp('^('+packages.join('|')+')/');
+
+      var skipPackages = QUnit.urlParams.skipPackage;
+      skipPackages = (skipPackages && skipPackages.split(',')) || [];
+      var skipPackageRegexp   = new RegExp('^('+skipPackages.join('|')+')/');
+
+      for (var moduleName in Bricks.__loader.registry) {
+        if (!moduleName.match(packageRegexp))   { continue; }
+        if (moduleName.match(skipPackageRegexp)) { continue; }
+
+        if (moduleName.match(/[_-]test$/)) { Bricks.__loader.require(moduleName); }
+        if (!QUnit.urlParams.nojshint && moduleName.match(/[-_.]jshint$/)) { Bricks.__loader.require(moduleName); }
+      }
+    </script>
+  </head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+</body>
+</html>
