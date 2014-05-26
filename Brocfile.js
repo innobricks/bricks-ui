@@ -118,7 +118,7 @@ var bowerFiles = [
     destDir: '/qunit'
   }),
 
-  pickFiles('vendor/jquery/dist', {
+  pickFiles('vendor/jquery', {
     files: ['jquery.js'],
     srcDir: '/',
     destDir: '/jquery'
