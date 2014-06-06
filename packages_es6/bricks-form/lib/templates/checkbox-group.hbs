@@ -1,0 +1,18 @@
+{{label-field propertyBinding="view.property" textBinding="view.fieldLabel"}}
+<div class="{{unbound view.wrapperConfig.controlsWrapperClass}}">
+    {{#each item in view.elements itemController="checkboxItem"}}
+        <div class="checkbox block">
+            <label>
+                {{view Ember.Checkbox checkedBinding="selected"}}
+                {{unbound label}}
+            </label>
+        </div>
+    {{/each}}
+
+    {{#if view.showError}}
+        {{error-field propertyBinding="view.property"}}
+    {{/if}}
+    {{#if view.hint}}
+        {{hint-field propertyBinding="view.property" textBinding="view.hint"}}
+    {{/if}}
+</div>

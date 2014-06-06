@@ -13,6 +13,7 @@ var removeFile = require('broccoli-file-remover');
 var exportTree = require('broccoli-export-tree');
 var jshintTree = require('broccoli-jshint');
 var replace = require('broccoli-replace');
+var templateCompiler = require('broccoli-ember-hbs-template-compiler')
 
 var calculateVersion = require('./lib/calculate-version');
 
@@ -20,8 +21,7 @@ var env = process.env.BROCCOLI_ENV || 'test';
 var disableJSHint = !!process.env.NO_JSHINT || false;
 var disableDefeatureify = !!process.env.NO_DEFEATUREIFY || env === 'test' || false;
 
-var generateTemplateCompiler = require('./lib/broccoli-ember-template-compiler-generator');
-var inlineTemplatePrecompiler = require('./lib/broccoli-ember-inline-template-precompiler');
+
 
 function defeatureifyConfig(options) {
   var stripDebug = false;
@@ -68,8 +68,8 @@ function concatES6(sourceTrees, options) {
   if (!disableDefeatureify) {
     sourceTrees = defeatureify(sourceTrees, defeatureifyConfig(options.defeatureifyOptions));
   }
-
-  var concatTrees = [loader, 'generators', iifeStart, iifeStop, sourceTrees];
+  //TODO 暂时将模板拼接在源码文件后面
+  var concatTrees = [loader, 'generators', iifeStart, iifeStop, sourceTrees,templates];
   if (options.includeLoader === true) {
     inputFiles.unshift('loader.js');
   }
@@ -98,6 +98,7 @@ function concatES6(sourceTrees, options) {
     outputFile: destFile
   });
 }
+
 
 var testConfig = pickFiles('tests', {
   srcDir: '/',
@@ -144,16 +145,21 @@ var iifeStop  = writeFile('iife-stop', '})();');
 var vendoredPackages = {
   'loader':           vendoredPackage('loader')
 };
-/*
-var emberHandlebarsCompiler = pickFiles('packages_es6/ember-handlebars-compiler/lib', {
-  files: ['main.js'],
-  srcDir: '/',
-  destDir: '/'
-});
-*/
-//var templateCompilerTree = generateTemplateCompiler(emberHandlebarsCompiler, { srcFile: 'main.js'});
+
 
 var packages = require('./lib/packages');
+
+//precompile template *.hbs *.handlebars
+var sourceTree=pickFiles("packages_es6",{
+    srcDir:"/",
+    files:["**/*.hbs"],
+    destDir: '/'
+});
+var templates = pickFiles(sourceTree, {
+    srcDir:"/",
+    destDir: '/templates'
+})
+templates = templateCompiler(templates);
 
 function es6Package(packageName) {
   var pkg = packages[packageName],
@@ -170,6 +176,8 @@ function es6Package(packageName) {
     srcDir: '/',
     destDir: packageName
   });
+
+
 
   libTree = moveFile(libTree, {
     srcFile: packageName + '/main.js',
@@ -286,6 +294,8 @@ vendorTrees = mergeTrees(vendorTrees);
 sourceTrees = mergeTrees(sourceTrees);
 testTrees   = mergeTrees(testTrees);
 
+
+
 var compiledSource = concatES6(sourceTrees, {
   includeLoader: true,
   bootstrapModule: 'bricks-metal',
@@ -319,7 +329,8 @@ var compiledTests = concatES6(testTrees, {
   destFile: '/bricks-tests.js'
 });
 
-var distTrees = [ compiledSource, compiledTests, testConfig, bowerFiles];
+
+var distTrees = [templates, compiledSource, compiledTests, testConfig, bowerFiles];
 
 if (env !== 'test') {
   distTrees.push(prodCompiledSource);
