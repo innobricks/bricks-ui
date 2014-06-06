@@ -351,4 +351,59 @@ var distExportTree = exportTree(distTrees, {
   destDir: 'live-dist'
 });
 
+
+/**
+ * START项目所依赖的第三方插件打包
+ */
+var vendorPath=(function(){
+  var manifest,fs=require('fs'),
+    regexp=/^\/\/=require (.*)$/igm,
+    result,fileSequence=[];
+  ;
+
+  manifest=fs.readFileSync("./manifest.js").toString();
+
+  while((result=regexp.exec(manifest))!==null){
+    fileSequence.push(result[1]);
+  }
+  return fileSequence;
+})();
+
+
+var vendorResource=pickFiles('vendor/',{
+  files:vendorPath,
+  srcDir: '/',
+  destDir:'vendorResource'
+});
+
+vendorResource=concat(vendorResource,{
+  inputFiles: [
+    '**/*.js'
+  ],
+  outputFile: '/all.js',
+  separator: '\n' // (optional, defaults to \n)
+});
+distTrees=mergeTrees([distTrees,vendorResource]);
+
+
+//var styleResource=pickFiles('/',{
+//  srcDir:'/',
+//  files:'manifest.less',
+//  destDir:'vendorResource'
+//})
+//
+//styleResource=less(styleResource,{
+//  paths: ['.', './vendor'], // Specify search paths for @import directives
+//  filename: 'manifest.less'
+//});
+//
+//vendorResource = exportTree(mergeTrees(vendorResource,styleResource), {
+//  destDir: 'dist/vendor/'
+//});
+/**
+ * END项目所依赖的第三方插件打包
+ */
+
+
+
 module.exports = mergeTrees([distTrees, distExportTree]);

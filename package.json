@@ -39,5 +39,8 @@
     "rimraf": "~2.2.8",
     "rsvp": "~3.0.6",
     "yuidocjs": "~0.3.46"
+  },
+  "dependencies": {
+    "broccoli-less": "^0.2.0"
   }
 }
