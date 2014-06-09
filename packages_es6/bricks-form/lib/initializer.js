@@ -1,4 +1,6 @@
 import formController from "./form-setup";
+import formController from "./form-controller";
+import chosen_select from "./chosen-select"
 
 Ember.onLoad("Ember.Application", function (Application) {
 
