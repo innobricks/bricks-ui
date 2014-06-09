@@ -1,9 +1,9 @@
-import formController from "./form-controller";
+import formController from "./form-setup";
 
-Ember.onLoad("Ember.Application",function(Application){
+Ember.onLoad("Ember.Application", function (Application) {
 
     Application.initializer({
-        name:"form-controller",
-        initialize:formController
+        name: "form-controller",
+        initialize: formController
     });
 });

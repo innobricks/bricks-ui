@@ -1,7 +1,7 @@
 import CheckboxItemController from './checkbox_item';
 var RadioItemController = CheckboxItemController.extend({
     selected: function () {
-        return this.get('content') == this.get('parentController.elementsOfProperty');
+        return this.get('content') === this.get('parentController.elementsOfProperty');
     }.property(),
     selectedChanged: function () {
         var content = this.get('content');
@@ -12,4 +12,5 @@ var RadioItemController = CheckboxItemController.extend({
     }.observes('selected')
 });
 
-export default RadioItemController;
+export default
+RadioItemController;

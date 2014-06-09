@@ -1,5 +1,4 @@
-var Em=window.Ember;
-var CheckboxItemController = Em.ObjectController.extend({
+var CheckboxItemController = Ember.ObjectController.extend({
     selected: function () {
         var content = this.get('content');
         var list = this.get('parentController.elementsOfProperty');
@@ -22,4 +21,5 @@ var CheckboxItemController = Em.ObjectController.extend({
         parent.validate();
     }.observes('selected')
 });
-export default CheckboxItemController;
+export default
+CheckboxItemController;
