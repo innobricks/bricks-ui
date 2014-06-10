@@ -41,6 +41,6 @@
     "yuidocjs": "~0.3.46"
   },
   "dependencies": {
-    "broccoli-less": "^0.2.0"
+    "broccoli-less-single": "^0.1.4"
   }
 }

@@ -13,8 +13,8 @@ var removeFile = require('broccoli-file-remover');
 var exportTree = require('broccoli-export-tree');
 var jshintTree = require('broccoli-jshint');
 var replace = require('broccoli-replace');
-var templateCompiler = require('broccoli-ember-hbs-template-compiler')
-
+var templateCompiler = require('broccoli-ember-hbs-template-compiler');
+var compileLess = require('broccoli-less-single');
 var calculateVersion = require('./lib/calculate-version');
 
 var env = process.env.BROCCOLI_ENV || 'test';
@@ -369,37 +369,21 @@ var vendorPath=(function(){
   return fileSequence;
 })();
 
-
-var vendorResource=pickFiles('vendor/',{
-  files:vendorPath,
-  srcDir: '/',
-  destDir:'vendorResource'
+var vendorAll = pickFiles('./vendor', {
+  srcDir: '/all',
+  files: ['**/*.*', '**/*.*'],
+  destDir: '/vendor/all'
 });
 
-vendorResource=concat(vendorResource,{
-  inputFiles: [
-    '**/*.js'
-  ],
-  outputFile: '/all.js',
+var vendorResource=concat('./',{
+  inputFiles: vendorPath,
+  outputFile: '/vendor/all.js',
   separator: '\n' // (optional, defaults to \n)
 });
-distTrees=mergeTrees([distTrees,vendorResource]);
 
 
-//var styleResource=pickFiles('/',{
-//  srcDir:'/',
-//  files:'manifest.less',
-//  destDir:'vendorResource'
-//})
-//
-//styleResource=less(styleResource,{
-//  paths: ['.', './vendor'], // Specify search paths for @import directives
-//  filename: 'manifest.less'
-//});
-//
-//vendorResource = exportTree(mergeTrees(vendorResource,styleResource), {
-//  destDir: 'dist/vendor/'
-//});
+
+distTrees=mergeTrees([distTrees,vendorResource,vendorAll]);
 /**
  * END项目所依赖的第三方插件打包
  */

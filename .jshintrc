@@ -1,5 +1,7 @@
 {
     "predef": [
+        "$",
+        "UM",
         "QUnit",
         "define",
         "console",

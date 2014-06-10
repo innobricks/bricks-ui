@@ -1,7 +1,8 @@
+!/vendor/all
 docs/
 dist/
 tmp/
 node_modules/
-vendor/
+/vendor/
 live-dist/
 .idea/
