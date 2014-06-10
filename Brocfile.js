@@ -1,4 +1,4 @@
-var fs  = require('fs');
+var fs = require('fs');
 var util = require('util');
 var path = require('path');
 var pickFiles = require('broccoli-static-compiler');
@@ -22,20 +22,23 @@ var disableJSHint = !!process.env.NO_JSHINT || false;
 var disableDefeatureify = !!process.env.NO_DEFEATUREIFY || env === 'test' || false;
 
 
-
 function defeatureifyConfig(options) {
   var stripDebug = false;
   var options = options || {};
   var configJson = JSON.parse(fs.readFileSync("features.json").toString());
 
-  if (configJson.hasOwnProperty('stripDebug')) { stripDebug = configJson.stripDebug; }
-  if (options.hasOwnProperty('stripDebug')) { stripDebug = options.stripDebug; }
+  if (configJson.hasOwnProperty('stripDebug')) {
+    stripDebug = configJson.stripDebug;
+  }
+  if (options.hasOwnProperty('stripDebug')) {
+    stripDebug = options.stripDebug;
+  }
 
   return {
-    enabled:           options.features || configJson.features,
-    debugStatements:   options.debugStatements || configJson.debugStatements,
-    namespace:         options.namespace || configJson.namespace,
-    enableStripDebug:  stripDebug
+    enabled: options.features || configJson.features,
+    debugStatements: options.debugStatements || configJson.debugStatements,
+    namespace: options.namespace || configJson.namespace,
+    enableStripDebug: stripDebug
   };
 }
 
@@ -69,7 +72,7 @@ function concatES6(sourceTrees, options) {
     sourceTrees = defeatureify(sourceTrees, defeatureifyConfig(options.defeatureifyOptions));
   }
   //TODO 暂时将模板拼接在源码文件后面
-  var concatTrees = [loader, 'generators', iifeStart, iifeStop, sourceTrees,templates];
+  var concatTrees = [loader, 'generators', iifeStart, iifeStop, sourceTrees, templates];
   if (options.includeLoader === true) {
     inputFiles.unshift('loader.js');
   }
@@ -90,7 +93,9 @@ function concatES6(sourceTrees, options) {
     inputFiles.unshift('license.js');
   }
 
-  if (options.vendorTrees) { concatTrees.push(options.vendorTrees); }
+  if (options.vendorTrees) {
+    concatTrees.push(options.vendorTrees);
+  }
 
   return concat(mergeTrees(concatTrees), {
     wrapInEval: options.wrapInEval,
@@ -125,9 +130,9 @@ var bowerFiles = [
     destDir: '/jquery'
   }),
   pickFiles('vendor/ember', {
-      files: ['ember.js'],
-      srcDir: '/',
-      destDir: '/ember'
+    files: ['ember.js'],
+    srcDir: '/',
+    destDir: '/ember'
   }),
 
   pickFiles('vendor/handlebars', {
@@ -140,30 +145,30 @@ var bowerFiles = [
 bowerFiles = mergeTrees(bowerFiles);
 
 var iifeStart = writeFile('iife-start', '(function() {');
-var iifeStop  = writeFile('iife-stop', '})();');
+var iifeStop = writeFile('iife-stop', '})();');
 
 var vendoredPackages = {
-  'loader':           vendoredPackage('loader')
+  'loader': vendoredPackage('loader')
 };
 
 
 var packages = require('./lib/packages');
 
 //precompile template *.hbs *.handlebars
-var sourceTree=pickFiles("packages_es6",{
-    srcDir:"/",
-    files:["**/*.hbs"],
-    destDir: '/'
+var sourceTree = pickFiles("packages_es6", {
+  srcDir: "/",
+  files: ["**/*.hbs"],
+  destDir: '/'
 });
 var templates = pickFiles(sourceTree, {
-    srcDir:"/",
-    destDir: '/templates'
+  srcDir: "/",
+  destDir: '/templates'
 })
 templates = templateCompiler(templates);
 
 function es6Package(packageName) {
   var pkg = packages[packageName],
-      libTree;
+    libTree;
 
   if (pkg['trees']) {
     return pkg['trees'];
@@ -178,7 +183,6 @@ function es6Package(packageName) {
   });
 
 
-
   libTree = moveFile(libTree, {
     srcFile: packageName + '/main.js',
     destFile: packageName + '.js'
@@ -187,9 +191,9 @@ function es6Package(packageName) {
   //libTree = mergeTrees([libTree, templateCompilerTree]);
   //libTree = inlineTemplatePrecompiler(libTree);
   /*libTree = removeFile(libTree, {
-    srcFile: 'ember-template-compiler.js'
-  });
-  */
+   srcFile: 'ember-template-compiler.js'
+   });
+   */
   var libJSHintTree = jshintTree(libTree, {
     destFile: '/' + packageName + '/tests/lib-jshint.js'
   });
@@ -223,12 +227,16 @@ function es6Package(packageName) {
     inputFiles: ['**/*.js'],
     destFile: '/packages/' + packageName + '-tests.js'
   })
-  if (!pkg.skipTests) { compiledTrees.push(compiledTest); }
+  if (!pkg.skipTests) {
+    compiledTrees.push(compiledTest);
+  }
 
   compiledTrees = mergeTrees(compiledTrees);
 
   pkg['trees'] = {lib: libTree, compiledTree: compiledTrees, vendorTrees: vendorTrees};
-  if (!pkg.skipTests) { pkg['trees'].tests = testTrees; }
+  if (!pkg.skipTests) {
+    pkg['trees'].tests = testTrees;
+  }
 
   return pkg.trees;
 }
@@ -247,22 +255,22 @@ function packageDependencyTree(packageName) {
   var libTrees = [];
   var vendorTrees = [];
 
-  vendoredDependencies.forEach(function(dependency) {
+  vendoredDependencies.forEach(function (dependency) {
     vendorTrees.push(vendoredPackages[dependency]);
   });
 
-  requiredDependencies.forEach(function(dependency) {
+  requiredDependencies.forEach(function (dependency) {
     libTrees.concat(packageDependencyTree(dependency));
     libTrees.push(es6Package(dependency).lib);
   }, this);
 
-  packages[packageName]['vendorTrees']            = mergeTrees(vendorTrees, {overwrite: true});
+  packages[packageName]['vendorTrees'] = mergeTrees(vendorTrees, {overwrite: true});
   return packages[packageName]['dependencyTrees'] = mergeTrees(libTrees, {overwrite: true});
 }
 
-var vendorTrees          = [];
-var sourceTrees          = [];
-var testTrees            = [];
+var vendorTrees = [];
+var sourceTrees = [];
+var testTrees = [];
 var compiledPackageTrees = [];
 
 for (var packageName in packages) {
@@ -271,7 +279,7 @@ for (var packageName in packages) {
   var packagesTrees = currentPackage['trees'];
 
   if (currentPackage['vendorRequirements']) {
-    currentPackage['vendorRequirements'].forEach(function(dependency) {
+    currentPackage['vendorRequirements'].forEach(function (dependency) {
       vendorTrees.push(vendoredPackages[dependency]);
     });
   }
@@ -292,8 +300,7 @@ for (var packageName in packages) {
 compiledPackageTrees = mergeTrees(compiledPackageTrees);
 vendorTrees = mergeTrees(vendorTrees);
 sourceTrees = mergeTrees(sourceTrees);
-testTrees   = mergeTrees(testTrees);
-
+testTrees = mergeTrees(testTrees);
 
 
 var compiledSource = concatES6(sourceTrees, {
@@ -347,23 +354,18 @@ distTrees = replace(distTrees, {
 });
 
 
-var distExportTree = exportTree(distTrees, {
-  destDir: 'live-dist'
-});
-
-
 /**
  * START项目所依赖的第三方插件打包
  */
-var vendorPath=(function(){
-  var manifest,fs=require('fs'),
-    regexp=/^\/\/=require (.*)$/igm,
-    result,fileSequence=[];
+var vendorPath = (function () {
+  var manifest, fs = require('fs'),
+    regexp = /^\/\/=require (.*)$/igm,
+    result, fileSequence = [];
   ;
 
-  manifest=fs.readFileSync("./manifest.js").toString();
+  manifest = fs.readFileSync("./manifest.js").toString();
 
-  while((result=regexp.exec(manifest))!==null){
+  while ((result = regexp.exec(manifest)) !== null) {
     fileSequence.push(result[1]);
   }
   return fileSequence;
@@ -375,19 +377,19 @@ var vendorAll = pickFiles('./vendor', {
   destDir: '/vendor/all'
 });
 
-var vendorResource=concat('./',{
+var vendorResource = concat('./', {
   inputFiles: vendorPath,
   outputFile: '/vendor/all.js',
   separator: '\n' // (optional, defaults to \n)
 });
 
-
-
-distTrees=mergeTrees([distTrees,vendorResource,vendorAll]);
+distTrees = mergeTrees([distTrees, vendorResource, vendorAll]);
 /**
  * END项目所依赖的第三方插件打包
  */
 
-
+var distExportTree = exportTree(distTrees, {
+  destDir: 'live-dist'
+});
 
 module.exports = mergeTrees([distTrees, distExportTree]);
