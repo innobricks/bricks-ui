@@ -1,10 +1,15 @@
 {
   "name": "bricks",
   "dependencies": {
+    "ember": "~1.4.0",
+    "ember-data": "~1.0.0-beta.7",
     "handlebars": "~1.3.0",
     "jquery": "~1.9.1",
     "qunit": "~1.12.0",
     "loader": "git://github.com/stefanpenner/loader.js#1.0.0",
-    "chosen": "~1.1.0"
+    "chosen": "git://github.com/Nav4e/chosen_dist",
+    "ember-easyForm": "http://builds.dockyard.com/ember-easyForm/release/ember-easyForm.js",
+    "ember-validations": "http://builds.dockyard.com/ember-validations/release/ember-validations.js",
+    "ember-i18n": "~2.0.0"
   }
 }

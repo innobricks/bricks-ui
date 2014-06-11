@@ -305,7 +305,7 @@ testTrees = mergeTrees(testTrees);
 
 var compiledSource = concatES6(sourceTrees, {
   includeLoader: true,
-  bootstrapModule: 'bricks-metal',
+  bootstrapModule: 'bricks',
   vendorTrees: vendorTrees,
   inputFiles: ['**/*.js'],
   destFile: '/bricks.js'
@@ -374,16 +374,22 @@ var vendorPath = (function () {
 var vendorAll = pickFiles('./vendor', {
   srcDir: '/all',
   files: ['**/*.*', '**/*.*'],
-  destDir: '/vendor/all'
+  destDir: '/bricks/all'
 });
 
 var vendorResource = concat('./', {
   inputFiles: vendorPath,
-  outputFile: '/vendor/all.js',
+  outputFile: '/bricks/plugins.js',
   separator: '\n' // (optional, defaults to \n)
 });
 
-distTrees = mergeTrees([distTrees, vendorResource, vendorAll]);
+var bricksFile=pickFiles(compiledSource,{
+  srcDir:"/",
+  files:['bricks.js'],
+  destDir:'/bricks'
+});
+
+distTrees = mergeTrees([distTrees, vendorResource, vendorAll,bricksFile]);
 /**
  * END项目所依赖的第三方插件打包
  */
@@ -392,4 +398,4 @@ var distExportTree = exportTree(distTrees, {
   destDir: 'live-dist'
 });
 
-module.exports = mergeTrees([distTrees, distExportTree]);
+module.exports = mergeTrees([distTrees,distExportTree]);

@@ -18,8 +18,8 @@
 }*/
 
 //=require vendor/ember-i18n/lib/i18n.js
-//=require vendor/ember-validations/dist/ember-validations.js
-//=require vendor/ember-easyForm-shim/dist/ember-easyForm.js
+//=require vendor/ember-validations/index.js
+//=require vendor/ember-easyForm/index.js
 //=require vendor/chosen/chosen.jquery.js
 
 
