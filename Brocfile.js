@@ -377,7 +377,7 @@ var vendorAll = pickFiles('./vendor', {
   destDir: '/bricks/all'
 });
 
-var vendorResource = concat('./', {
+var vendorResource = concat('./vendor', {
   inputFiles: vendorPath,
   outputFile: '/bricks/plugins.js',
   separator: '\n' // (optional, defaults to \n)

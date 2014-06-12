@@ -17,10 +17,10 @@
   }
 }*/
 
-//=require vendor/ember-i18n/lib/i18n.js
-//=require vendor/ember-validations/index.js
-//=require vendor/ember-easyForm/index.js
-//=require vendor/chosen/chosen.jquery.js
+//=require ember-i18n/lib/i18n.js
+//=require ember-validations/index.js
+//=require ember-easyForm/index.js
+//=require chosen/chosen.jquery.js
 
 
 
