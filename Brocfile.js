@@ -310,14 +310,21 @@ var compiledSource = concatES6(sourceTrees, {
   inputFiles: ['**/*.js'],
   destFile: '/bricksui.js'
 });
+var debugSource = concatES6(sourceTrees, {
+    includeLoader: true,
+    bootstrapModule: 'bricksui',
+    vendorTrees: vendorTrees,
+    inputFiles: ['**/*.js'],
+    destFile: '/bricksui-debug.js'
+});
 // debug 版本
-var prodCompiledSource = removeFile(sourceTrees, {
+var prodCompiledSource = removeFile(debugSource, {
   srcFile: 'bricksui-debug.js',
 });
 
 prodCompiledSource = concatES6(prodCompiledSource, {
   includeLoader: true,
-  bootstrapModule: 'bricksui-metal/core',
+  bootstrapModule: 'bricksui',
   vendorTrees: vendorTrees,
   inputFiles: ['**/*.js'],
   destFile: '/bricksui.prod.js',
