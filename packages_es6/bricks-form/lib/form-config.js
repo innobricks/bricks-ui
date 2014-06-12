@@ -1,5 +1,9 @@
-//样式配置,默认提供两种,
-Ember.EasyForm.Config.registerWrapper('bootstrap', {
+/**
+ * @description bootstrap横排样式
+ * 布局分隔为100%撑满，
+ * Label在input左方，验证信息在input下方
+ */
+Ember.EasyForm.Config.registerWrapper('bootstrap-horizontal', {
     inputTemplate: 'bootstrap-input',
     checkboxTemplate: "bootstrap-checkbox",
     radioTemplate: "bootstrap-radio",
@@ -12,6 +16,23 @@ Ember.EasyForm.Config.registerWrapper('bootstrap', {
     inputClass: 'form-group',
     buttonClass: 'btn btn-primary'
 });
+
+/**
+ * @description bootstrap默认样式
+ * 布局分隔为100%撑满，
+ * Label在input上方，验证信息在input下方
+ */
+Ember.EasyForm.Config.registerWrapper('bootstrap', {
+  checkboxTemplate: "bootstrap-checkbox",
+  radioTemplate: "bootstrap-radio",
+  labelClass: 'control-label',
+  inputClass: 'form-group',
+  buttonClass: 'btn btn-primary',
+  fieldErrorClass: 'has-error',
+  errorClass: 'help-block'
+});
+
+
 //禁用submit 按钮的默认disabled属性
 //TODO 改用样式控制
 Ember.EasyForm.Submit.reopen({
