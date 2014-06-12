@@ -1,4 +1,4 @@
-import Bricks from "bricks-metal/core";
+import Bricks from "bricksui-metal/core";
 var Em = window.Ember;
 /**
  * Ember.View 本身的实现过程就是一个状态机的流转过程

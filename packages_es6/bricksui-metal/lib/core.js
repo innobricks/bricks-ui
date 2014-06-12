@@ -1,7 +1,7 @@
 /*globals Bricks:true */
 /**
  * @module bricks
- * @submodule bricks-metal
+ * @submodule bricksui-metal
  */
 
 /**

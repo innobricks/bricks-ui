@@ -1,6 +1,6 @@
-import Bricks from "bricks-metal/core";
-import Stateable from "bricks-metal/statechart";
-import EventManager from "bricks-metal/event_manager";
+import Bricks from "bricksui-metal/core";
+import Stateable from "bricksui-metal/statechart";
+import EventManager from "bricksui-metal/event_manager";
 /**
  *  Ember.View的创建过程是一个状态机的流转过程,具体如下:
  *  Ember.View.states:
