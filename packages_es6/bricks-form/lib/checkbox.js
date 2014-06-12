@@ -1,5 +1,6 @@
 var Checkbox = Ember.EasyForm.Input.extend({
     init: function () {
+        console.log(this,"================2=======");
         this._super.apply(this, arguments);
         this.set('templateName', this.get('wrapperConfig.checkboxTemplate'));
         this.set('context', this);

@@ -3,7 +3,7 @@
     {{#each item in view.elements itemController="radioItem"}}
         <div class="radio">
             <label>
-                {{view Ember.RadioButton nameBinding="view.property" checkedBinding="selected" selectionBinding="selected" valueBinding=item.name}}
+                {{view Ember.RadioButton nameBinding="view.property" checkedBinding="selected" selectionBinding="selected" valueBinding="item.name"}}
                 {{unbound label}}
             </label>
         </div>
