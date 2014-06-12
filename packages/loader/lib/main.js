@@ -1,10 +1,10 @@
-var define, requireModule, require, requirejs, Bricks;
+var define, requireModule, require, requirejs, BricksUI;
 
 (function() {
-    Bricks = this.Bricks = this.Bricks || {};
-  if (typeof Bricks === 'undefined') { Bricks = {} };
+    BricksUI = this.BricksUI = this.BricksUI || {};
+  if (typeof BricksUI === 'undefined') { BricksUI = {} };
 
-  if (typeof Bricks.__loader === 'undefined') {
+  if (typeof BricksUI.__loader === 'undefined') {
     var registry = {}, seen = {};
 
     define = function(name, deps, callback) {
@@ -54,9 +54,9 @@ var define, requireModule, require, requirejs, Bricks;
     };
     requirejs._eak_seen = registry;
 
-      Bricks.__loader = {define: define, require: require, registry: registry};
+      BricksUI.__loader = {define: define, require: require, registry: registry};
   } else {
-    define = Bricks.__loader.define;
-    requirejs = require = requireModule = Bricks.__loader.require;
+    define = BricksUI.__loader.define;
+    requirejs = require = requireModule = BricksUI.__loader.require;
   }
 })();

@@ -1,17 +1,17 @@
-/*globals Bricks:true */
+/*globals BricksUI:true */
 /**
- * @module bricks
+ * @module bricksui
  * @submodule bricksui-metal
  */
 
 /**
- *  Brics ,a widget library on ember.js
- *  @class Bricks
+ *  BricksUI ,a widget library on ember.js
+ *  @class BricksUI
  *  @statis
  *  @version VERSION_STRING_PLACEHOLDER
  */
-if ("undefined" === typeof Bricks) {
-    Bricks = Ember.Namespace.create();
+if ("undefined" === typeof BricksUI) {
+    BricksUI = Ember.Namespace.create();
 }
 /**
  @property VERSION
@@ -19,10 +19,10 @@ if ("undefined" === typeof Bricks) {
  @default 'VERSION_STRING_PLACEHOLDER'
  @static
  */
-Bricks.VERSION = 'VERSION_STRING_PLACEHOLDER';
+BricksUI.VERSION = 'VERSION_STRING_PLACEHOLDER';
 
 var exports = this;
 
-exports.Bricks = Bricks;
+exports.BricksUI = BricksUI;
 export default
 Ember;

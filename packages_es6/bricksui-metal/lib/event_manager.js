@@ -1,4 +1,4 @@
-import Bricks from "bricksui-metal/core";
+import BricksUI from "bricksui-metal/core";
 var Em = window.Ember;
 /**
  * Ember.View 本身的实现过程就是一个状态机的流转过程
@@ -45,7 +45,7 @@ var eventHandlers = {
         }
         var handler = emberEvent ? this.get(emberEvent) : null;
         if (handler) {
-            return !handler.call(Bricks.keyResponderStack.current(), event, Bricks.keyResponderStack.current());
+            return !handler.call(BricksUI.keyResponderStack.current(), event, BricksUI.keyResponderStack.current());
         } else if (emberEvent === "keyDown" && this.interpreKeyEvents(event)) {
             return false;
         } else if (this.get("parentView")) {
@@ -61,7 +61,7 @@ Ember.TextSupport.reopen(eventHandlers);
  * 用户可进行扩展和修改
  * @type
  */
-var KeyBindings = Bricks.KeyBindings = {
+var KeyBindings = BricksUI.KeyBindings = {
     8: 'deleteBackward',
     9: 'insertTab',
     13: 'insertNewline',
@@ -77,7 +77,7 @@ var KeyBindings = Bricks.KeyBindings = {
  * 辅助键配合其他按键的修改操作
  * @type
  */
-var ModifiedKeyBindings = Bricks.ModifiedKeyBindings = {
+var ModifiedKeyBindings = BricksUI.ModifiedKeyBindings = {
     8: 'deleteForward',
     9: 'insertBacktab',
     37: 'moveLeftAndModifySelection',
@@ -87,7 +87,7 @@ var ModifiedKeyBindings = Bricks.ModifiedKeyBindings = {
 };
 
 
-Ember.mixin(Bricks, {
+Ember.mixin(BricksUI, {
     mouseResponderView: null,
     keyResponderStack: Em.Object.extend({
         /**
@@ -143,9 +143,9 @@ var EventManager = {
     becomeKeyResponder: function (replace) {
         if (this.get('acceptsKeyResponder') !== false && !this.get('isDisabled')) {
             if (replace === undefined || replace === true) {
-                Bricks.keyResponderStack.replace(this);
+                BricksUI.keyResponderStack.replace(this);
             } else {
-                Bricks.keyResponderStack.push(this);
+                BricksUI.keyResponderStack.push(this);
             }
         } else {
             var parent = this.get('parentView');
@@ -156,10 +156,10 @@ var EventManager = {
     },
 
     resignKeyResponder: function () {
-        Bricks.keyResponderStack.pop();
+        BricksUI.keyResponderStack.pop();
     }
 };
-Bricks.ALLOW_BROWSER_DEFAULT_HANDLING = {};
+BricksUI.ALLOW_BROWSER_DEFAULT_HANDLING = {};
 /**
  * 分开维护
  * @type {{}}
@@ -167,46 +167,46 @@ Bricks.ALLOW_BROWSER_DEFAULT_HANDLING = {};
 EventManager["eventManager"] = {
     mouseDown: function (event, view) {
         view.becomeKeyResponder();  // Becoming a key responder is independent of mouseDown handling
-        Bricks.set('mouseResponderView', undefined);
+        BricksUI.set('mouseResponderView', undefined);
         var handlingView = this._dispatch('mouseDown', event, view);
         if (handlingView) {
-            Bricks.set('mouseResponderView', handlingView);
+            BricksUI.set('mouseResponderView', handlingView);
         }
         return !handlingView;
     },
 
     mouseUp: function (event, view) {
-        if (Bricks.get('mouseResponderView') !== undefined) {
-            view = Bricks.get('mouseResponderView');
-            Bricks.set('mouseResponderView', undefined);
+        if (BricksUI.get('mouseResponderView') !== undefined) {
+            view = BricksUI.get('mouseResponderView');
+            BricksUI.set('mouseResponderView', undefined);
         }
         return !this._dispatch('mouseUp', event, view);
     },
 
     mouseMove: function (event, view) {
-        if (Bricks.get('mouseResponderView') !== undefined) {
-            view = Bricks.get('mouseResponderView');
+        if (BricksUI.get('mouseResponderView') !== undefined) {
+            view = BricksUI.get('mouseResponderView');
         }
         return !this._dispatch('mouseMove', event, view);
     },
 
     doubleClick: function (event, view) {
-        if (Bricks.get('mouseResponderView') !== undefined) {
-            view = Bricks.get('mouseResponderView');
+        if (BricksUI.get('mouseResponderView') !== undefined) {
+            view = BricksUI.get('mouseResponderView');
         }
         return !this._dispatch('doubleClick', event, view);
     },
 
     keyDown: function (event) {
-        if (Bricks.keyResponderStack.current() !== undefined && Bricks.keyResponderStack.current().get('isVisible')) {
-            return Bricks.keyResponderStack.current().handleKeyEvent(event, Bricks.keyResponderStack.current());
+        if (BricksUI.keyResponderStack.current() !== undefined && BricksUI.keyResponderStack.current().get('isVisible')) {
+            return BricksUI.keyResponderStack.current().handleKeyEvent(event, BricksUI.keyResponderStack.current());
         }
         return true;
     },
 
     keyPress: function (event) {
-        if (Bricks.keyResponderStack.current() !== undefined && Bricks.keyResponderStack.current().get('isVisible')) {
-            return Bricks.keyResponderStack.current().handleKeyEvent(event, Bricks.keyResponderStack.current());
+        if (BricksUI.keyResponderStack.current() !== undefined && BricksUI.keyResponderStack.current().get('isVisible')) {
+            return BricksUI.keyResponderStack.current().handleKeyEvent(event, BricksUI.keyResponderStack.current());
         }
         return true;
     },
@@ -219,7 +219,7 @@ EventManager["eventManager"] = {
         if (handler) {
             var result = handler.call(view, event, view);
             //TODO
-            if (result === Bricks.ALLOW_BROWSER_DEFAULT_HANDLING) return false;
+            if (result === BricksUI.ALLOW_BROWSER_DEFAULT_HANDLING) return false;
             else if (result) return view;
         }
         var parentView = view.get('parentView');

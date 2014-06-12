@@ -1,4 +1,4 @@
-import Bricks from "bricksui-metal/core";
+import BricksUI from "bricksui-metal/core";
 import Stateable from "bricksui-metal/statechart";
 import EventManager from "bricksui-metal/event_manager";
 /**
@@ -17,7 +17,7 @@ import EventManager from "bricksui-metal/event_manager";
  *  而且Ember的这一实现与W3C目前的Custom Elements 工作一致,并且尽可能保持同步
  *  在未来的浏览器版本,一旦Custom Elements普及,则Ember实现的这一套机制本身就与标准看齐,所以可以方便地集成
  *
- *  Bricks View 要点
+ *  BricksUI View 要点
  *  1.FSM 分离用户行为和组件行为
  *  2.AOP进行事件切片,以及权限和操作行为控制
  *  3.与W3C Custom Elements (TODO 研究)
