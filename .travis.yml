@@ -6,9 +6,8 @@ node_js:
 install:
 - "npm install"
 after_success:
-  - bundle install --deployment --retry 3 --jobs 4
-  - bundle exec rake publish_build
-  - bundle exec rake publish_to_bower
+  - broccoli build dist
+  - node publish.js
 script:
   - npm test
 env:
