@@ -305,35 +305,42 @@ testTrees = mergeTrees(testTrees);
 
 var compiledSource = concatES6(sourceTrees, {
   includeLoader: true,
-  bootstrapModule: 'bricks',
+  bootstrapModule: 'bricksui',
   vendorTrees: vendorTrees,
   inputFiles: ['**/*.js'],
-  destFile: '/bricks.js'
+  destFile: '/bricksui.js'
+});
+var debugSource = concatES6(sourceTrees, {
+    includeLoader: true,
+    bootstrapModule: 'bricksui',
+    vendorTrees: vendorTrees,
+    inputFiles: ['**/*.js'],
+    destFile: '/bricksui-debug.js'
 });
 // debug 版本
-var prodCompiledSource = removeFile(sourceTrees, {
-  srcFile: 'bricks-debug.js',
+var prodCompiledSource = removeFile(debugSource, {
+  srcFile: 'bricksui-debug.js',
 });
 
 prodCompiledSource = concatES6(prodCompiledSource, {
   includeLoader: true,
-  bootstrapModule: 'bricks-metal/core',
+  bootstrapModule: 'bricksui',
   vendorTrees: vendorTrees,
   inputFiles: ['**/*.js'],
-  destFile: '/bricks.prod.js',
+  destFile: '/bricksui.prod.js',
   defeatureifyOptions: {stripDebug: true}
 });
 
 var minCompiledSource = moveFile(prodCompiledSource, {
-  srcFile: 'bricks.prod.js',
-  destFile: 'bricks.min.js',
+  srcFile: 'bricksui.prod.js',
+  destFile: 'bricksui.min.js',
 });
 minCompiledSource = uglifyJavaScript(minCompiledSource);
 //单元测试
 var compiledTests = concatES6(testTrees, {
   includeLoader: true,
   inputFiles: ['**/*.js'],
-  destFile: '/bricks-tests.js'
+  destFile: '/bricksui-tests.js'
 });
 
 
@@ -374,19 +381,19 @@ var vendorPath = (function () {
 var vendorAll = pickFiles('./vendor', {
   srcDir: '/all',
   files: ['**/*.*', '**/*.*'],
-  destDir: '/bricks/all'
+  destDir: '/bricksui/all'
 });
 
 var vendorResource = concat('./vendor', {
   inputFiles: vendorPath,
-  outputFile: '/bricks/plugins.js',
+  outputFile: '/bricksui/plugins.js',
   separator: '\n' // (optional, defaults to \n)
 });
 
 var bricksFile=pickFiles(compiledSource,{
   srcDir:"/",
-  files:['bricks.js'],
-  destDir:'/bricks'
+  files:['bricksui.js'],
+  destDir:'/bricksui'
 });
 
 distTrees = mergeTrees([distTrees, vendorResource, vendorAll,bricksFile]);

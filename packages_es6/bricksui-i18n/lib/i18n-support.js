@@ -47,5 +47,5 @@ Ember.I18n.getLanguage=function(){
 
 Ember.I18n.setLanguage=function(lang){
   //TODO 加载language文件
-  Ember.$.cookie('bricks-lang',lang, { expires: 7 });
+  Ember.$.cookie('bricksui-lang',lang, { expires: 7 });
 };

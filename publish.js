@@ -35,7 +35,7 @@ process.exec(cmds, function () {
     json.version = calcVersion();
     fs.writeFileSync(file, JSON.stringify(json, null, 4));
 
-    process.exec("cp -r dist/bricks/* ../publish_to_bower", function () {
+    process.exec("cp -r dist/bricksui/* ../publish_to_bower", function () {
         process.exec("cd ../publish_to_bower", function () {
             var pushCmds = [
                 "cd ../publish_to_bower",

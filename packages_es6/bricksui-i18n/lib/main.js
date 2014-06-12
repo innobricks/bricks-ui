@@ -1,0 +1,1 @@
+import "bricksui-i18n/i18n-support";

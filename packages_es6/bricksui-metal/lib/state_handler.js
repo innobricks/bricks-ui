@@ -3,13 +3,13 @@
  * 在extend时将states属性移到_states属性,
  * 继承该接口,可以实现states在子父类间继承
  *
- *  App.DemoView=Bricks.View.extend({
+ *  App.DemoView=BricksUI.View.extend({
  *      states:{
  *
  *      }
  *  });
  *
- *  App.DemoView=Bricks.View.extend({
+ *  App.DemoView=BricksUI.View.extend({
  *      states:function(){
  *          return {
  *
