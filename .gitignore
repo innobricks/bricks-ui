@@ -1,8 +1,9 @@
-!/vendor/all
+
 docs/
 dist/
 tmp/
 node_modules/
-/vendor/
+/vendor/*
+!/vendor/assets
 live-dist/
 .idea/

@@ -15,7 +15,7 @@ Ember.I18n.registerTranslation = function (translation) {
   Ember.merge(Ember.I18n.translations, translation);
 };
 
-Ember.I18n.getLanguage=function(){
+Ember.I18n.getLanguage = function () {
   return window.navigator.language;
 };
 
@@ -23,7 +23,7 @@ Ember.I18n.getLanguage=function(){
 //  Ember.I18n.lang
 //}
 
-Ember.I18n.setLanguage=function(lang){
+Ember.I18n.setLanguage = function (lang) {
   //TODO 加载language文件
-  Ember.$.cookie('bricksui-lang',lang, { expires: 7 });
+  Ember.$.cookie('bricksui-lang', lang, { expires: 7 });
 };
