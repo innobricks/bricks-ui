@@ -379,9 +379,9 @@ var vendorPath = (function () {
 })();
 
 var vendorAll = pickFiles('./vendor', {
-  srcDir: '/all',
-  files: ['**/*.*', '**/*.*'],
-  destDir: '/bricksui/all'
+  srcDir: '/assets',
+  files: ['**/*.*'],
+  destDir: '/bricksui/assets'
 });
 
 var vendorResource = concat('./vendor', {

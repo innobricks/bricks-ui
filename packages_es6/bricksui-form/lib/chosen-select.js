@@ -6,6 +6,14 @@ export default Ember.EasyForm.Select.reopen({
   init:function(){
     this._super();
     this.set('prompt',' ');  //对于chosen组件，需要存在一个为空的promt
+
+    //once elements trigger blur event,the parentView will show validated result,
+    //aim to defer validation
+    var parentView=this.get('parentView');
+    parentView.focusOut=function(){
+      parentView.set(parentView.set('hasFocusedOut', true));
+    };
+
   },
 
   /**
@@ -28,7 +36,7 @@ export default Ember.EasyForm.Select.reopen({
   }.observes('content.@each'),
 
   _doShowFocus:function(){
-    this.get('parentView').focusOut();
+    this.get('parentView').showValidationError();
   },
 
   _validation:function(){
@@ -43,13 +51,11 @@ export default Ember.EasyForm.Select.reopen({
   _updateDom:function(){
 
     Ember.run.scheduleOnce('afterRender',this,function(){
-
       //在select视图渲染成成后，将其转换为chosen下拉框，并监听change事件
       this.$().chosen()
-        .change(function(){
+        .on('change chosen:hiding_dropdown',function(){
           //为了取得数组正确的变化，将validate推迟到下一生命周期运行
           Ember.run.next(this,'_validation');
-
         }.bind(this))
       ;
     });
