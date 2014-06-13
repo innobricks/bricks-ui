@@ -24,5 +24,4 @@ var en = {
     url: "is not a valid URL"
   }
 };
-Ember.I18n.lang['en'] = en;
 export default en;

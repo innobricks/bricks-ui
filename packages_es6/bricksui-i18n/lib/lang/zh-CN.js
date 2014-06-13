@@ -24,5 +24,4 @@ var zhCN = {
     url: "请输入正确的URL地址"
   }
 };
-Ember.I18n['zh-CN'] = zhCN;
 export default zhCN;
