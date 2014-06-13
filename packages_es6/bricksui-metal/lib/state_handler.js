@@ -26,7 +26,7 @@ var merge = Ember.merge,
     ;
 /**
  * @class StateHandler
- * @namespace Bricks
+ * @namespace BricksUI
  */
 var StateHandler = Mixin.create({
     mergedProperties: ["_states"],

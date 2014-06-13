@@ -1,6 +1,8 @@
-import "bricksui-i18n/i18n-support";
-
-BricksUI.I18n.lang = BricksUI.I18n.lang || Ember.namespace.create('lang');
-
-
+import i18n from "bricksui-i18n/i18n-initializer";
+/**
+ @module BricksUI
+ @submodule BricksUI-I18n
+ @description 国际化支持
+ */
+BricksUI.I18n = i18n;
 
