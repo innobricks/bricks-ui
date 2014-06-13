@@ -1,1 +1,0 @@
-require("bricks-views/~tests/bricks-views");

@@ -22,11 +22,7 @@
     * bricks-metal  //模块目录
         * lib   //模块代码目录,可以有子目录
             * main.js   // 当前模块的所有子模块导出汇合文件
-        * tests  //模块单元测试代码存放目录        
-  packages_es6   //Ecmascript6 模块存放目录
-        * lib
-        * tests
-        * main.js
+        * tests  //模块单元测试代码存放目录   
   tests     //单元测试配置文件存放目录
   tmp       //构建产生临时目录 移除,不宜上传在项目中,应在在本地
   vendor    //本项目所以来的JS库,通过bower管理
