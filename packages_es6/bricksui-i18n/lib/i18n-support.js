@@ -1,4 +1,4 @@
-import i18n from "./i18n-initialize"
+import i18n from "./i18n-initialize";
 
 /**
  * @description 向I18N注册模板
@@ -14,7 +14,7 @@ i18n.registerTranslation = function (translation) {
  * @returns {string}
  */
 i18n.getLanguage = function () {
-  return (navigator.language || navigator.browserLanguage).toLowerCase();
+  return (window.navigator.language || window.navigator.browserLanguage).toLowerCase();
 };
 
 /**
