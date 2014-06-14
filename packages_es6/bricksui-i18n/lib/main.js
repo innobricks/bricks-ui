@@ -1,4 +1,6 @@
+import BricksUI from 'bricksui-metal/core';
 import i18n from "bricksui-i18n/i18n-initializer";
+
 /**
  @module BricksUI
  @submodule BricksUI-I18n

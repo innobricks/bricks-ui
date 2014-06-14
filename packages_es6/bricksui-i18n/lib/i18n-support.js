@@ -20,10 +20,13 @@ i18n.getLanguage = function () {
 /**
  * @description 将选择的语言类型持久化到cookie中
  * @param lang {string} 语言类型，如'zh-CN'等
+ * @param langObject {object} i18n对象，为键值对形势
  */
-i18n.setLanguage = function (lang, langObject) {
+i18n.setLanguage = function (lang, langObject,isPersistent) {
   i18n.registerTranslation(langObject);
-  Ember.$.cookie('bricksui-lang', lang, { expires: 7 });
+  if(isPersistent){
+    Ember.$.cookie('bricksui-lang', lang, { expires: 7 });
+  }
 };
 
 /**
