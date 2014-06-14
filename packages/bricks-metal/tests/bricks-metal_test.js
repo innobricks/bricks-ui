@@ -1,1 +1,0 @@
-require("bricks-metal/~tests/bricks-metal");

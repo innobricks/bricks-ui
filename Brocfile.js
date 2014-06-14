@@ -155,7 +155,7 @@ var vendoredPackages = {
 var packages = require('./lib/packages');
 
 //precompile template *.hbs *.handlebars
-var sourceTree = pickFiles("packages_es6", {
+var sourceTree = pickFiles("packages", {
   srcDir: "/",
   files: ["**/*.hbs"],
   destDir: '/'
@@ -177,7 +177,7 @@ function es6Package(packageName) {
   var dependencyTrees = packageDependencyTree(packageName);
   var vendorTrees = packages[packageName].vendorTrees;
 
-  libTree = pickFiles('packages_es6/' + packageName + '/lib', {
+  libTree = pickFiles('packages/' + packageName + '/lib', {
     srcDir: '/',
     destDir: packageName
   });
@@ -198,7 +198,7 @@ function es6Package(packageName) {
     destFile: '/' + packageName + '/tests/lib-jshint.js'
   });
 
-  var testTree = pickFiles('packages_es6/' + packageName + '/tests', {
+  var testTree = pickFiles('packages/' + packageName + '/tests', {
     srcDir: '/',
     destDir: '/' + packageName + '/tests'
   });
