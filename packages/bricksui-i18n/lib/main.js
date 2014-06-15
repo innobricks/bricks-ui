@@ -1,6 +1,7 @@
 import BricksUI from 'bricksui-metal/core';
 import i18n from "bricksui-i18n/i18n-initializer";
-
+import "bricksui-i18n/i18n-support";
+import "bricksui-i18n/i18n-validator";
 /**
  @module BricksUI
  @submodule BricksUI-I18n

@@ -21,6 +21,7 @@
 //=require ember-validations/index.js
 //=require ember-easyForm/index.js
 //=require chosen/chosen.jquery.js
+//=require jquery-cookie/jquery.cookie.js
 
 
 

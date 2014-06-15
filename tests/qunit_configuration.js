@@ -39,7 +39,7 @@
 
   EmberDev.afterEach = function() {
     EmberDev.assertions.noViewsRemain();
-    EmberDev.assertions.noTemplatesRemain();
+//    EmberDev.assertions.noTemplatesRemain();
     EmberDev.assertions.noExpectedDeprecations();
   };
 

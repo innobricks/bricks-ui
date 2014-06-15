@@ -11,7 +11,7 @@
  *  @version VERSION_STRING_PLACEHOLDER
  */
 if ("undefined" === typeof BricksUI) {
-    BricksUI = Ember.Namespace.create();
+  BricksUI = Ember.Namespace.create();
 }
 /**
  @property VERSION
@@ -21,8 +21,6 @@ if ("undefined" === typeof BricksUI) {
  */
 BricksUI.VERSION = 'VERSION_STRING_PLACEHOLDER';
 
-var exports = this;
 
-exports.BricksUI = BricksUI;
 export default
-Ember;
+  BricksUI;
