@@ -28,6 +28,3 @@ env:
       I/BFT0MbnR6JVCZiPV7TCWPgY1gvgZ6TEEIKGqauDMUBdL8ZK6I='
   matrix:
     - TEST_SUITE=each-package-tests
-    - TEST_SUITE=built-tests
-    - TEST_SUITE=old-jquery
-    - TEST_SUITE=extend-prototypes
