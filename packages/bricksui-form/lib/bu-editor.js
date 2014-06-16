@@ -67,7 +67,9 @@ var BuEditor = Ember.Component.extend({
    @type String
    @default bu-editor+父级ID编号
    */
-  holderId: 'bu-editor' + this.elementId,
+  holderId: function () {
+    return 'bu-editor' + Ember.get(this, 'elementId');
+  }.property('elementId'),
 
   /**
    为UMeditor添加事件监听
@@ -81,7 +83,7 @@ var BuEditor = Ember.Component.extend({
       var value = get(this, 'value');
       if (!Ember.isEmpty(value)) editor.setContent(value);
 
-      this.$('.edui-container').css({width:'100%'});
+      this.$('.edui-container').css({width: '100%'});
 
     }.bind(this));
 
@@ -123,7 +125,7 @@ var BuEditor = Ember.Component.extend({
     //TODO toolbar属性合并
     options = $.extend(true, {}, options, defaultOptions);
 
-    editor = this._editor = UM.getEditor(this.holderId, options);
+    editor = this._editor = UM.getEditor(this.get('holderId'), options);
 
     this._attachEvent(editor);
   }.on('didInsertElement'),
