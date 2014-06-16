@@ -10,6 +10,7 @@
     "chosen": "git://github.com/Nav4e/chosen_dist",
     "ember-easyForm": "http://builds.dockyard.com/ember-easyForm/release/ember-easyForm.js",
     "ember-validations": "http://builds.dockyard.com/ember-validations/release/ember-validations.js",
-    "ember-i18n": "~2.0.0"
+    "ember-i18n": "~2.0.0",
+    "jquery-cookie": "~1.4.1"
   }
 }
