@@ -14,7 +14,8 @@ Ember.EasyForm.Config.registerWrapper('bootstrap-horizontal', {
     hintClass: 'help-block',
     labelClass: 'col-sm-3 control-label',
     inputClass: 'form-group',
-    buttonClass: 'btn btn-primary'
+    buttonClass: 'btn btn-primary',
+    validationLayout:'bootstrap-validation-input'
 });
 
 /**
@@ -29,7 +30,8 @@ Ember.EasyForm.Config.registerWrapper('bootstrap', {
   inputClass: 'form-group',
   buttonClass: 'btn btn-primary',
   fieldErrorClass: 'has-error',
-  errorClass: 'help-block'
+  errorClass: 'help-block',
+  validationLayout:'validation-layout'
 });
 
 
@@ -63,4 +65,16 @@ Ember.EasyForm.TextField.reopen({
 });
 Ember.EasyForm.TextArea.reopen({
     classNames: ["form-control"]
+});
+
+/**
+ * @description 拓展校验字段
+ */
+Ember.EasyForm.Input.reopen({
+  init:function(){
+    this._super();
+    if(this.isBlock && this.get('withValidation')){
+      this.set('layoutName',this.get('wrapperConfig.validationLayout'));
+    }
+  }
 });

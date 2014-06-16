@@ -17,7 +17,7 @@ i18n.registerTranslation = function (translation) {
 i18n.getLanguage = function (isFromCookie) {
   var lang;
   if (isFromCookie) {
-    lang = Ember.$.cookie('bricksui-lang')
+    lang = Ember.$.cookie('bricksui-lang');
   }
   return lang ? lang : (window.navigator.language || window.navigator.browserLanguage).toLowerCase();
 };

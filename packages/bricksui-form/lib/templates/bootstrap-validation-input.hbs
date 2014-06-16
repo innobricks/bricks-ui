@@ -1,0 +1,10 @@
+{{label-field propertyBinding="view.property" textBinding="view.label"}}
+<div class="{{unbound view.wrapperConfig.controlsWrapperClass}}">
+    {{yield}}
+    {{#if view.showError}}
+        {{error-field propertyBinding="view.property"}}
+    {{/if}}
+    {{#if view.hint}}
+        {{hint-field propertyBinding="view.property" textBinding="view.hint"}}
+    {{/if}}
+</div>
