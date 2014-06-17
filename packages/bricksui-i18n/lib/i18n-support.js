@@ -1,12 +1,11 @@
-import i18n from "./i18n-initializer";
-
+import BricksUI from  "bricksui-metal/core";
 /**
  * @description 向I18N注册模板
  * @param  {object} translation
  */
-i18n.registerTranslation = function (translation) {
-  Ember.assert('translation must be an object ,you passed ' + translation, typeof translation === 'object');
-  Ember.merge(Ember.I18n.translations, translation);
+var registerTranslation = function (translation) {
+    Ember.assert('translation must be an object ,you passed ' + translation, typeof translation === 'object');
+    Ember.merge(Ember.I18n.translations, translation);
 };
 
 /**
@@ -14,12 +13,12 @@ i18n.registerTranslation = function (translation) {
  * @param isFromCookie {boolean} 是否同时从cookie中获取语言
  * @returns {string} 语言列表
  */
-i18n.getLanguage = function (isFromCookie) {
-  var lang;
-  if (isFromCookie) {
-    lang = Ember.$.cookie('bricksui-lang');
-  }
-  return lang ? lang : (window.navigator.language || window.navigator.browserLanguage).toLowerCase();
+var getLanguage = function (isFromCookie) {
+    var lang;
+    if (isFromCookie) {
+        lang = Ember.$.cookie('bricksui-lang');
+    }
+    return lang ? lang : (window.navigator.language || window.navigator.browserLanguage).toLowerCase();
 };
 
 /**
@@ -27,11 +26,11 @@ i18n.getLanguage = function (isFromCookie) {
  * @param lang {string} 语言类型，如'zh-CN'等
  * @param langObject {object} i18n对象，为键值对形势
  */
-i18n.setLanguage = function (lang, langObject, isPersistent) {
-  i18n.registerTranslation(langObject);
-  if (isPersistent) {
-    Ember.$.cookie('bricksui-lang', lang, { expires: 7 });
-  }
+var setLanguage = function (lang, langObject, isPersistent) {
+    registerTranslation(langObject);
+    if (isPersistent) {
+        Ember.$.cookie('bricksui-lang', lang, { expires: 7 });
+    }
 };
 
 /**
@@ -39,15 +38,15 @@ i18n.setLanguage = function (lang, langObject, isPersistent) {
  * @param lang {string} 如'zh-CN','en-US'等
  * @param isPersistent {boolean} 是否将所选择的语言保存到cookie
  */
-i18n.setByLang = function (lang, isPersistent) {
-  i18n.setLanguage(lang, i18n.lang[lang], isPersistent);
-  var translations = Ember.I18n.translations;
-  for (var prop in translations) {
-    if (Ember.canInvoke(translations, prop)) {
-      delete translations[prop];
+var setByLang = function (lang, isPersistent) {
+    setLanguage(lang, BricksUI.I18n.lang[lang], isPersistent);
+    var translations = Ember.I18n.translations;
+    for (var prop in translations) {
+        if (Ember.canInvoke(translations, prop)) {
+            delete translations[prop];
+        }
     }
-  }
-  Ember.instrument("i18nChange");
+    Ember.instrument("i18nChange");
 };
 
 /**
@@ -55,11 +54,34 @@ i18n.setByLang = function (lang, isPersistent) {
  * 传入一个回调函数，方法将会将语言代码传入回调函数中，回调函数需返回对应语言代码的语言对象
  * @param getLangObject {function}
  */
-i18n.initialLanguage = function (getLangObject) {
-  var langObject,
-    lang = i18n.getLanguage(true);
+var initialLanguage = function (getLangObject) {
+    var langObject,
+        lang = getLanguage(true);
 
-  langObject = getLangObject(lang);
-  i18n.setLanguage(lang, langObject, false);
+    langObject = getLangObject(lang);
+    setLanguage(lang, langObject, false);
 
 };
+
+var parseLanguage = function () {
+    var language = (window.navigator.language || window.navigator.browserLanguage).toLowerCase(),
+        match
+        ;
+    match = language.match(/(.*)-(.*)/);
+    return {
+        fullName: match[0],
+        language: match[1],
+        area: match[2]
+    };
+};
+
+export
+{
+    registerTranslation,
+    getLanguage,
+    setLanguage,
+    setByLang,
+    initialLanguage,
+    parseLanguage
+}
+;
