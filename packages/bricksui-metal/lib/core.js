@@ -21,6 +21,24 @@ if ("undefined" === typeof BricksUI) {
  */
 BricksUI.VERSION = 'VERSION_STRING_PLACEHOLDER';
 
+var DEFAULT_ENV = {
+  /**
+   * @description 是否将语言选择持久化到cookie中，如果设置为true，则将优先获取cookie设置的语言
+   */
+  PERSISTENT_I18N: true,
+  MODULE_PREFIX:'appkit'
+}
+
+/**
+ * @description Bricks变量配置
+ * I18NCOOKIEPERSISTENT : true
+ *
+ */
+if ("undefined" === typeof BricksUI.ENV) {
+  BricksUI.ENV = DEFAULT_ENV;
+} else {
+  Ember.$.extend(true, BricksUI.ENV, DEFAULT_ENV);
+}
 
 export default
   BricksUI;
