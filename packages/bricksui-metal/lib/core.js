@@ -26,7 +26,8 @@ var DEFAULT_ENV = {
    * @description 是否将语言选择持久化到cookie中，如果设置为true，则将优先获取cookie设置的语言
    */
   PERSISTENT_I18N: true,
-  MODULE_PREFIX:'appkit'
+  MODULE_PREFIX:'appkit',
+  LANG_FOLDER_NAME:"lang"
 }
 
 /**
