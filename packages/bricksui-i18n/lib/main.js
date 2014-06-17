@@ -16,6 +16,11 @@ import en from "bricksui-i18n/lang/en";
 import zhCN from "bricksui-i18n/lang/zh-cn";
 
 //END IMPORT LANGUAGE
+
+
+import {
+    translationHelper
+    } from "bricksui-i18n/helpers/translation";
 /**
  @module BricksUI
  @submodule BricksUI-I18n
@@ -43,6 +48,8 @@ I18n.setLanguage = setLanguage;
 I18n.setByLang = setByLang;
 I18n.initialLanguage = initialLanguage;
 I18n.parseLanguage = parseLanguage;
+
+Handlebars.registerHelper("t", translationHelper);
 
 
 BricksUI.I18n = I18n;
