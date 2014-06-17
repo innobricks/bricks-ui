@@ -5,7 +5,7 @@ import BricksUI from  "bricksui-metal/core";
  */
 var registerTranslation = function (translation) {
     Ember.assert('translation must be an object ,you passed ' + translation, typeof translation === 'object');
-    Ember.merge(Ember.I18n.translations, translation);
+    Ember.$.extend(true, Ember.I18n.translations, translation);
 };
 
 /**
