@@ -353,13 +353,6 @@ if (env !== 'test') {
 }
 
 distTrees = mergeTrees(distTrees);
-distTrees = replace(distTrees, {
-  files: [ '**/*.js' ],
-  patterns: [
-    { match: /VERSION_STRING_PLACEHOLDER/g, replacement: calculateVersion }
-  ]
-});
-
 
 /**
  * START项目所依赖的第三方插件打包
@@ -397,6 +390,12 @@ var bricksFile=pickFiles(compiledSource,{
 });
 
 distTrees = mergeTrees([distTrees, vendorResource, vendorAll,bricksFile]);
+distTrees = replace(distTrees, {
+    files: [ '**/*.js' ],
+    patterns: [
+        { match: /VERSION_STRING_PLACEHOLDER/g, replacement: calculateVersion }
+    ]
+});
 /**
  * END项目所依赖的第三方插件打包
  */
@@ -404,5 +403,18 @@ distTrees = mergeTrees([distTrees, vendorResource, vendorAll,bricksFile]);
 var distExportTree = exportTree(distTrees, {
   destDir: 'live-dist'
 });
+var yuidocCompiler = require('broccoli-yuidoc');
 
-module.exports = mergeTrees([distTrees,distExportTree]);
+var yuidocTree = yuidocCompiler('live-dist/bricksui', {
+    srcDir: '/',
+    destDir: 'docs',
+    yuidoc: {
+        // .. yuidoc option overrides
+        exclude:"assets",
+        "themedir" : "node_modules/yuidoc-bootstrap-theme",
+        "helpers" : ["node_modules/yuidoc-bootstrap-theme/helpers/helpers.js"]
+    }
+});
+
+
+module.exports = mergeTrees([distTrees,distExportTree,yuidocTree]);

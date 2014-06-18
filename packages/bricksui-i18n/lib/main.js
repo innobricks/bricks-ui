@@ -2,12 +2,7 @@ import BricksUI from 'bricksui-metal/core';
 import "bricksui-i18n/initializer";
 
 import {
-    registerTranslation,
-    getLanguage,
-    setLanguage,
-    setByLang,
-    initialLanguage,
-    parseLanguage
+    setLang
     } from "bricksui-i18n/i18n-support";
 import i18nValidator from "bricksui-i18n/i18n-validator";
 
@@ -22,11 +17,15 @@ import {
     translationHelper
     } from "bricksui-i18n/helpers/translation";
 /**
- @module BricksUI
- @submodule BricksUI-I18n
+ @module bricksui
+ @submodule bricks-i18n
  @description 国际化支持
  */
-
+/**
+ * @class I18n
+ * @namespace BricksUI
+ * @type {{}}
+ */
 var I18n = {};
 
 I18n.lang = {};
@@ -42,12 +41,7 @@ I18n.lang['zh-cn'] = zhCN;
 
 I18n.I18nableValidationMixin = i18nValidator;
 
-I18n.registerTranslation = registerTranslation;
-I18n.getLanguage = getLanguage;
-I18n.setLanguage = setLanguage;
-I18n.setByLang = setByLang;
-I18n.initialLanguage = initialLanguage;
-I18n.parseLanguage = parseLanguage;
+I18n.setLang = setLang;
 
 Handlebars.registerHelper("t", translationHelper);
 

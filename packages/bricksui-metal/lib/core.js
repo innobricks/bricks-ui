@@ -28,7 +28,7 @@ var DEFAULT_ENV = {
   PERSISTENT_I18N: true,
   MODULE_PREFIX:'appkit',
   LANG_FOLDER_NAME:"lang"
-}
+};
 
 /**
  * @description Bricks变量配置

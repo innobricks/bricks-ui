@@ -7,7 +7,7 @@ install:
 - "npm install"
 after_success:
   - broccoli build dist
-  - node publish.js
+  - node publish_to_bower.js
 script:
   - npm test
 env:

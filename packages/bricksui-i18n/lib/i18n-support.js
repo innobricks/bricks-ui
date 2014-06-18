@@ -8,7 +8,7 @@ var loadLang = function () {
     } catch (e) {
         return null;
     }
-}
+};
 
 var parseLanguage = function () {
     var language = (window.navigator.language || window.navigator.browserLanguage).toLowerCase(),
@@ -23,7 +23,7 @@ var parseLanguage = function () {
 };
 var requireLang = function (parsedName) {
     var require = window.require;
-    if (typeof parsedName == "string") {
+    if (typeof parsedName === "string") {
         parsedName = {
             language: parsedName
         };
@@ -41,20 +41,20 @@ var requireLang = function (parsedName) {
     return {
         localeName: localeName,
         localeLang: localeLang
-    }
-}
+    };
+};
 var saveLang = function (lang) {
     if (BricksUI.ENV.PERSISTENT_I18N) {
         Ember.$.cookie(langKey, JSON.stringify(lang), { expires: 7 });
     }
-}
+};
 var mergeLang = function (locale) {
     var localeName = locale.localeName;
     var localeLang = locale.localeLang;
     var bricksLocale = BricksUI.I18n.lang[localeName];
     Ember.$.extend(true, bricksLocale, localeLang);
     Ember.$.extend(true, Ember.I18n.translations, bricksLocale);
-}
+};
 var initLang = function () {
     var parsedName;
     if (BricksUI.ENV.PERSISTENT_I18N) {
@@ -63,7 +63,19 @@ var initLang = function () {
     var locale = requireLang(parsedName);
     mergeLang(locale);
     saveLang(parsedName);
-}
+};
+/**
+ * 语言切换,用户可以通过传入的语言标识符进行语言切换
+ * 需要在对应的项目下有对应的语言包
+ * app
+ *      lang
+ *          en.js
+ *          zh-cn.js
+ *  传入的标识符即为lang下的对应的文件名
+ * @method setLang
+ * @for BricksUI.I18n
+ * @param {String} lang language string ,"en" "zh-cn"
+ */
 var setLang = function (lang) {
     var locale = requireLang(lang);
     mergeLang(locale);
@@ -80,7 +92,7 @@ var setLang = function (lang) {
         }
     }
     Ember.instrument("i18nChange");
-}
+};
 
 export
 {
