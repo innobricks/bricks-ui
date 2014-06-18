@@ -24,10 +24,15 @@ import {
 /**
  * @class I18n
  * @namespace BricksUI
- * @type {{}}
+ * @type {Object}
  */
 var I18n = {};
-
+/**
+ * I18n lang locale package
+ * @module bricksui-i18n
+ * @submodule bricks-i18n-lang
+ * @type {Object}
+ */
 I18n.lang = {};
 
 /**
@@ -35,6 +40,7 @@ I18n.lang = {};
  * de :de-dk de-ch de-lu
  * zh-cn : zh-cn
  * zh-tw : zh-tw
+ *  @default "zh-cn"
  */
 I18n.lang['en'] = en;
 I18n.lang['zh-cn'] = zhCN;

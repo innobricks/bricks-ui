@@ -42,12 +42,13 @@ process.exec(cmds, function () {
                 "git config user.email '294358991@qq.com'",
                 "git config user.name 'enshjiang'",
                 "git add -A",
-                    "git commit -m 'Update for bricks-ui SHA: https://github.com/innoarch/bricks-ui/" + json.version + "'",
-                "GIT_SSH=./bin/git_wrapper",
+                "git commit -m 'Update for bricks-ui SHA: https://github.com/innoarch/bricks-ui/" + json.version + "'",
                 "git push origin master"].join("&&");
-            process.exec(pushCmds), function () {
+            process.exec(pushCmds, function (err,out) {
+                console.warn(err);
+                console.log(out);
                 console.log("publish successfully!");
-            };
+            });
         });
     });
 
