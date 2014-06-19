@@ -1,4 +1,9 @@
 /**
+ * @module bricksui
+ * @submodule bricksui-metal
+ */
+
+/**
  * 状态处理器
  * 在extend时将states属性移到_states属性,
  * 继承该接口,可以实现states在子父类间继承

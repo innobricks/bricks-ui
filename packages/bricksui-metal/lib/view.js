@@ -1,3 +1,7 @@
+/**
+ * @module bricksui-metal
+ */
+
 import BricksUI from "bricksui-metal/core";
 import Stateable from "bricksui-metal/statechart";
 import EventManager from "bricksui-metal/event_manager";

@@ -34,7 +34,7 @@ function (key, options) {
             attrs[propertyName] = currentValue;
             invoker = null;
             normalized = EmHandlebars.normalizePath(context, bindPath, data);
-            _ref = [normalized.root, normalized.path], root = _ref[0], normalizedPath = _ref[1];
+            _ref = [normalized.root, normalized.path], root = _ref[0], normalizedPath = _ref[1]; //jshint ignore:line
 
             observer = function () {
                 var elem, newValue;

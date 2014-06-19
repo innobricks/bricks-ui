@@ -1,3 +1,14 @@
+/**
+ @module bricksui
+ @submodule bricksui-form
+ */
+/**
+ 基于ember与[百度富文本编辑器umeditor](http://ueditor.baidu.com/website/umeditor.html)
+ 主要增加了数据绑定的功能，config配置项与umeditor一致
+ @class Checkbox
+ @namespace Ember.EasyForm
+ @extends Ember.EasyForm.Input
+ */
 var Checkbox = Ember.EasyForm.Input.extend({
     init: function () {
         this._super.apply(this, arguments);

@@ -1,4 +1,9 @@
 /**
+ * @module bricksui
+ * @submodule bricksui-metal
+ */
+
+/**
  * 有限状态机(Finite State Machine)
  *   有限状态机对行为建模
  *      1、事件：程序对事件进行响应

@@ -55,6 +55,7 @@ var mergeLang = function (locale) {
     Ember.$.extend(true, bricksLocale, localeLang);
     Ember.$.extend(true, Ember.I18n.translations, bricksLocale);
 };
+
 var initLang = function () {
     var parsedName;
     if (BricksUI.ENV.PERSISTENT_I18N) {

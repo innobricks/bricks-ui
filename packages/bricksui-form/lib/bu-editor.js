@@ -1,4 +1,9 @@
 var get = Ember.get, set = Ember.set;
+
+/**
+ @module bricksui
+ @submodule bricksui-form
+ */
 /**
  基于ember与[百度富文本编辑器umeditor](http://ueditor.baidu.com/website/umeditor.html)
  主要增加了数据绑定的功能，config配置项与umeditor一致
@@ -10,7 +15,7 @@ var get = Ember.get, set = Ember.set;
 var BuEditor = Ember.Component.extend({
 
   /**
-   value类型，分别为content和contentTxt,content包含其中的段落标签
+   value类型，分别为content和contentTxt,content包含其中的段落标签,contentTxt则指纯文本内容
    @property valueType
    @type string
    */

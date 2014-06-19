@@ -1,3 +1,8 @@
+/**
+ * @module bricksui
+ * @submodule bricksui-metal
+ */
+
 import BricksUI from "bricksui-metal/core";
 var Em = window.Ember;
 /**
