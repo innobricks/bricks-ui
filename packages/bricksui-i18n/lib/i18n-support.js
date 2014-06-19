@@ -124,7 +124,9 @@ var setLang = function (lang) {
             delete translations[prop];
         }
     }
-    Ember.instrument("i18nChange");
+    Ember.instrument("i18nChange",null,function(){
+        Ember.Logger.warn("no listener for i18nChange! nothing changed!");
+    });
 };
 
 export

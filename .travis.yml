@@ -7,14 +7,11 @@ install:
 - "npm install"
 after_success:
   - broccoli build dist
-  - node publish_to_bower.js
 script:
   - npm test
 env:
   global:
   - BROCCOLI_ENV=production
-  - S3_BUILD_CACHE_BUCKET=emberjs-build-cache
-  - S3_BUCKET_NAME=builds.emberjs.com
   - secure: "SHnuJ4A3QbSc3LV2fYynDPbbSbhVl0ZWnCiKPuRgwnddDnoSaMQUY2RqyHdtsQGdUZCOeNaMvYUhYx6hzxBVHn0yuN3KA20aSwvYdwaMgZXfJi+lyxgsEI8iYdksWXvVbCAyKM8zjTWXUtNcMBGtsGYOfdD41wfZgI8GsI0YYJc="
   - secure: ! 'KXJmcGLpnxnPmmei/qPNVcdQxLX1xyYIaVocinQ0YAjtBvCtAwg63EWMFnGp
 
