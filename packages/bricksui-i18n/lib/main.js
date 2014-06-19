@@ -16,20 +16,23 @@ import zhCN from "bricksui-i18n/lang/zh-cn";
 import {
     translationHelper
     } from "bricksui-i18n/helpers/translation";
-
 /**
- i18n国际化与本地化支持模块
  @module bricksui
- @submodule bricksui-i18n
+ @submodule bricks-i18n
+ @description 国际化支持
  */
-
-///**
-// * @class I18n
-// * @namespace BricksUI
-// * @type {{}}
-// */
+/**
+ * @class I18n
+ * @namespace BricksUI
+ * @type {Object}
+ */
 var I18n = {};
-
+/**
+ * I18n lang locale package
+ * @module bricksui-i18n
+ * @submodule bricks-i18n-lang
+ * @type {Object}
+ */
 I18n.lang = {};
 
 /**
@@ -37,6 +40,7 @@ I18n.lang = {};
  * de :de-dk de-ch de-lu
  * zh-cn : zh-cn
  * zh-tw : zh-tw
+ *  @default "zh-cn"
  */
 I18n.lang['en'] = en;
 I18n.lang['zh-cn'] = zhCN;
@@ -46,6 +50,7 @@ I18n.I18nableValidationMixin = i18nValidator;
 I18n.setLang = setLang;
 
 Handlebars.registerHelper("t", translationHelper);
+
 
 BricksUI.I18n = I18n;
 
