@@ -119,7 +119,8 @@ var yuidocTree = yuidocCompiler('./packages/', {
             "packages/bricksui-metal/lib",
             "packages/bricksui-form/lib",
             "packages/bricksui-i18n/lib"
-        ]
+        ],
+        "themedir":"vendor/doc-theme-blue"
     }
 });
 

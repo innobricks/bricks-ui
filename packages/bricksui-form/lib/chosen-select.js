@@ -1,4 +1,32 @@
+/**
+ @module bricksui
+ @submodule bricksui-form
+ */
 
+/**
+ * 重置Ember.EasyForm下拉组建行为，将下拉框组件行为转换未chosen组建，用户通常无需直接使用该组建，
+ * 应通过Ember-EasyForm的方式使用该组件
+ * 可选的参数有 data-placeholder，表示下拉组建的占位符
+ * 使用方式如
+ ```handlebars
+ {{#form-for model wrapper="bootstrap"}}
+ {{input author
+ as='select'
+ data-placeholder="请选择作者"
+ collection="category"
+ optionLabelPath="content.value"
+ }}
+ {{input tags as='select'
+ data-placeholder="请选标签"
+ multiple=true
+ collection="category"
+ optionLabelPath="content.value"
+ }}
+ {{/form-for}}
+ ```
+ * @class Select
+ * @namespace Ember.EasyForm
+ */
 var ChosenSelect = Ember.EasyForm.Select.reopen({
 
   classNames: ['form-control'],
@@ -18,8 +46,9 @@ var ChosenSelect = Ember.EasyForm.Select.reopen({
   },
 
   /**
-   * @description 在收到通知需进行销毁后，销毁chsen组建
    * @private
+   * @method _elementDestroy
+   * @description 在收到通知需进行销毁后，销毁chsen组建
    */
   _elementDestroy: function () {
     this.$().chosen('destroy');
@@ -27,8 +56,8 @@ var ChosenSelect = Ember.EasyForm.Select.reopen({
 
 
   /**
+   * @method _updateItem
    * @description 在select的context发生变化后，通知chosen进行视图更新
-   * @private
    */
   _updateItem: function () {
     Ember.run.scheduleOnce('afterRender', this, function () {

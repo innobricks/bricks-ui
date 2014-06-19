@@ -7,6 +7,11 @@ var get = Ember.get, set = Ember.set;
 /**
  基于ember与[百度富文本编辑器umeditor](http://ueditor.baidu.com/website/umeditor.html)
  主要增加了数据绑定的功能，config配置项与umeditor一致
+ 继承自Ember.Component，用法上与Ember.Component保持一致
+ 使用方式如:
+ ```handlebars
+ {{bu-editor value=title valueType="contentTxt"}}
+ ```
  @class BuEditor
  @namespace Ember
  @extends Ember.Component
@@ -18,6 +23,7 @@ var BuEditor = Ember.Component.extend({
    value类型，分别为content和contentTxt,content包含其中的段落标签,contentTxt则指纯文本内容
    @property valueType
    @type string
+   @default "content"
    */
   valueType: "content",
 

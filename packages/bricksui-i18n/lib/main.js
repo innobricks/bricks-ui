@@ -18,19 +18,21 @@ import {
     } from "bricksui-i18n/helpers/translation";
 /**
  @module bricksui
- @submodule bricks-i18n
+ @submodule bricksui-i18n
  @description 国际化支持
  */
 /**
  * @class I18n
  * @namespace BricksUI
  * @type {Object}
+ * @static
  */
 var I18n = {};
 /**
- * I18n lang locale package
- * @module bricksui-i18n
- * @submodule bricks-i18n-lang
+ * I18n语言包Hash
+ * @static
+ * @class lang
+ * @namespace BricksUI.I18n
  * @type {Object}
  */
 I18n.lang = {};

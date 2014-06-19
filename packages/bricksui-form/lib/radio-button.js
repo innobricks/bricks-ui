@@ -1,3 +1,7 @@
+/**
+ @module bricksui
+ @submodule bricksui-form
+ */
 var RadioButton = Ember.View.extend({
     tagName: "input",
     type: "radio",

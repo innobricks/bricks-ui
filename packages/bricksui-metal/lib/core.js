@@ -7,7 +7,7 @@
 /**
  *  BricksUI ,a widget library on ember.js
  *  @class BricksUI
- *  @statis
+ *  @static
  *  @version VERSION_STRING_PLACEHOLDER
  */
 if ("undefined" === typeof BricksUI) {

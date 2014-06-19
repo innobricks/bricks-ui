@@ -5,5 +5,6 @@ tmp/
 node_modules/
 /vendor/*
 !/vendor/assets
+!/vendor/doc-theme-blue
 live-dist/
 .idea/
