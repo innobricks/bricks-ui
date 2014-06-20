@@ -112,15 +112,13 @@ var yuidocTree = yuidocCompiler('./packages/', {
     yuidoc: {
         // .. yuidoc option overrides
         exclude: "assets",
-        themedir: "node_modules/yuidoc-bootstrap-theme",
-        helpers: ["node_modules/yuidoc-bootstrap-theme/helpers/helpers.js"],
         paths: [
             "packages/bricksui/lib",
             "packages/bricksui-metal/lib",
             "packages/bricksui-form/lib",
             "packages/bricksui-i18n/lib"
         ],
-        "themedir":"vendor/doc-theme-blue"
+        "themedir":"vendor/yuidoc-theme-blue"
     }
 });
 

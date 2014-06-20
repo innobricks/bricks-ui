@@ -41,7 +41,6 @@
     "ncp": "~0.5.1",
     "rimraf": "~2.2.8",
     "rsvp": "~3.0.6",
-    "yuidoc-bootstrap-theme": "^1.0.2",
     "yuidocjs": "~0.3.46"
   },
   "dependencies": {}
