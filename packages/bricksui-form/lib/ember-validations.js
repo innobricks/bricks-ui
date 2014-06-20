@@ -3,7 +3,6 @@
  @submodule bricksui-form
  */
 /**
-
  ## 用法 ##
 
  需要将`Ember.Validations.Mixin`集成到任何你想要添加验证的控制器上
@@ -18,22 +17,22 @@
 
  ```javascript
  App.UserController.reopen({
-  validations: {
-    firstName: {
-      presence: true,
-      length: { minimum: 5 }
-    },
-    age: {
-      numericality: true
-    },
-    profile: true
-  }
-});
+      validations: {
+        firstName: {
+          presence: true,
+          length: { minimum: 5 }
+        },
+        age: {
+          numericality: true
+        },
+        profile: true
+      }
+ });
  ```
 
  ## 校验器 ##
 
- 当前已经支持的校验器如下所示:
+ 当前已经支持的校验器如下所示
 
  ### Absence ###
  验证属性值是`null`,`undefined` 或者是 `''`.
@@ -105,7 +104,7 @@
 
  ### Inclusion ###
  被允许的值
-熬过校验
+ 熬过校验
  #### Options ####
  * `message` - 错误提示信息,可以如果提供了,将会覆盖默认的提示信息.
  * `allowBlank` - 如果设置为`true`,值为空将跳过校验
@@ -218,21 +217,21 @@
  ```javascript
  // function form
  firstName: {
-  presence: {
-    if: function(object, validator) {
-      return true;
-    }
-  }
-}
+      presence: {
+        if: function(object, validator) {
+          return true;
+        }
+      }
+ }
 
  // string form
  // if 'canValidate' is a function on the object it will be called
  // if 'canValidate' is a property object.get('canValidate') will be called
  firstName: {
-  presence: {
-    unless: 'canValidate'
-  }
-}
+      presence: {
+        unless: 'canValidate'
+      }
+ }
  ```
 
  ## Running Validations
@@ -247,9 +246,9 @@
 
  ```javascript
  user.validate().then(function() {
-  user.get('isValid'); // true
-  user.get('isInvalid'); // false
-})
+      user.get('isValid'); // true
+      user.get('isInvalid'); // false
+ })
  ```
 
  ## Inspecting Errors ##
@@ -259,21 +258,21 @@
 
  ```javascript
  App.User = Ember.Object.extend(Ember.Validations.Mixin, {
-  validations: {
-    firstName: { presence: true }
-  }
-});
+      validations: {
+        firstName: { presence: true }
+      }
+ });
 
  user = App.User.create();
  user.validate().then(null, function() {
-  user.get('isValid'); // false
-  user.get('errors.firstName'); // ["can't be blank"]
-  user.set('firstName', 'Brian');
-  user.validate().then(function() {
-    user.get('isValid'); // true
-    user.get('errors.firstName'); // []
-  })
-})
+      user.get('isValid'); // false
+      user.get('errors.firstName'); // ["can't be blank"]
+      user.set('firstName', 'Brian');
+      user.validate().then(function() {
+         user.get('isValid'); // true
+         user.get('errors.firstName'); // []
+      })
+ })
 
  ```
 
@@ -283,28 +282,29 @@
 
  ```javascript
  Ember.I18n.translations = {
-  errors:
-    inclusion: "is not included in the list",
-    exclusion: "is reserved",
-    invalid: "is invalid",
-    confirmation: "doesn't match {{attribute}}",
-    accepted: "must be accepted",
-    empty: "can't be empty",
-    blank: "can't be blank",
-    present: "must be blank",
-    tooLong: "is too long (maximum is {{count}} characters)",
-    tooShort: "is too short (minimum is {{count}} characters)",
-    wrongLength: "is the wrong length (should be {{count}} characters)",
-    notANumber: "is not a number",
-    notAnInteger: "must be an integer",
-    greaterThan: "must be greater than {{count}}",
-    greaterThanOrEqualTo: "must be greater than or equal to {{count}}",
-    equalTo: "must be equal to {{count}}",
-    lessThan: "must be less than {{count}}",
-    lessThanOrEqualTo: "must be less than or equal to {{count}}",
-    otherThan: "must be other than {{count}}",
-    odd: "must be odd",
-    even: "must be even"
+      errors:{
+        inclusion: "is not included in the list",
+        exclusion: "is reserved",
+        invalid: "is invalid",
+        confirmation: "doesn't match {{attribute}}",
+        accepted: "must be accepted",
+        empty: "can't be empty",
+        blank: "can't be blank",
+        present: "must be blank",
+        tooLong: "is too long (maximum is {{count}} characters)",
+        tooShort: "is too short (minimum is {{count}} characters)",
+        wrongLength: "is the wrong length (should be {{count}} characters)",
+        notANumber: "is not a number",
+        notAnInteger: "must be an integer",
+        greaterThan: "must be greater than {{count}}",
+        greaterThanOrEqualTo: "must be greater than or equal to {{count}}",
+        equalTo: "must be equal to {{count}}",
+        lessThan: "must be less than {{count}}",
+        lessThanOrEqualTo: "must be less than or equal to {{count}}",
+        otherThan: "must be other than {{count}}",
+        odd: "must be odd",
+        even: "must be even"
+      }
 }
  ```
  @namespace Ember
