@@ -120,7 +120,7 @@ var BuEditor = Ember.Component.extend({
 
 
   /**
-   将textarea转换未UMeditor实例
+   将textarea转换为UMeditor实例
    @private
    @method _updateDom
    */

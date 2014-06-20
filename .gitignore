@@ -5,7 +5,6 @@ tmp/
 node_modules/
 /vendor/*
 !/vendor/assets
-!/vendor/doc-theme-blue
 live-dist/
 .idea/
 publish_to_bower/

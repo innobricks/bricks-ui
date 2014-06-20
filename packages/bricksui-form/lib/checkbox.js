@@ -15,7 +15,7 @@
  */
 var Checkbox = Ember.EasyForm.Input.extend({
   /**
-   *初始化操作，模仿Ember.Component,将视图上下文设置未自身，并从Ember.EasyForm.Config中获取模板
+   *初始化操作，模仿Ember.Component,将视图上下文设置为自身，并从Ember.EasyForm.Config中获取模板
    *@method init
    */
   init: function () {

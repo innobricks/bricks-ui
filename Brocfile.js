@@ -118,7 +118,7 @@ var yuidocTree = yuidocCompiler('./packages/', {
             "packages/bricksui-form/lib",
             "packages/bricksui-i18n/lib"
         ],
-        "themedir":"vendor/doc-theme-blue"
+        "themedir":"vendor/yuidoc-theme-blue"
     }
 });
 

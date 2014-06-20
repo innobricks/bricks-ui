@@ -4,9 +4,9 @@
  */
 
 /**
- * 重置Ember.EasyForm下拉组建行为，将下拉框组件行为转换未chosen组建，用户通常无需直接使用该组建，
+ * 重置Ember.EasyForm下拉组件行为，将下拉框组件行为转换为chosen组件，用户通常无需直接使用该组件，
  * 应通过Ember-EasyForm的方式使用该组件
- * 可选的参数有 data-placeholder，表示下拉组建的占位符
+ * 可选的参数有 data-placeholder，表示下拉组件的占位符
  * 使用方式如
  ```handlebars
  {{#form-for model wrapper="bootstrap"}}
@@ -48,7 +48,7 @@ var ChosenSelect = Ember.EasyForm.Select.reopen({
   /**
    * @private
    * @method _elementDestroy
-   * @description 在收到通知需进行销毁后，销毁chsen组建
+   * @description 在收到通知需进行销毁后，销毁chsen组件
    */
   _elementDestroy: function () {
     this.$().chosen('destroy');
