@@ -4,7 +4,7 @@ import "bricksui-form/helpers/checkbox";
 import "bricksui-form/helpers/radio";
 import "bricksui-form/bu-editor";
 import "bricksui-form/chosen-select";
-
+import "bricksui-form/ember-validations";
 
 import Checkbox from "bricksui-form/checkbox";
 import Radio from "bricksui-form/radio";
