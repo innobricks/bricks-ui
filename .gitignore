@@ -8,3 +8,6 @@ node_modules/
 !/vendor/doc-theme-blue
 live-dist/
 .idea/
+publish_to_bower/
+publish_to_docs/
+publish_to_build/

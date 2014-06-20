@@ -19,9 +19,9 @@ var execCmd = function (cmds, callback) {
 }
 
 var cmds = [
-    "rm -rf ../publish_to_bower",
-    "mkdir ../publish_to_bower",
-    "cd ../publish_to_bower",
+    "rm -rf publish_to_bower",
+    "mkdir publish_to_bower",
+    "cd publish_to_bower",
     "git init",
     "git remote add origin git@github.com:innobower/bricksui.git",
     "git fetch origin",
@@ -29,26 +29,25 @@ var cmds = [
     "git checkout master"
 ].join("&&")
 process.exec(cmds, function () {
-    var file = "../publish_to_bower/bower.json";
+    var file = "publish_to_bower/bower.json";
     var content = fs.readFileSync(file, "utf-8");
     var json = JSON.parse(content);
     json.version = calcVersion();
     fs.writeFileSync(file, JSON.stringify(json, null, 4));
 
-    process.exec("cp -r dist/bricksui/* ../publish_to_bower", function () {
-        process.exec("cd ../publish_to_bower", function () {
-            var pushCmds = [
-                "cd ../publish_to_bower",
-                "git config user.email '294358991@qq.com'",
-                "git config user.name 'enshjiang'",
-                "git add -A",
-                "git commit -m 'Update for bricks-ui SHA: https://github.com/innoarch/bricks-ui/" + json.version + "'",
-                "git push origin master"].join("&&");
-            process.exec(pushCmds, function (err,out) {
-                console.warn(err);
-                console.log(out);
-                console.log("publish successfully!");
-            });
+    process.exec("cp -r dist/bricksui/* publish_to_bower", function () {
+        var pushCmds = [
+            "cd publish_to_bower",
+            "git config user.email '294358991@qq.com'",
+            "git config user.name 'enshjiang'",
+            "git add -A",
+            "git commit -m 'Update for bricks-ui SHA: https://github.com/innoarch/bricks-ui/" + json.version + "'",
+            "git push origin master"].join("&&");
+        process.exec(pushCmds, function (err, out) {
+            console.warn(err);
+            console.log(out);
+            console.log("publish successfully!");
+            process.exec("rm -rf publish_to_bower");
         });
     });
 
