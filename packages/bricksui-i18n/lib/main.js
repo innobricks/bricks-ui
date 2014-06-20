@@ -29,22 +29,30 @@ import {
  */
 var I18n = {};
 /**
- * I18n语言包Hash
- * @static
- * @class lang
- * @namespace BricksUI.I18n
- * @type {Object}
- */
-I18n.lang = {};
-
-/**
+ * I18n语言包Hash.
+ * ```javascript
  * en :en-us en-hk en-au
  * de :de-dk de-ch de-lu
  * zh-cn : zh-cn
  * zh-tw : zh-tw
- *  @default "zh-cn"
+ * ```
+ * @static
+ * @class lang
+ * @namespace BricksUI.I18n
+ * @type {Object}
+ * @default zh-cn
+ */
+I18n.lang = {};
+
+/**
+ *  @property en
+ *  @type Hash
  */
 I18n.lang['en'] = en;
+/**
+ * @property zh-cn
+ * @type Hash
+ */
 I18n.lang['zh-cn'] = zhCN;
 
 I18n.I18nableValidationMixin = i18nValidator;

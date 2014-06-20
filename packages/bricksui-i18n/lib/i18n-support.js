@@ -85,6 +85,7 @@ var mergeLang = function (locale) {
 
 /**
  * 在项目载入时进行I18n的选择，并根据是否开启语言选择持久化，保存语言选择
+ * @private
  * @method initLang
  * @for BricksUI.I18n
  */

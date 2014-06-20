@@ -56,6 +56,7 @@ var ChosenSelect = Ember.EasyForm.Select.reopen({
 
 
   /**
+   * @private
    * @method _updateItem
    * @description 在select的context发生变化后，通知chosen进行视图更新
    */
@@ -76,6 +77,7 @@ var ChosenSelect = Ember.EasyForm.Select.reopen({
 
   /**
    * @description 在视图渲染完成后，将select组件转换为chosen组件
+   * @method _updateDom
    * @private
    */
   _updateDom: function () {
