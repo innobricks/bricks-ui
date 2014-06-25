@@ -17,11 +17,17 @@
   }
 }*/
 
+
+//=require moment/moment.js
 //=require ember-i18n/lib/i18n.js
 //=require ember-validations/index.js
 //=require ember-easyForm/index.js
 //=require chosen/chosen.jquery.js
 //=require jquery-cookie/jquery.cookie.js
+//=require bootstrap3-datetimepicker/src/js/bootstrap-datetimepicker.js
 
+/* locales require */
 
+//=require bootstrap3-datetimepicker/src/js/locales/bootstrap-datetimepicker.zh-CN.js
+//=require bootstrap3-datetimepicker/src/js/locales/bootstrap-datetimepicker.zh-TW.js
 

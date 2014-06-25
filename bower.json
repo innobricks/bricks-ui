@@ -7,11 +7,14 @@
     "jquery": "~1.9.1",
     "qunit": "~1.12.0",
     "loader": "git://github.com/stefanpenner/loader.js#1.0.0",
-    "chosen": "git://github.com/Nav4e/chosen_dist",
-    "yuidoc-theme-blue":"https://github.com/Nav4e/yuidoc-theme-blue.git#v0.1.8b",
     "ember-easyForm": "http://builds.dockyard.com/ember-easyForm/release/ember-easyForm.js",
     "ember-validations": "http://builds.dockyard.com/ember-validations/release/ember-validations.js",
     "ember-i18n": "~2.0.0",
-    "jquery-cookie": "~1.4.1"
+    "jquery-cookie": "~1.4.1",
+    "moment": ">=2.4.0",
+
+    "chosen": "git://github.com/bricks-vendor/chosen_dist",
+    "bootstrap3-datetimepicker": "git://github.com/bricks-vendor/bootstrap-datetimepicker.git#v3.0zhsp",
+    "yuidoc-theme-blue":"https://github.com/bricks-vendor/yuidoc-theme-blue.git#v0.1.8b"
   }
 }

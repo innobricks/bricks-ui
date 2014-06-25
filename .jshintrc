@@ -30,6 +30,7 @@
     "ignoreAssertion",
     "ignoreDeprecation",
     "BricksUI",
+    "moment",
     // A safe subset of "browser:true":
     "window", "document",
     "setTimeout", "clearTimeout", "setInterval", "clearInterval"
