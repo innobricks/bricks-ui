@@ -16,7 +16,9 @@ var replace = require('broccoli-replace');
 var templateCompiler = require('broccoli-ember-hbs-template-compiler');
 var compileLess = require('broccoli-less-single');
 var calculateVersion = require('./lib/calculate-version');
-
+var path = require("path");
+//relativePath is '/' ,compatible windows
+path.sep = "/";
 var env = process.env.BROCCOLI_ENV || 'test';
 var disableJSHint = !!process.env.NO_JSHINT || false;
 var disableDefeatureify = !!process.env.NO_DEFEATUREIFY || env === 'test' || false;
@@ -118,7 +120,7 @@ var yuidocTree = yuidocCompiler('./packages/', {
             "packages/bricksui-form/lib",
             "packages/bricksui-i18n/lib"
         ],
-        "themedir":"vendor/yuidoc-theme-blue"
+        "themedir": "vendor/yuidoc-theme-blue"
     }
 });
 
@@ -423,4 +425,4 @@ var distExportTree = exportTree(distTrees, {
 });
 
 
-module.exports = mergeTrees([yuidocTree,distTrees, distExportTree]);
+module.exports = mergeTrees([yuidocTree, distTrees, distExportTree]);
