@@ -38,7 +38,7 @@ var get = Ember.get,
 
  组件使用方式为
  ```handlebars
-  {{bu-datepicker value=value}}
+ {{bu-datepicker value=value}}
  ```
  @class BuDatePicker
  @namespace Ember
@@ -46,13 +46,14 @@ var get = Ember.get,
  */
 export default Ember.Component.extend({
   classNames: ['form-control'],
-  tagName:'input',
+  tagName: 'input',
 
   /**
    * 外部所绑定的值
    * @property value
+   * @type Object
    */
-  value:null,
+  value: null,
 
   init: function () {
     this._super.apply(this, arguments);
@@ -62,9 +63,9 @@ export default Ember.Component.extend({
 
   /**
    * input fix，根据在输入的格式校验失败后，尝试将输入项转换为Date类型，如果成功，则进行格式转换并输出
-   * @param evt
+   * @param {object} event
    */
-  error: function (evt) {
+  error: function (event) {
     var date, elem, format, newFmt , val;
     elem = this.$();
     val = elem.prop('value');
@@ -79,12 +80,14 @@ export default Ember.Component.extend({
 
   /**
    * 绑定原始值,在输入框内容发生改变时，更新Value的值
+   * @method change
+   * @private
    */
   change: function () {
-    var elem=this.$(),
+    var elem = this.$(),
       picker = elem.data('DateTimePicker');
 
-    set(this,'value',picker.getDate().toISOString());
+    set(this, 'value', picker.getDate().toISOString());
   },
 
   /**
@@ -103,6 +106,7 @@ export default Ember.Component.extend({
    */
   _parseOptions: function () {
     var options = get(this, 'options');
+
     if (Ember.typeOf(options) === 'string') {
       try {
         options = JSON.parse(options);
@@ -111,18 +115,29 @@ export default Ember.Component.extend({
         throw e;
       }
     }
+    this.defaultOptions.language = BricksUI.I18n.getLang().language;
   },
+
+  /**
+   * 在视图销毁时，清除datepicker Dom 对象
+   */
+  _destroyElement: function () {
+    var elem;
+    elem = this.$();
+    elem.data('DateTimePicker').destroy();
+  }.on('destroyElement'),
 
   /**
    * 监听全局I18n改变事件，在所选择的语言改变后，重新渲染视图
    * @method attachI18nEvent
+   * @private
    */
   attachI18nEvent: function () {
     var datePicker = this;
-    Ember.subscribe("i18n.change", {
+    Ember.subscribe("i18nChange", {
       after: function (name, timestamp, payload) {
-        var lang = payload.lang;
-        this.defaultOptions.language = lang;
+        datePicker._destroyElement();
+        datePicker.defaultOptions.language = payload.language;
         datePicker._updateDom();
       }
     });
@@ -145,7 +160,7 @@ export default Ember.Component.extend({
   _updateDom: function () {
 
     Ember.run.scheduleOnce('afterRender', this, function () {
-      var options = Ember.$.extend({}, this.defaultOptions, (this.get('options') || {}));
+      var options = Ember.$.extend({}, this.defaultOptions, this.get('options'));
       this.$().datetimepicker(options);
       this._attachEvent();
     });

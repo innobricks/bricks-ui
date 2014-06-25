@@ -170,11 +170,6 @@ test("set Lang Test", function () {
 
 test("initial Lang Test", function () {
   initLang();
-  if(BricksUI.ENV.PERSISTENT_I18N){
-    console.log(Ember.$.cookie("bricksui-lang"));
-  }
-
-
   ok(Ember.I18n.translations.foo === "bar", "deep one success");
   ok(Ember.I18n.translations.errors.foo === "bar", "deep one success");
   ok(Ember.I18n.translations.errors.foo1.foo2 === "bar", "deep one success");
