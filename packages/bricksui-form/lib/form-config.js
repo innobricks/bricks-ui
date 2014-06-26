@@ -31,7 +31,7 @@ Ember.EasyForm.Config.registerWrapper('bootstrap', {
   buttonClass: 'btn btn-primary',
   fieldErrorClass: 'has-error',
   errorClass: 'help-block',
-  validationLayout:'validation-layout'
+  validationLayout:'bootstrap-validation-input'
 });
 
 
