@@ -118,7 +118,8 @@ var yuidocTree = yuidocCompiler('./packages/', {
             "packages/bricksui/lib",
             "packages/bricksui-metal/lib",
             "packages/bricksui-form/lib",
-            "packages/bricksui-i18n/lib"
+            "packages/bricksui-i18n/lib",
+            "packages/bricksui-thirdpart/lib"
         ],
         "themedir": "vendor/yuidoc-theme-blue"
     }

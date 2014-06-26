@@ -25,6 +25,7 @@
 //=require chosen/chosen.jquery.js
 //=require jquery-cookie/jquery.cookie.js
 //=require bootstrap3-datetimepicker/src/js/bootstrap-datetimepicker.js
+//=require bootstrap-for-ember/dist/js/bs-ui.max.js
 
 /* locales require */
 
