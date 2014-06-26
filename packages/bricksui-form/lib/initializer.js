@@ -11,14 +11,16 @@ Ember.onLoad("Ember.Application", function (Application) {
 
     Application.initializer({
       name: "swap-form-helper",
-      initialize: swapHelpers({
-        "input":"bu-input",
-        "error-field":"bu-error-field",
-        "form-for":"bu-form-for",
-        "hint-field":"bu-hint-field",
-        "input-field":"bu-input-field",
-        "label-field":"bu-label-field",
-        "submit":"bu-submit"
-      })
+      initialize: function (container, application) {
+        swapHelpers({
+          "input": "bu-input",
+          "error-field": "bu-error-field",
+          "form-for": "bu-form-for",
+          "hint-field": "bu-hint-field",
+          "input-field": "bu-input-field",
+          "label-field": "bu-label-field",
+          "submit": "bu-submit"
+        });
+      }
     });
 });

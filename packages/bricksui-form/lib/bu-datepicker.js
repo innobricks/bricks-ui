@@ -1,5 +1,7 @@
+import BricksUI from 'bricksui-metal/core';
 var get = Ember.get,
-  set = Ember.set;
+  set = Ember.set,
+  i18n=BricksUI.I18n;
 /**
  @module bricksui
  @submodule bricksui-form
@@ -115,7 +117,7 @@ export default Ember.Component.extend({
         throw e;
       }
     }
-    this.defaultOptions.language = BricksUI.I18n.getLang().language;
+    this.defaultOptions.language = i18n.getLang().language;
   },
 
   /**
