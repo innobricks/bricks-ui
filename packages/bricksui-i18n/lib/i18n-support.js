@@ -38,11 +38,16 @@ var parseLanguage = function () {
 };
 
 var tryRequire = function (moduleName) {
+  var require = window.require,
+    result
+    ;
+
   try {
-    require(moduleName);
+    result = require(moduleName);
   } catch (e) {
     Ember.warn(e.message);
   }
+  return result;
 };
 
 /**
@@ -51,18 +56,15 @@ var tryRequire = function (moduleName) {
  * @returns {{localeName: ({language: *}|*|set.language|parseLanguage.language|language|string), localeLang: *}}
  */
 var requireLang = function (parsedName) {
-  var localeLang,
-    require = window.require;
+  var localeLang;
+
   if (typeof parsedName === "string") {
     parsedName = {
       language: parsedName
     };
   }
-  try {
-    localeLang = tryRequire([BricksUI.ENV.MODULE_PREFIX, BricksUI.ENV.LANG_FOLDER_NAME, parsedName.language].join("/"));
-  } catch (e) {
-    Ember.warn(e.message);
-  }
+
+  localeLang = tryRequire([BricksUI.ENV.MODULE_PREFIX, BricksUI.ENV.LANG_FOLDER_NAME, parsedName.language].join("/"));
 
   var localeName = parsedName.language;
   if (!localeLang) {
