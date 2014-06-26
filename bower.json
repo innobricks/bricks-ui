@@ -12,9 +12,9 @@
     "ember-i18n": "~2.0.0",
     "jquery-cookie": "~1.4.1",
     "moment": ">=2.4.0",
-
     "chosen": "git://github.com/bricks-vendor/chosen_dist",
     "bootstrap3-datetimepicker": "git://github.com/bricks-vendor/bootstrap-datetimepicker.git#v3.0zhsp",
-    "yuidoc-theme-blue":"https://github.com/bricks-vendor/yuidoc-theme-blue.git#v0.1.8b"
+    "yuidoc-theme-blue": "https://github.com/bricks-vendor/yuidoc-theme-blue.git#v0.1.8b",
+    "bootstrap-daterangepicker": "~1.3.7"
   }
 }
