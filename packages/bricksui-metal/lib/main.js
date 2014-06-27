@@ -10,4 +10,4 @@ import swapHelpers from 'bricksui-metal/helper-support';
 BricksUI.EventManager = EventManager;
 BricksUI.Stateable = Stateable;
 BricksUI.StateHandler = StateHandler;
-BricksUI.swapHelpers = BricksUI.swapHelpers;
+BricksUI.swapHelpers = swapHelpers;

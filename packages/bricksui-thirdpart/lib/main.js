@@ -3,3 +3,5 @@
  @module bricksui
  @submodule bricksui-thirdpart
  */
+
+import "bricksui-thirdpart/initializer";

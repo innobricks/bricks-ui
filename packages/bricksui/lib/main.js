@@ -4,3 +4,4 @@
 import "bricksui-metal";
 import "bricksui-form";
 import "bricksui-i18n";
+import "bricksui-thirdpart";

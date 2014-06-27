@@ -3,7 +3,8 @@
  @submodule bricksui-form
  */
 /**
- ## 用法 ##
+ #####[Ember.Validations更多内容查看...](https://github.com/dockyard/ember-validations)
+ #### 用法
 
  需要将`Ember.Validations.Mixin`集成到任何你想要添加验证的控制器上
 
@@ -30,14 +31,14 @@
  });
  ```
 
- ## 校验器 ##
+ #### 校验器
 
  当前已经支持的校验器如下所示
 
- ### Absence ###
+ ##### Absence
  验证属性值是`null`,`undefined` 或者是 `''`.
 
- #### Options ####
+ ###### Options
  * `true` - 设置为`true`将激活控制校验并且使用默认提示信息
  * `message` - 错误提示信息,可以如果提供了,将会覆盖默认的提示信息
 
@@ -47,10 +48,10 @@
  absence: { message: 'must be blank' }
  ```
 
- ### Acceptance ###
+ ##### Acceptance
  默认可被接受的值为`'1'`, `1`, and `true`.
 
- #### Options ####
+ ###### Options
  * `true` - 设置为`true`将激活控制校验并且使用默认提示信息
  * `message` - 错误提示信息,可以如果提供了,将会覆盖默认的提示信息
  * `accept` - 可被接受的值
@@ -61,10 +62,10 @@
  acceptance: { message: 'you must accept', accept: 'yes' }
  ```
 
- ### Confirmation ###
+ ##### Confirmation
  相同值校验
 
- #### Options ####
+ ###### Options
  * `true` - 设置为`true`将激活控制校验并且使用默认提示信息
  * `message` - 错误提示信息,可以如果提供了,将会覆盖默认的提示信息
 
@@ -74,10 +75,10 @@
  confirmation: { message: 'you must confirm' }
  ```
 
- ### Exclusion ###
+ ##### Exclusion
  排除校验
 
- #### Options ####
+ ###### Options
  * `message` - 错误提示信息,可以如果提供了,将会覆盖默认的提示信息
  * `allowBlank` - 如果设置为`true`,值为空将跳过校验
  * `in` - 被允许的数组
@@ -89,10 +90,10 @@
  exclusion: { range: [5, 10], allowBlank: true, message: 'cannot be between 5 and 10' }
  ```
 
- ### Format ###
+ ##### Format
  正则,格式化校验
 
- #### Options ####
+ ###### Options
  * `message` - 错误提示信息,可以如果提供了,将会覆盖默认的提示信息
  * `allowBlank` - 如果设置为`true`,值为空将跳过校验
  * `with` - 正则表达式
@@ -102,10 +103,10 @@
  format: { with: /^([a-zA-Z]|\d)+$/, allowBlank: true, message: 'must be letters and numbers only'  }
  ```
 
- ### Inclusion ###
+ ##### Inclusion
  被允许的值
  熬过校验
- #### Options ####
+ ###### Options
  * `message` - 错误提示信息,可以如果提供了,将会覆盖默认的提示信息.
  * `allowBlank` - 如果设置为`true`,值为空将跳过校验
  * `in` - 被允许的数组
@@ -117,10 +118,10 @@
  inclusion: { range: [5, 10], allowBlank: true, message: 'must be between 5 and 10' }
  ```
 
- ### Length ###
+ ##### Length
  定义属性的长度
 
- #### Options ####
+ ###### Options
  * `number` - 跟`is`作用一样,长度必须时指定值
  * `array` - 数组里面有两个值,第一个元素代表最小值,第二个元素达标最大值,即长度的区间
  * `allowBlank` - 如果设置为`true`,值为空将跳过校验
@@ -129,7 +130,7 @@
  * `is` - 跟`number`作用一样,长度必须时指定值
  * `tokenizer` - 校验时执行的自定以函数,返回一个代表长度的对象
 
- ##### Messages #####
+ ###### Messages
  * `tooShort` - 当不满足最小长度验证规则时,该错误信息将被应用显示,可覆盖默认的提示信息
  * `tooLong` - t当不满足最大长度验证规则时,该错误信息将被应用显示,可覆盖默认的提示信息
  * `wrongLength` - 当校验失败时,该错误信息将被应用显示,可覆盖默认的提示信息
@@ -143,10 +144,10 @@
  length: { is: 5, tokenizer: function(value) { return value.split(''); } }
  ```
 
- ### Numericality ###
+ ##### Numericality
  校验是否是一个数值
 
- #### Options ####
+ ###### Options
  * `true` -设置为`true`将激活控制校验并且使用默认提示信息
  * `allowBlank` - 如果设置为`true`,值为空将跳过校验
  * `onlyInteger` - 只能是整数
@@ -158,7 +159,7 @@
  * `odd` - 一定是奇数
  * `even` - 一定是偶数
 
- ##### Messages #####
+ ###### Messages
  * `greaterThan` -当大于校验失败时,该错误信息将被应用显示,可覆盖默认的提示信息
  * `greaterThanOrEqualTo` - 当大于等于校验失败时,该错误信息将被应用显示,可覆盖默认的提示信息
  * `equalTo` - 当等于校验失败时,该错误信息将被应用显示,可覆盖默认的提示信息
@@ -174,10 +175,10 @@
  numericality: { onlyInteger, greaterThan: 5, lessThanOrEqualTo : 10 }
  ```
 
- ### Presence ###
+ ##### Presence
  非空校验`null`, `undefined`, or `''`
 
- #### Options ####
+ ###### Options
  * `true` - 设置为`true`将激活控制校验并且使用默认提示信息
  * `message` - 错误提示信息,可以如果提供了,将会覆盖默认的提示信息
 
@@ -187,15 +188,15 @@
  presence: { message: 'must not be blank' }
  ```
 
- ### Uniqueness ###
+ ##### Uniqueness
 
  *尚未实现*
 
- ### URL ##
+ ##### URL
 
  校验是否是一个URL.
 
- #### Options ####
+ ###### Options
  * `allowBlank` - 如果设置为`true`,值为空将跳过校验
  * `allowIp` - 如果设置为`true`,将使用IP地址进行校验URL,IP地址默认是非法的
  * `allowUserPass` - 如果设置为`true`,将校验URL是否有用户名和密码,默认情况是不允许用户名和密码
@@ -210,7 +211,7 @@
  url { domainOnly: true }
  ```
 
- ### Conditional Validators ##
+ ##### Conditional Validators
 
  每个校验器都可以带有一个`if` 或者 一个`unless`.条件判断.
 
@@ -234,7 +235,7 @@
  }
  ```
 
- ## Running Validations
+ ##### Running Validations
 
  当对象被创建时,校验器将自动运行,以及每个属性改变时,也将自动校验.
  `isValid` 状态将被冒泡,并且帮助确定直接父级的校验状态
@@ -251,7 +252,7 @@
  })
  ```
 
- ## Inspecting Errors ##
+ ##### Inspecting Errors
 
  当一个对象集成`Ember.Validations.Mixin`后,该对象将同时拥有一个`errors`对象,所有校验的错误信息
  将被放置在该对象上.
@@ -276,7 +277,7 @@
 
  ```
 
- ## i18n ##
+ ##### i18n
 
  国际化I18n默认包含以下的keys
 

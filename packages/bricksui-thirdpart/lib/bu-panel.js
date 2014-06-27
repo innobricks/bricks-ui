@@ -7,14 +7,14 @@
  * `heading` 头部说明信息
  * `footer` 脚注说明信息
 
- ##基本用法
+ ####基本用法
  ```javascript
  {{#bs-panel heading="Simple Panel" footer="Panel Footer"}}
     <p>Panel content goes here...!</p>
  {{/bs-panel}}
  ```
 
- ##利用bootstrap的样式
+ ####利用bootstrap的样式
  * type=`primary`
  * type=`success`
  * type=`info`
@@ -39,7 +39,7 @@
  {{/bs-panel}}
  ```
 
- ## 更多可选配置
+ #### 更多可选配置
 
  * `dismiss` 设定panel是否可以被关闭,`true` `false`
  * `onClose` 配置`onClose` 会触发响应controller的action

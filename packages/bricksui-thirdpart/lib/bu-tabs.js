@@ -3,7 +3,7 @@
  @submodule bricksui-thirdpart
  */
 /**
- ##`tabs` 组件基本用法
+ ####`tabs` 组件基本用法
  一个`tab-pane`代表一个tab页签
  `bu-tabs-panes` 需要有一个`contentBinding` 属性,用来生成所有的tab标签页,
  `bu-tabs-panes`与`bu-tabs`是配套使用的,`bu-tabs`生成tab组件页签头,`bu-tabs-panes`生成内容,
@@ -36,7 +36,7 @@
  `controller` 可以指定tabs标签页的控制器
  ```
 
- ##`tabs` 组件与路由相结合
+ ####`tabs` 组件与路由相结合
  定义路由:
  ```javascript
      this.resource('user', function() {
