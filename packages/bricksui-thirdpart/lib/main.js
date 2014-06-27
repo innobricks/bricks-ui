@@ -1,3 +1,5 @@
 /**
- * Created by jiangwy on 14-6-26.
+ 基于Bootstrap的扩展组件
+ @module bricksui
+ @submodule bricksui-thirdpart
  */
