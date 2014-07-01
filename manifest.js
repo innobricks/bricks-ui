@@ -29,6 +29,7 @@
 //=require bootstrap-daterangepicker/daterangepicker.js
 
 //=require ztree_v3/js/jquery.ztree.all-3.5.js
+//=require bootstrap/dist/js/bootstrap.js
 
 /* locales require */
 
