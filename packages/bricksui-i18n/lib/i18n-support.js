@@ -129,9 +129,7 @@ var initLang = function () {
  * @param {String} lang language string ,"en" "zh-cn"
  */
 var setLang = function (lang) {
-  var parsedName,
-    locale = requireLang(lang);
-  mergeLang(locale);
+  var parsedName, locale;
 
   parsedName = {
     fullName: lang,
@@ -139,6 +137,9 @@ var setLang = function (lang) {
     area: lang
   };
 
+  locale = requireLang(parsedName);
+
+  mergeLang(locale);
   saveLang(parsedName);
 
   var translations = Ember.I18n.translations;

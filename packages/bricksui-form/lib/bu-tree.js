@@ -109,6 +109,9 @@ export default Ember.Component.extend({
    */
   zNodes: null,
 
+
+  classNames:['ztree'],
+
   /**
    * elementId的别名
    * @property treeId
