@@ -98,7 +98,7 @@ var BuPagination = Ember.Component.extend({
     disableFirst: Ember.computed.alias("disablePrev"),
     /**
      * 计算属性,前一页按钮是否不可用
-     * @property disableFirst
+     * @property disablePrev
      * @return {Boolean}
      */
     disablePrev: function () {
@@ -107,7 +107,7 @@ var BuPagination = Ember.Component.extend({
 
     /**
      * 计算属性,后一页按钮是否不可用
-     * @property disableFirst
+     * @property disableNext
      * @return {Boolean}
      */
     disableNext: function () {
@@ -115,7 +115,7 @@ var BuPagination = Ember.Component.extend({
     }.property('pagerController.currentPage', 'pagerController.totalPages'),
     /**
      * 计算属性,尾页按钮是否不可用
-     * @property disableFirst
+     * @property disableLast
      * @return {Boolean}
      */
     disableLast: Ember.computed.alias("disableNext"),
@@ -179,7 +179,7 @@ var BuPagination = Ember.Component.extend({
                 // Change the page
                 this.set('parentView.pagerController.currentPage', this.get('content'));
                 var pagerController = this.get('parentView.pagerController');
-                constrain(pagerController.doLoad(((this.get('content') - 1) * pagerController.get('perPage')), 0, pagerController.getTotalCount()));
+                constrain(pagerController.doLoad(((this.get('content') - 1) * pagerController.get('perPage')), 0, pagerController.get('totalCount')));
             }
         },
 

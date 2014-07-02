@@ -353,11 +353,12 @@ var DynamicPageable = Ember.Mixin.create({
         if (this.get('loading')) {
             return false;
         }
-        console.log(o);
+
         var loadingPromise = this.store.find(this.get('modelName'), o).then(function (models) {
             var perPage = o.limit,
                 len = models.get('length');
             Ember.assert("server return models length is " + models.get('length') + " but the config perPage is " + perPage, len === perPage);
+            Ember.assert("the response data has no meta with the total property ",that.store.metadataFor(that.get('modelName').total));
             that.set("content", models);
             that.set("cursor", start);
             Ember.propertyDidChange(that, "totalPages");
@@ -373,8 +374,8 @@ var DynamicPageable = Ember.Mixin.create({
      * @property totalPages
      */
     totalPages: function () {
-        return Math.ceil(this.getTotalCount() / this.get('perPage'));
-    }.property('perPage'),
+        return Math.ceil(this.get('totalCount') / this.get('perPage'));
+    }.property('perPage','totalCount'),
 
     actions: {
         /**
@@ -428,7 +429,7 @@ var DynamicPageable = Ember.Mixin.create({
          * @method lastPage
          */
         lastPage: function () {
-            var total = this./**/getTotalCount(),
+            var total = this.get('totalCount'),
                 extra = total % this.get('perPage');
 
             this.set("currentPage", this.get('totalPages'));
@@ -437,13 +438,13 @@ var DynamicPageable = Ember.Mixin.create({
     },
     /**
      * 总条数
-     * @method getTotalCount
+     * @property totalCount
      * @returns {*|number}
      */
-    getTotalCount: function () {
+    totalCount: function () {
         var meta = this.store.metadataFor(this.get('modelName'));
         return meta.total || 0;
-    },
+    }.property(),
     /**
      * 根据属性名称排序
      * @method sortByProperty
