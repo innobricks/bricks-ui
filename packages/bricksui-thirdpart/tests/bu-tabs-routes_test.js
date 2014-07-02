@@ -45,7 +45,7 @@ QUnit.module("bu-tabs-routes", {
     }
 });
 
-test("test bs-tabs is still exist", function () {
+test("test bu-tabs is still exist", function () {
     Ember.TEMPLATES.user = Ember.Handlebars.compile('{{bs-tabs id="tabs1" contentBinding="tabsMeta" default="Foo" justified=true}}{{outlet}}');
 
     App.Router.map(function () {

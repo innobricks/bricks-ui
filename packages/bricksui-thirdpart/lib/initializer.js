@@ -1,4 +1,5 @@
 import BricksUI from "bricksui-metal/core";
+import {BuPagination} from "./bu-pagination";
 
 var swapHelpers = BricksUI.swapHelpers;
 swapHelpers({
@@ -20,4 +21,16 @@ swapHelpers({
     "bs-tabs-panes": "bu-tabs-panes",
     "bs-tooltip": "bu-tooltip",
     "bs-wizard": "bu-wizard"
+});
+
+Ember.onLoad("Ember.Application", function (Application) {
+
+    Application.initializer({
+        name: 'pagination-pager',
+
+        initialize: function (container, application) {
+            container.register('component:bu-pagination', BuPagination);
+            application.inject('component:bu-pagination', "store", "store:main");
+        }
+    });
 });

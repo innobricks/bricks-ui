@@ -1,0 +1,13 @@
+{{#if view.pages}}
+<div class="pull-right">
+    <ul class="pagination">
+        <li {{bind-attr class="view.disableFirst:disabled"}}><a {{action firstPage target="view"}}>First</a></li>
+        <li {{bind-attr class="view.disablePrev:disabled"}}><a {{action prevPage target="view"}}>Prev</a></li>
+        {{#each view.pages itemViewClass="view.PageButton" page="content"}}
+            <a {{action goToPage target="view"}}>{{this}}</a>
+        {{/each}}
+        <li {{bind-attr class="view.disableNext:disabled"}}><a {{action nextPage target="view"}}>Next</a></li>
+        <li {{bind-attr class="view.disableLast:disabled"}}><a {{action lastPage target="view"}}>Last</a></li>
+    </ul>
+</div>
+{{/if}}
