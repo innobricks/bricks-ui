@@ -358,7 +358,7 @@ var DynamicPageable = Ember.Mixin.create({
             var perPage = o.limit,
                 len = models.get('length');
             Ember.assert("server return models length is " + models.get('length') + " but the config perPage is " + perPage, len === perPage);
-            Ember.assert("the response data has no meta with the total property ",that.store.metadataFor(that.get('modelName').total));
+            Ember.assert("the response data has no meta with the total property ", that.store.metadataFor(that.get('modelName').total));
             that.set("content", models);
             that.set("cursor", start);
             Ember.propertyDidChange(that, "totalPages");
@@ -375,7 +375,7 @@ var DynamicPageable = Ember.Mixin.create({
      */
     totalPages: function () {
         return Math.ceil(this.get('totalCount') / this.get('perPage'));
-    }.property('perPage','totalCount'),
+    }.property('perPage', 'totalCount'),
 
     actions: {
         /**

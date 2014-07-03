@@ -14,11 +14,11 @@ var persistentLang = null;
  * @returns {*} 如果语言选择已经保存在cookie中，则返回已保存的语言结构，如果不存在则返回空
  */
 var loadLang = function () {
-  try {
-    return JSON.parse(Ember.$.cookie(langKey));
-  } catch (e) {
-    return null;
-  }
+    try {
+        return JSON.parse(Ember.$.cookie(langKey));
+    } catch (e) {
+        return null;
+    }
 };
 
 /**
@@ -26,28 +26,28 @@ var loadLang = function () {
  * @returns {{fullName: *, language, area}}
  */
 var parseLanguage = function () {
-  var language = (window.navigator.language || window.navigator.browserLanguage).toLowerCase(),
-    match
-    ;
-  match = language.match(/(.*)-(.*)/);
-  return {
-    fullName: match[0],
-    language: match[1],
-    area: match[2]
-  };
+    var language = (window.navigator.language || window.navigator.browserLanguage).toLowerCase(),
+        match
+        ;
+    match = language.match(/(.*)-(.*)/);
+    return {
+        fullName: match[0],
+        language: match[1],
+        area: match[2]
+    };
 };
 
 var tryRequire = function (moduleName) {
-  var require = window.require,
-    result
-    ;
+    var require = window.require,
+        result
+        ;
 
-  try {
-    result = require(moduleName);
-  } catch (e) {
-    Ember.warn(e.message);
-  }
-  return result;
+    try {
+        result = require(moduleName);
+    } finally {
+        return result;
+    }
+
 };
 
 /**
@@ -56,29 +56,35 @@ var tryRequire = function (moduleName) {
  * @returns {{localeName: ({language: *}|*|set.language|parseLanguage.language|language|string), localeLang: *}}
  */
 var requireLang = function (parsedName) {
-  var localeLang;
+    var localeLang, moduleMatcher;
 
-  if (typeof parsedName === "string") {
-    parsedName = {
-      language: parsedName
+    moduleMatcher = {
+        shortMatch: [BricksUI.ENV.MODULE_PREFIX, BricksUI.ENV.LANG_FOLDER_NAME, parsedName.language].join("/"),
+        longMatch: [BricksUI.ENV.MODULE_PREFIX, BricksUI.ENV.LANG_FOLDER_NAME, parsedName.fullName].join("/")
     };
-  }
 
-  localeLang = tryRequire([BricksUI.ENV.MODULE_PREFIX, BricksUI.ENV.LANG_FOLDER_NAME, parsedName.language].join("/"));
+    if (typeof parsedName === "string") {
+        parsedName = {
+            language: parsedName
+        };
+    }
 
-  var localeName = parsedName.language;
-  if (!localeLang) {
-    localeLang = tryRequire([BricksUI.ENV.MODULE_PREFIX, BricksUI.ENV.LANG_FOLDER_NAME, parsedName.fullName].join("/"));
-    localeName = parsedName.fullName;
-  }
-  if (localeLang && localeLang['default']) {
-    localeLang = localeLang['default'];
-  }
+    localeLang = tryRequire(moduleMatcher.shortMatch);
 
-  return {
-    localeName: localeName,
-    localeLang: localeLang
-  };
+    var localeName = parsedName.language;
+    if (!localeLang) {
+        localeLang = tryRequire(moduleMatcher.longMatch);
+        localeName = parsedName.fullName;
+    }
+    Ember.warn("Could not find module " + moduleMatcher.shortMatch + " or " + moduleMatcher.shortMatch, localeLang !== undefined);
+    if (localeLang && localeLang["default"]) {
+        localeLang = localeLang["default"];
+    }
+
+    return {
+        localeName: localeName,
+        localeLang: localeLang
+    };
 };
 
 /**
@@ -86,10 +92,10 @@ var requireLang = function (parsedName) {
  * @param {object} lang
  */
 var saveLang = function (lang) {
-  persistentLang = lang;
-  if (BricksUI.ENV.PERSISTENT_I18N) {
-    Ember.$.cookie(langKey, JSON.stringify(lang), { expires: 7 });
-  }
+    persistentLang = lang;
+    if (BricksUI.ENV.PERSISTENT_I18N) {
+        Ember.$.cookie(langKey, JSON.stringify(lang), { expires: 7 });
+    }
 };
 
 /**
@@ -97,11 +103,11 @@ var saveLang = function (lang) {
  * @param {object} locale
  */
 var mergeLang = function (locale) {
-  var localeName = locale.localeName;
-  var localeLang = locale.localeLang;
-  var bricksLocale = BricksUI.I18n.lang[localeName];
-  Ember.$.extend(true, bricksLocale, localeLang);
-  Ember.$.extend(true, Ember.I18n.translations, bricksLocale);
+    var localeName = locale.localeName;
+    var localeLang = locale.localeLang;
+    var bricksLocale = BricksUI.I18n.lang[localeName];
+    Ember.$.extend(true, bricksLocale, localeLang);
+    Ember.$.extend(true, Ember.I18n.translations, bricksLocale);
 };
 
 /**
@@ -111,10 +117,15 @@ var mergeLang = function (locale) {
  * @for BricksUI.I18n
  */
 var initLang = function () {
-  var parsedName = getLang();
-  var locale = requireLang(parsedName);
-  mergeLang(locale);
-  saveLang(parsedName);
+    var parsedName = getLang();
+    var locale = requireLang(parsedName);
+
+    if (!locale) {
+        locale = requireLang(BricksUI.ENV.DEFAULT_LANG);
+    }
+
+    mergeLang(locale);
+    saveLang(parsedName);
 };
 /**
  * 语言切换,用户可以通过传入的语言标识符进行语言切换
@@ -129,28 +140,28 @@ var initLang = function () {
  * @param {String} lang language string ,"en" "zh-cn"
  */
 var setLang = function (lang) {
-  var parsedName, locale;
+    var parsedName, locale;
 
-  parsedName = {
-    fullName: lang,
-    language: lang,
-    area: lang
-  };
+    parsedName = {
+        fullName: lang,
+        language: lang,
+        area: lang
+    };
 
-  locale = requireLang(parsedName);
+    locale = requireLang(parsedName);
 
-  mergeLang(locale);
-  saveLang(parsedName);
+    mergeLang(locale);
+    saveLang(parsedName);
 
-  var translations = Ember.I18n.translations;
-  for (var prop in translations) {
-    if (Ember.canInvoke(translations, prop)) {
-      delete translations[prop];
+    var translations = Ember.I18n.translations;
+    for (var prop in translations) {
+        if (Ember.canInvoke(translations, prop)) {
+            delete translations[prop];
+        }
     }
-  }
-  Ember.instrument("i18nChange", parsedName, function () {
-    Ember.Logger.warn("no listener for i18nChange! nothing changed!");
-  });
+    Ember.instrument("i18nChange", parsedName, function () {
+        Ember.Logger.warn("no listener for i18nChange! nothing changed!");
+    });
 };
 
 /**
@@ -158,22 +169,22 @@ var setLang = function (lang) {
  * @returns {*}
  */
 var getLang = function () {
-  var parsedName;
-  if (persistentLang) return persistentLang;
+    var parsedName;
+    if (persistentLang) return persistentLang;
 
-  if (BricksUI.ENV.PERSISTENT_I18N) {
-    parsedName = loadLang();
-  }
-  if (!parsedName) {
-    parsedName = parseLanguage();
-  }
-  return parsedName;
+    if (BricksUI.ENV.PERSISTENT_I18N) {
+        parsedName = loadLang();
+    }
+    if (!parsedName) {
+        parsedName = parseLanguage();
+    }
+    return parsedName;
 };
 
 export
-  {
-  initLang,
-  setLang,
-  getLang
-  }
-  ;
+    {
+    initLang,
+    setLang,
+    getLang
+    }
+    ;

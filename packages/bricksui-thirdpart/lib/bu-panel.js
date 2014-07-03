@@ -10,7 +10,7 @@
  ####基本用法
  ```javascript
  {{#bs-panel heading="Simple Panel" footer="Panel Footer"}}
-    <p>Panel content goes here...!</p>
+ <p>Panel content goes here...!</p>
  {{/bs-panel}}
  ```
 
@@ -23,19 +23,19 @@
 
  ```javascript
  {{#bs-panel heading="Primary Panel" type="primary"}}
-    <p>Panel content.</p>
+ <p>Panel content.</p>
  {{/bs-panel}}
  {{#bs-panel heading="Success Panel" type="success"}}
-    <p>Panel content.</p>
+ <p>Panel content.</p>
  {{/bs-panel}}
  {{#bs-panel heading="Info Panel" type="info"}}
-    <p>Panel content.</p>
+ <p>Panel content.</p>
  {{/bs-panel}}
  {{#bs-panel heading="Warning Panel" type="warning"}}
-    <p>Panel content.</p>
+ <p>Panel content.</p>
  {{/bs-panel}}
  {{#bs-panel heading="Danger Panel" type="danger"}}
-    <p>Panel content.</p>
+ <p>Panel content.</p>
  {{/bs-panel}}
  ```
 
@@ -55,7 +55,7 @@
      dismiss=true
      onClose="panelClosed"
      clicked="panelClicked"}}
-    <p>Panel content.</p>
+ <p>Panel content.</p>
  {{/bs-panel}}
  ```
 

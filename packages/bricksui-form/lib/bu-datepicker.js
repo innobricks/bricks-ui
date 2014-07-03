@@ -1,7 +1,7 @@
 import BricksUI from 'bricksui-metal/core';
 var get = Ember.get,
-  set = Ember.set,
-  i18n=BricksUI.I18n;
+    set = Ember.set,
+    i18n = BricksUI.I18n;
 /**
  @module bricksui
  @submodule bricksui-form
@@ -47,124 +47,127 @@ var get = Ember.get,
  @extends Ember.Component
  */
 export default Ember.Component.extend({
-  classNames: ['form-control'],
-  tagName: 'input',
+    classNames: ['form-control'],
 
-  /**
-   * 外部所绑定的值
-   * @property value
-   * @type Object
-   */
-  value: null,
+    tagName: 'input',
 
-  init: function () {
-    this._super.apply(this, arguments);
-    this._parseOptions();
-    this.attachI18nEvent();
-  },
+    defaultTemplate: Ember.Handlebars.compile(""),
 
-  /**
-   * input fix，根据在输入的格式校验失败后，尝试将输入项转换为Date类型，如果成功，则进行格式转换并输出
-   * @param {object} event
-   */
-  error: function (event) {
-    var date, elem, format, newFmt , val;
-    elem = this.$();
-    val = elem.prop('value');
-    if (!isNaN((date = new Date(val)).getTime())) {
-      elem = this.$();
-      format = elem.data('DateTimePicker').format;
-      newFmt = moment(date).format(format);
-      elem.prop('value', newFmt);
-      elem.trigger('change');
-    }
-  },
+    /**
+     * 外部所绑定的值
+     * @property value
+     * @type Object
+     */
+    value: null,
 
-  /**
-   * 绑定原始值,在输入框内容发生改变时，更新Value的值
-   * @method change
-   * @private
-   */
-  change: function () {
-    var elem = this.$(),
-      picker = elem.data('DateTimePicker');
+    init: function () {
+        this._super.apply(this, arguments);
+        this._parseOptions();
+        this.attachI18nEvent();
+    },
 
-    set(this, 'value', picker.getDate().toISOString());
-  },
+    /**
+     * input fix，根据在输入的格式校验失败后，尝试将输入项转换为Date类型，如果成功，则进行格式转换并输出
+     * @param {object} event
+     */
+    error: function (event) {
+        var date, elem, format, newFmt , val;
+        elem = this.$();
+        val = elem.prop('value');
+        if (!isNaN((date = new Date(val)).getTime())) {
+            elem = this.$();
+            format = elem.data('DateTimePicker').format;
+            newFmt = moment(date).format(format);
+            elem.prop('value', newFmt);
+            elem.trigger('change');
+        }
+    },
 
-  /**
-   * 在时间格式校验失败后，进行泛类型时间尝试
-   * @private
-   */
-  _attachEvent: function () {
-    this.$().on('dp.error', this.error.bind(this));
-    this.$().on('focusout', this.change.bind(this));
-  },
+    /**
+     * 绑定原始值,在输入框内容发生改变时，更新Value的值
+     * @method change
+     * @private
+     */
+    change: function () {
+        var elem = this.$(),
+            picker = elem.data('DateTimePicker');
 
-  /**
-   * 对传入的options参数进行解析，如果传入的参数类型为string，则尝试转换为字符串
-   * @method _parseOptions
-   * @private
-   */
-  _parseOptions: function () {
-    var options = get(this, 'options');
+        set(this, 'value', picker.getDate().toISOString());
+    },
 
-    if (Ember.typeOf(options) === 'string') {
-      try {
-        options = JSON.parse(options);
-        set(this, 'options', options);
-      } catch (e) {
-        throw e;
-      }
-    }
-    this.defaultOptions.language = i18n.getLang().language;
-  },
+    /**
+     * 在时间格式校验失败后，进行泛类型时间尝试
+     * @private
+     */
+    _attachEvent: function () {
+        this.$().on('dp.error', this.error.bind(this));
+        this.$().on('focusout', this.change.bind(this));
+    },
 
-  /**
-   * 在视图销毁时，清除datepicker Dom 对象
-   */
-  _destroyElement: function () {
-    var elem;
-    elem = this.$();
-    elem.data('DateTimePicker').destroy();
-  }.on('destroyElement'),
+    /**
+     * 对传入的options参数进行解析，如果传入的参数类型为string，则尝试转换为字符串
+     * @method _parseOptions
+     * @private
+     */
+    _parseOptions: function () {
+        var options = get(this, 'options');
 
-  /**
-   * 监听全局I18n改变事件，在所选择的语言改变后，重新渲染视图
-   * @method attachI18nEvent
-   * @private
-   */
-  attachI18nEvent: function () {
-    var datePicker = this;
-    Ember.subscribe("i18nChange", {
-      after: function (name, timestamp, payload) {
-        datePicker._destroyElement();
-        datePicker.defaultOptions.language = payload.language;
-        datePicker._updateDom();
-      }
-    });
-  },
+        if (Ember.typeOf(options) === 'string') {
+            try {
+                options = JSON.parse(options);
+                set(this, 'options', options);
+            } catch (e) {
+                throw e;
+            }
+        }
+        this.defaultOptions.language = i18n.getLang().language;
+    },
 
-  /**
-   * 默认配置文件，为准确完成日期格式转换，将进行严格日期校验
-   * 在所选择语言发生变化后，将进行视图重新渲染
-   * @property
-   */
-  defaultOptions: {
-    useStrict: true
-  },
+    /**
+     * 在视图销毁时，清除datepicker Dom 对象
+     */
+    _destroyElement: function () {
+        var elem;
+        elem = this.$();
+        elem.data('DateTimePicker').destroy();
+    }.on('destroyElement'),
 
-  /**
-   * 在视图渲染完成后，设置datetimepick组件
-   * @method _updateDom
-   * @private
-   */
-  _updateDom: function () {
+    /**
+     * 监听全局I18n改变事件，在所选择的语言改变后，重新渲染视图
+     * @method attachI18nEvent
+     * @private
+     */
+    attachI18nEvent: function () {
+        var datePicker = this;
+        Ember.subscribe("i18nChange", {
+            after: function (name, timestamp, payload) {
+                datePicker._destroyElement();
+                datePicker.defaultOptions.language = payload.language;
+                datePicker._updateDom();
+            }
+        });
+    },
 
-    Ember.run.scheduleOnce('afterRender', this, function () {
-      var options = Ember.$.extend({}, this.defaultOptions, this.get('options'));
-      this.$().datetimepicker(options);
-      this._attachEvent();
-    });
-  }.on('didInsertElement')
+    /**
+     * 默认配置文件，为准确完成日期格式转换，将进行严格日期校验
+     * 在所选择语言发生变化后，将进行视图重新渲染
+     * @property
+     */
+    defaultOptions: {
+        useStrict: true
+    },
+
+    /**
+     * 在视图渲染完成后，设置datetimepick组件
+     * @method _updateDom
+     * @private
+     */
+    _updateDom: function () {
+
+        Ember.run.scheduleOnce('afterRender', this, function () {
+            var options = Ember.$.extend({}, this.defaultOptions, this.get('options'));
+            this.$().datetimepicker(options);
+            this._attachEvent();
+        });
+    }.on('didInsertElement')
 });

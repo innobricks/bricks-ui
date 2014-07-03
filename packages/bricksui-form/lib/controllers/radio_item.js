@@ -13,4 +13,4 @@ var RadioItemController = CheckboxItemController.extend({
 });
 
 export default
-RadioItemController;
+    RadioItemController;

@@ -16,7 +16,7 @@
 
  对应控制器
  ```javascript
-     Showcase.ShowComponentsModalController = Ember.Controller.extend({
+ Showcase.ShowComponentsModalController = Ember.Controller.extend({
       myModalButtons: [
           Ember.Object.create({title: 'Submit', clicked:"submit"})
           Ember.Object.create({title: 'Cancel', clicked:"cancel", dismiss: 'modal'})
@@ -70,10 +70,10 @@
 
  ```html
  controller 对应的控制器，可手动指定
- title	    modal窗口标题
- message	model的内容
- confirmButtonTitle	确定按钮的文本描述
- cancelButtonTitle	取消按钮的文本描述
+ title        modal窗口标题
+ message    model的内容
+ confirmButtonTitle    确定按钮的文本描述
+ cancelButtonTitle    取消按钮的文本描述
  ```
 
  ------------------------------
@@ -87,7 +87,7 @@
  对应控制器
 
  ```javascript
-     Showcase.ShowComponentsModalController = Ember.Controller.extend({
+ Showcase.ShowComponentsModalController = Ember.Controller.extend({
       manualButtons: [
           Ember.Object.create({title: 'Submit', clicked:"submitManual"})
           Ember.Object.create({title: 'Cancel', dismiss: 'modal'})
@@ -100,14 +100,14 @@
         },
         createModalProgramatically: function() {
              //@property {string} The name of the modal, required later to close the modal (see submitManual function above)
-             //@property {string} The title of the modal.
-             //@property {string} The template name to render within the modal body, a View class may also be specified.
-             //@property {array} Array of Button meta data
-             //@property {object} The controller instance that instantiate the modal.
-             Bootstrap.ModalManager.open('manualModal', 'Hello', 'demo-template', this.manualButtons, this);
-        }
-     }
-     });
+ //@property {string} The title of the modal.
+ //@property {string} The template name to render within the modal body, a View class may also be specified.
+ //@property {array} Array of Button meta data
+ //@property {object} The controller instance that instantiate the modal.
+ Bootstrap.ModalManager.open('manualModal', 'Hello', 'demo-template', this.manualButtons, this);
+ }
+ }
+ });
  ```
 
 

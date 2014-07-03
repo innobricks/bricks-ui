@@ -16,11 +16,11 @@ import BuTree from './bu-tree';
  *    bu-tree
  */
 export default
-function initFormController(container, application) {
-    container.register('controller:checkboxItem', CheckboxItemController);
-    container.register('controller:radioItem', RadioItemController);
-    container.register('component:bu-editor',BuEditor);
-    container.register('component:bu-datepicker',BuDatePicker);
-    container.register('component:bu-daterange',BuDateRange);
-    container.register('component:bu-tree',BuTree);
-}
+    function initFormController(container, application) {
+        container.register('controller:checkboxItem', CheckboxItemController);
+        container.register('controller:radioItem', RadioItemController);
+        container.register('component:bu-editor', BuEditor);
+        container.register('component:bu-datepicker', BuDatePicker);
+        container.register('component:bu-daterange', BuDateRange);
+        container.register('component:bu-tree', BuTree);
+    }

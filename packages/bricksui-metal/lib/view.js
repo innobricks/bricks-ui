@@ -52,7 +52,7 @@ var View = Em.View.extend(Stateable, EventManager, {
 });
 
 export
-{
+    {
     View
-}
-;
+    }
+    ;

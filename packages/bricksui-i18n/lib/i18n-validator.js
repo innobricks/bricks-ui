@@ -13,7 +13,7 @@
  * 使用方法为在需要使用校验的对象中参入I18nableValidationMixin
  * 如：
  ```javascript
-  var Post=DS.Model.extend(BricksUI.I18n.I18nableValidationMixin,{
+ var Post=DS.Model.extend(BricksUI.I18n.I18nableValidationMixin,{
     title:DS.attr('string')
     validations: {
       title:{
@@ -24,16 +24,16 @@
  })
  ```
  */
-var I18nableValidationMixin = Ember.Mixin.create(Ember.Validations.Mixin,{
-  init: function () {
-    this._super();
+var I18nableValidationMixin = Ember.Mixin.create(Ember.Validations.Mixin, {
+    init: function () {
+        this._super();
 
-    var validatorMixin = this;
-    Ember.subscribe("i18nChange", {
-      after: function (name, timestamp, payload) {
-        validatorMixin.validate();
-      }
-    });
-  }
+        var validatorMixin = this;
+        Ember.subscribe("i18nChange", {
+            after: function (name, timestamp, payload) {
+                validatorMixin.validate();
+            }
+        });
+    }
 });
 export default I18nableValidationMixin;

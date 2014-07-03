@@ -15,7 +15,7 @@ Ember.EasyForm.Config.registerWrapper('bootstrap-horizontal', {
     labelClass: 'col-sm-3 control-label',
     inputClass: 'form-group',
     buttonClass: 'btn btn-primary',
-    validationLayout:'bootstrap-validation-input'
+    validationLayout: 'bootstrap-validation-input'
 });
 
 /**
@@ -24,14 +24,14 @@ Ember.EasyForm.Config.registerWrapper('bootstrap-horizontal', {
  * Label在input上方，验证信息在input下方
  */
 Ember.EasyForm.Config.registerWrapper('bootstrap', {
-  checkboxTemplate: "bootstrap-checkbox",
-  radioTemplate: "bootstrap-radio",
-  labelClass: 'control-label',
-  inputClass: 'form-group',
-  buttonClass: 'btn btn-primary',
-  fieldErrorClass: 'has-error',
-  errorClass: 'help-block',
-  validationLayout:'bootstrap-validation-input'
+    checkboxTemplate: "bootstrap-checkbox",
+    radioTemplate: "bootstrap-radio",
+    labelClass: 'control-label',
+    inputClass: 'form-group',
+    buttonClass: 'btn btn-primary',
+    fieldErrorClass: 'has-error',
+    errorClass: 'help-block',
+    validationLayout: 'bootstrap-validation-input'
 });
 
 
@@ -71,10 +71,10 @@ Ember.EasyForm.TextArea.reopen({
  * @description 拓展校验字段
  */
 Ember.EasyForm.Input.reopen({
-  init:function(){
-    this._super();
-    if(this.isBlock && this.get('withValidation')){
-      this.set('layoutName',this.get('wrapperConfig.validationLayout'));
+    init: function () {
+        this._super();
+        if (this.isBlock && this.get('withValidation')) {
+            this.set('layoutName', this.get('wrapperConfig.validationLayout'));
+        }
     }
-  }
 });
