@@ -12,6 +12,7 @@ import { StaticPageable,
 import BricksUI from "bricksui-metal/core";
 
 BricksUI.BuPagination = BuPagination;
+BricksUI.TableHeader = TableHeader;
 BricksUI.StaticPageable = StaticPageable;
 BricksUI.DynamicPageable = DynamicPageable;
 

@@ -225,6 +225,14 @@ var StaticPageable = Ember.Mixin.create({
  分页扩展,用于增强控制器的功能,使控制器具备分页管理功能
  * `modelName`  必须配置,当前分页组件所要请求的模型名称
  * `query` 要传入到后台的查询参数,是一个计算属性,需要返回`Object`
+ 返回的数据必须要有`total`属性
+ ```javascript
+ {
+     "meta":{
+         "total":100
+     }
+ }
+ ```
  ```javascript
  App.ApplicationController = Ember.ArrayController.extend(BricksUI.DynamicPageable,{
     perPage: 5,
@@ -357,12 +365,16 @@ var DynamicPageable = Ember.Mixin.create({
         var loadingPromise = this.store.find(this.get('modelName'), o).then(function (models) {
             var perPage = o.limit,
                 len = models.get('length');
+
             Ember.assert("server return models length is " + models.get('length') + " but the config perPage is " + perPage, len === perPage);
-            Ember.assert("the response data has no meta with the total property ",that.store.metadataFor(that.get('modelName').total));
+            Ember.assert("the response data has no meta with the total property ", that.store.metadataFor(that.get('modelName')).total);
+
+            that.beginPropertyChanges();
             that.set("content", models);
             that.set("cursor", start);
-            Ember.propertyDidChange(that, "totalPages");
             that.set("loading", false);
+            that.endPropertyChanges();
+            that.notifyPropertyChange("totalCount");
         });
         this.set("loading", true);
         return loadingPromise;
@@ -375,7 +387,7 @@ var DynamicPageable = Ember.Mixin.create({
      */
     totalPages: function () {
         return Math.ceil(this.get('totalCount') / this.get('perPage'));
-    }.property('perPage','totalCount'),
+    }.property('perPage', 'totalCount'),
 
     actions: {
         /**
@@ -444,7 +456,7 @@ var DynamicPageable = Ember.Mixin.create({
     totalCount: function () {
         var meta = this.store.metadataFor(this.get('modelName'));
         return meta.total || 0;
-    }.property(),
+    }.property().volatile(),
     /**
      * 根据属性名称排序
      * @method sortByProperty
