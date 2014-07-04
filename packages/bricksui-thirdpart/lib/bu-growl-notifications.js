@@ -10,7 +10,7 @@
  ```
  在代码中调用Bootstrap.GNM.push()功能，传入相关的参数，即可实现消息的推送
  ```javascript
-     Showcase.ShowComponentsGrowlNotifController = Ember.Controller.extend({
+ Showcase.ShowComponentsGrowlNotifController = Ember.Controller.extend({
       pushInfo: function() {
         Bootstrap.GNM.push('INFO!', 'Hello, this is just an info message.', 'info');
       },

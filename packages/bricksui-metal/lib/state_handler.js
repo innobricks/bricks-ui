@@ -71,4 +71,4 @@ var StateHandler = Mixin.create({
  */
 
 export default
-StateHandler;
+    StateHandler;

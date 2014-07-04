@@ -14,11 +14,11 @@
  ------------------
  ###type
  ```handlebars
-     {{!--可根据type的类型，指定progress的呈现行为--}}
-     {{bu-progress progress=40 type="success"}}
-     {{bu-progress progress=20 type="info"}}
-     {{bu-progress progress=60 type="warning"}}
-     {{bu-progress progress=80 type="danger"}}
+ {{!--可根据type的类型，指定progress的呈现行为--}}
+ {{bu-progress progress=40 type="success"}}
+ {{bu-progress progress=20 type="info"}}
+ {{bu-progress progress=60 type="warning"}}
+ {{bu-progress progress=80 type="danger"}}
  ```
 
  ------------------------------
@@ -32,7 +32,7 @@
 
  也可以以对progress进行值的绑定
  ```javascript
-     Showcase.ShowComponentsProgressbarController = Ember.Controller.extend({
+ Showcase.ShowComponentsProgressbarController = Ember.Controller.extend({
       prog: 0,
       incrementBy: 20,
       increment: function() {
@@ -49,11 +49,11 @@
  progressbar 堆叠
 
  ```handlebars
-     {{#bu-progress}}
-     {{bu-progressbar type="success" progress="35"}}
-     {{bu-progressbar type="warning" progress="20"}}
-     {{bu-progressbar type="danger" progress="10"}}
-     {{/bu-progress}}
+ {{#bu-progress}}
+ {{bu-progressbar type="success" progress="35"}}
+ {{bu-progressbar type="warning" progress="20"}}
+ {{bu-progressbar type="danger" progress="10"}}
+ {{/bu-progress}}
  ```
 
 
