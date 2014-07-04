@@ -380,9 +380,16 @@ var VenderCompiler=require('./lib/vendorCompiler');
 var compiledTree=new VenderCompiler(vendorsOptions,'./vendor').exec();
 
 
+distTrees = replace(distTrees, {
+  files: [ '**/*.js' ],
+  patterns: [
+    { match: /VERSION_STRING_PLACEHOLDER/g, replacement: calculateVersion }
+  ]
+});
+distTrees = mergeTrees([distTrees, compiledTree]);
 
 var distExportTree = exportTree(distTrees, {
   destDir: 'live-dist'
 });
 
-module.exports = mergeTrees([compiledTree]);
+module.exports = mergeTrees([yuidocTree, distTrees, distExportTree]);
