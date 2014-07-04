@@ -32,7 +32,6 @@ QUnit.module("bu-tabs-routes", {
             Ember.TEMPLATES.application = Ember.Handlebars.compile("{{outlet}}");
 
 
-
         });
         $fixture = Ember.$("#qunit-fixture");
     },
@@ -73,7 +72,7 @@ test("test bu-tabs is still exist", function () {
                 router.transitionTo("user").then(function (value) {
                     ok(true, 'expected transition');
                 }, function (reason) {
-                    ok(false, 'failed to visit:user,and reason is '+reason);
+                    ok(false, 'failed to visit:user,and reason is ' + reason);
                 });
             });
         });

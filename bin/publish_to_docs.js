@@ -1,6 +1,6 @@
 var process = require("child_process");
 var fs = require("fs");
-var calcVersion = require("./lib/calculate-version");
+var calcVersion = require("../lib/calculate-version");
 var execCmd = function (cmds, callback) {
     var execNext = function () {
         process.exec(cmds.shift(), function (error) {

@@ -234,4 +234,4 @@ EventManager["eventManager"] = {
 };
 
 export default
-EventManager;
+    EventManager;

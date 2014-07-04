@@ -22,4 +22,4 @@ var CheckboxItemController = Ember.ObjectController.extend({
     }.observes('selected')
 });
 export default
-CheckboxItemController;
+    CheckboxItemController;

@@ -45,7 +45,15 @@ var DEFAULT_ENV = {
      * @type String
      * @default lang
      */
-    LANG_FOLDER_NAME: "lang"
+    LANG_FOLDER_NAME: "lang",
+
+    /**
+     * @property DEFAULT_LANG
+     * @for BricksUI.ENV
+     * @type String
+     * @default zh-cn
+     */
+    DEFAULT_LANG: 'zh-cn'
 };
 
 /**

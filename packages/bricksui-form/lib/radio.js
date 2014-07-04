@@ -22,4 +22,4 @@ var Radio = Checkbox.extend({
 });
 
 export default
-Radio;
+    Radio;

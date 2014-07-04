@@ -12,7 +12,7 @@
  ```
  对应控制器
  ```javascript
-     Showcase.ShowComponentsWizardController = Ember.Controller.extend({
+ Showcase.ShowComponentsWizardController = Ember.Controller.extend({
       init: function() {
         this._super();
         this.set('steps', Ember.A([
@@ -32,7 +32,7 @@
  ```
 
  ```javascript
-     Showcase.ShowComponentsWizardController = Ember.Controller.extend({
+ Showcase.ShowComponentsWizardController = Ember.Controller.extend({
       init: function() {
         this._super();
         this.set('steps', Ember.A([
@@ -51,7 +51,7 @@
  ```
 
  ```javascript
-     Showcase.ShowComponentsWizardController = Ember.Controller.extend({
+ Showcase.ShowComponentsWizardController = Ember.Controller.extend({
       actions: {
         createWizard: function() {
           var body;

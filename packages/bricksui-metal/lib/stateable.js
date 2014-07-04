@@ -145,8 +145,8 @@ function wireState(object, parent, name) {
 
 
 export
-{
+    {
     Stateable,
-        wireState
-}
-;
+    wireState
+    }
+    ;

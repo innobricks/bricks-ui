@@ -15,4 +15,4 @@ var RadioButton = Ember.View.extend({
 });
 
 export default
-RadioButton;
+    RadioButton;

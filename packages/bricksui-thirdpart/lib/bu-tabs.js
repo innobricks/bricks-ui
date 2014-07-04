@@ -39,7 +39,7 @@
  ####`tabs` 组件与路由相结合
  定义路由:
  ```javascript
-     this.resource('user', function() {
+ this.resource('user', function() {
       this.route('general');
       this.route('privacy');
       return this.route('activities');

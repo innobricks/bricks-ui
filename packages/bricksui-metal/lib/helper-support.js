@@ -18,8 +18,7 @@
  @method swapHelpers
  @param hash {Object}
  */
-export default function swapHelpers(hash)
-{
+export default function swapHelpers(hash) {
     if (typeof hash === "string") {
         var value = arguments[1];
         Ember.assert("must provide the corresponding helper to replace the older one", value && typeof value === "string");

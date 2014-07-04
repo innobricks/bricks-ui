@@ -9,46 +9,46 @@
 
  #####formFor助手用法
  ```handlebars
-   {{#form-for model}}
-   {{input firstName}}
-   {{input lastName}}
-   {{input bio as="text"}}
-   {{input country as='select'
-        collection="App.countries"
-        selection="country"
-        optionValuePath="content.id"
-        optionLabelPath="content.name"
-        prompt="Select Country"
-   }}
-   {{/form-for}}
+ {{#form-for model}}
+ {{input firstName}}
+ {{input lastName}}
+ {{input bio as="text"}}
+ {{input country as='select'
+      collection="App.countries"
+      selection="country"
+      optionValuePath="content.id"
+      optionLabelPath="content.name"
+      prompt="Select Country"
+ }}
+ {{/form-for}}
  ```
  编译结果
 
  ```html
  <form>
-   <div class="input string">
-     <label for="ember1">First name</label>
-     <input id="ember1" type="text"/>
-     <span class="error"></span>
-   </div>
-   <div class="input string">
-     <label for="ember2">Last name</label>
-     <input id="ember2" type="text"/>
-     <span class="error"></span>
-   </div>
-     <div class="input string">
-     <label for="ember3">Bio</label>
-     <textarea id="ember3"></textarea>
-     <span class="error"></span>
-   </div>
-   <div class="input string">
-    <label for="ember4">Country</label>
-   <select id="ember4">
-    xxx
-   </select>
-    <span class="error"></span>
-   </div>
-   </form>
+ <div class="input string">
+ <label for="ember1">First name</label>
+ <input id="ember1" type="text"/>
+ <span class="error"></span>
+ </div>
+ <div class="input string">
+ <label for="ember2">Last name</label>
+ <input id="ember2" type="text"/>
+ <span class="error"></span>
+ </div>
+ <div class="input string">
+ <label for="ember3">Bio</label>
+ <textarea id="ember3"></textarea>
+ <span class="error"></span>
+ </div>
+ <div class="input string">
+ <label for="ember4">Country</label>
+ <select id="ember4">
+ xxx
+ </select>
+ <span class="error"></span>
+ </div>
+ </form>
  ```
  --------------------------------------
  Ember.EasyForm 允许通过设置input的as属性改变input组件的行为
@@ -160,9 +160,9 @@
 
 
 /**
-  Ember.EasyForm配置项，可以向Config内注册自定义组件，注册自定义模板等
-  @class Config
-  @namespace Ember.EasyForm
+ Ember.EasyForm配置项，可以向Config内注册自定义组件，注册自定义模板等
+ @class Config
+ @namespace Ember.EasyForm
  */
 
 /**
@@ -213,30 +213,30 @@
 
  ```handlebars
  {{#form-for model wrapper="my-wrapper"}}
-   {{input firstName}}
-   {{input lastName}}
+ {{input firstName}}
+ {{input lastName}}
  {{/form-for}}
  ```
  编译结果为
  ```html
-   <form class="my-form">
-     <div class="input string">
-       <label for="ember1">First name</label>
-       <input id="ember1" type="text"/>
-       <span class="error"></span>
-     </div>
-     <div class="input string">
-       <label for="ember2" class="my-label">Last name</label>
-       <input id="ember2" type="text"/>
-       <span class="error my-error"></span>
-     </div>
-   </form>
+ <form class="my-form">
+ <div class="input string">
+ <label for="ember1">First name</label>
+ <input id="ember1" type="text"/>
+ <span class="error"></span>
+ </div>
+ <div class="input string">
+ <label for="ember2" class="my-label">Last name</label>
+ <input id="ember2" type="text"/>
+ <span class="error my-error"></span>
+ </div>
+ </form>
  ```
 
  ----------------------------------------
  Ember.EasyForm也支持向Wrapper中注册模板
  ```javascript
-     Ember.EasyForm.Config.registerWrapper('twitter-bootstrap', {
+ Ember.EasyForm.Config.registerWrapper('twitter-bootstrap', {
       // Define the custom template
       inputTemplate: 'bootstrap-input',
 
@@ -254,9 +254,9 @@
  ```
  bootstrap-input模板
  ```handlebars
-   {{label-field propertyBinding="view.property" textBinding="view.label"}}
-       <div class="{{unbound view.wrapperConfig.controlsWrapperClass}}">
-   {{partial "easyForm/inputControls"}}
+ {{label-field propertyBinding="view.property" textBinding="view.label"}}
+ <div class="{{unbound view.wrapperConfig.controlsWrapperClass}}">
+ {{partial "easyForm/inputControls"}}
  </div>
  ```
 
