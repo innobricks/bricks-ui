@@ -186,7 +186,7 @@ export default Ember.Component.extend({
      */
     getTree: function () {
         var treeId = get(this, 'treeId');
-        return $.fn.zTree.getZTreeObj(treeId);
+        return Ember.$.fn.zTree.getZTreeObj(treeId);
     },
 
     /**
@@ -197,7 +197,7 @@ export default Ember.Component.extend({
     _destroyElement: function () {
         var treeId = get(this, 'treeId');
 
-        $.fn.zTree.destroy(treeId);
+        Ember.$.fn.zTree.destroy(treeId);
     }.on('destroyElement'),
 
 
@@ -210,7 +210,7 @@ export default Ember.Component.extend({
         Ember.run.scheduleOnce('afterRender', this, function () {
             var setting = get(this, 'options'),
                 zNodes = get(this, 'zNodes');
-            $.fn.zTree.init(this.$(), setting, zNodes);
+            Ember.$.fn.zTree.init(this.$(), setting, zNodes);
         });
     }.on('didInsertElement')
 

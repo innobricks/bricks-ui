@@ -77,8 +77,8 @@ var requireLang = function (parsedName) {
         localeName = parsedName.fullName;
     }
     Ember.warn("Could not find module " + moduleMatcher.shortMatch + " or " + moduleMatcher.shortMatch, localeLang !== undefined);
-    if (localeLang && localeLang['default']) {
-        localeLang = localeLang['default'];
+    if (localeLang && localeLang["default"]) {
+        localeLang = localeLang["default"];
     }
 
     return {
@@ -119,6 +119,11 @@ var mergeLang = function (locale) {
 var initLang = function () {
     var parsedName = getLang();
     var locale = requireLang(parsedName);
+
+    if (!locale) {
+        locale = requireLang(BricksUI.ENV.DEFAULT_LANG);
+    }
+
     mergeLang(locale);
     saveLang(parsedName);
 };

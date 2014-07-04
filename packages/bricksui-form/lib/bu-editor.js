@@ -128,7 +128,7 @@ var BuEditor = Ember.Component.extend({
             options = JSON.parse(options);
         }
         //TODO toolbar属性合并
-        options = $.extend(true, {}, options, defaultOptions);
+        options = Ember.$.extend(true, {}, options, defaultOptions);
 
         editor = this._editor = UM.getEditor(this.get('elementD'), options);
 
