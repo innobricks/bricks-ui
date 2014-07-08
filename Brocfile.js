@@ -25,142 +25,142 @@ var disableDefeatureify = !!process.env.NO_DEFEATUREIFY || env === 'test' || fal
 
 
 function defeatureifyConfig(options) {
-  var stripDebug = false;
-  var options = options || {};
-  var configJson = JSON.parse(fs.readFileSync("features.json").toString());
+    var stripDebug = false;
+    var options = options || {};
+    var configJson = JSON.parse(fs.readFileSync("features.json").toString());
 
-  if (configJson.hasOwnProperty('stripDebug')) {
-    stripDebug = configJson.stripDebug;
-  }
-  if (options.hasOwnProperty('stripDebug')) {
-    stripDebug = options.stripDebug;
-  }
+    if (configJson.hasOwnProperty('stripDebug')) {
+        stripDebug = configJson.stripDebug;
+    }
+    if (options.hasOwnProperty('stripDebug')) {
+        stripDebug = options.stripDebug;
+    }
 
-  return {
-    enabled: options.features || configJson.features,
-    debugStatements: options.debugStatements || configJson.debugStatements,
-    namespace: options.namespace || configJson.namespace,
-    enableStripDebug: stripDebug
-  };
+    return {
+        enabled: options.features || configJson.features,
+        debugStatements: options.debugStatements || configJson.debugStatements,
+        namespace: options.namespace || configJson.namespace,
+        enableStripDebug: stripDebug
+    };
 }
 
 function vendoredPackage(packageName) {
-  var libTree = pickFiles('packages/' + packageName + '/lib', {
-    files: ['main.js'],
-    srcDir: '/',
-    destDir: '/' + packageName
-  });
+    var libTree = pickFiles('packages/' + packageName + '/lib', {
+        files: ['main.js'],
+        srcDir: '/',
+        destDir: '/' + packageName
+    });
 
-  return  moveFile(libTree, {
-    srcFile: packageName + '/main.js',
-    destFile: '/' + packageName + '.js'
-  });
+    return  moveFile(libTree, {
+        srcFile: packageName + '/main.js',
+        destFile: '/' + packageName + '.js'
+    });
 };
 
 function concatES6(sourceTrees, options) {
-  var loader = vendoredPackages['loader'];
-  var inputFiles = options.inputFiles;
-  var destFile = options.destFile;
+    var loader = vendoredPackages['loader'];
+    var inputFiles = options.inputFiles;
+    var destFile = options.destFile;
 
-  if (util.isArray(sourceTrees)) {
-    sourceTrees = mergeTrees(sourceTrees, {overwrite: true});
-  }
+    if (util.isArray(sourceTrees)) {
+        sourceTrees = mergeTrees(sourceTrees, {overwrite: true});
+    }
 
-  sourceTrees = transpileES6(sourceTrees, {
-    moduleName: true
-  });
+    sourceTrees = transpileES6(sourceTrees, {
+        moduleName: true
+    });
 
-  if (!disableDefeatureify) {
-    sourceTrees = defeatureify(sourceTrees, defeatureifyConfig(options.defeatureifyOptions));
-  }
-  //TODO 暂时将模板拼接在源码文件后面
-  var concatTrees = [loader, 'generators', iifeStart, iifeStop, sourceTrees, templates];
-  if (options.includeLoader === true) {
-    inputFiles.unshift('loader.js');
-  }
+    if (!disableDefeatureify) {
+        sourceTrees = defeatureify(sourceTrees, defeatureifyConfig(options.defeatureifyOptions));
+    }
+    //TODO 暂时将模板拼接在源码文件后面
+    var concatTrees = [loader, 'generators', iifeStart, iifeStop, sourceTrees, templates];
+    if (options.includeLoader === true) {
+        inputFiles.unshift('loader.js');
+    }
 
-  if (options.bootstrapModule) {
-    var bootstrapTree = writeFile('bootstrap', 'requireModule("' + options.bootstrapModule + '");\n');
-    concatTrees.push(bootstrapTree);
-    inputFiles.push('bootstrap');
-  }
+    if (options.bootstrapModule) {
+        var bootstrapTree = writeFile('bootstrap', 'requireModule("' + options.bootstrapModule + '");\n');
+        concatTrees.push(bootstrapTree);
+        inputFiles.push('bootstrap');
+    }
 
-  // do not modify inputFiles after here (otherwise IIFE will be messed up)
-  if (options.wrapInIIFE !== false) {
-    inputFiles.unshift('iife-start');
-    inputFiles.push('iife-stop');
-  }
+    // do not modify inputFiles after here (otherwise IIFE will be messed up)
+    if (options.wrapInIIFE !== false) {
+        inputFiles.unshift('iife-start');
+        inputFiles.push('iife-stop');
+    }
 
-  if (options.includeLicense !== false) {
-    inputFiles.unshift('license.js');
-  }
+    if (options.includeLicense !== false) {
+        inputFiles.unshift('license.js');
+    }
 
-  if (options.vendorTrees) {
-    concatTrees.push(options.vendorTrees);
-  }
+    if (options.vendorTrees) {
+        concatTrees.push(options.vendorTrees);
+    }
 
-  return concat(mergeTrees(concatTrees), {
-    wrapInEval: options.wrapInEval,
-    inputFiles: inputFiles,
-    outputFile: destFile
-  });
+    return concat(mergeTrees(concatTrees), {
+        wrapInEval: options.wrapInEval,
+        inputFiles: inputFiles,
+        outputFile: destFile
+    });
 }
 
 var yuidocCompiler = require('broccoli-yuidoc');
 
 var yuidocTree = yuidocCompiler('./packages/', {
-  srcDir: '/',
-  destDir: 'docs',
-  yuidoc: {
-    // .. yuidoc option overrides
-    exclude: "assets",
-    paths: [
-      "packages/bricksui/lib",
-      "packages/bricksui-metal/lib",
-      "packages/bricksui-form/lib",
-      "packages/bricksui-i18n/lib",
-      "packages/bricksui-thirdpart/lib"
-    ],
-    "themedir": "vendor/yuidoc-theme-blue"
-  }
+    srcDir: '/',
+    destDir: 'docs',
+    yuidoc: {
+        // .. yuidoc option overrides
+        exclude: "assets",
+        paths: [
+            "packages/bricksui/lib",
+            "packages/bricksui-metal/lib",
+            "packages/bricksui-form/lib",
+            "packages/bricksui-i18n/lib",
+            "packages/bricksui-thirdpart/lib"
+        ],
+        "themedir": "vendor/yuidoc-theme-blue"
+    }
 });
 
 
 var testConfig = pickFiles('tests', {
-  srcDir: '/',
-  files: ['**/*.*'],
-  destDir: '/tests'
+    srcDir: '/',
+    files: ['**/*.*'],
+    destDir: '/tests'
 });
 
 testConfig = replace(testConfig, {
-  files: [ 'tests/ember_configuration.js' ],
-  patterns: [
-    { match: /\{\{FEATURES\}\}/g, replacement: JSON.stringify(defeatureifyConfig().enabled) }
-  ]
+    files: [ 'tests/ember_configuration.js' ],
+    patterns: [
+        { match: /\{\{FEATURES\}\}/g, replacement: JSON.stringify(defeatureifyConfig().enabled) }
+    ]
 });
 
 var bowerFiles = [
-  pickFiles('vendor/qunit/qunit', {
-    srcDir: '/',
-    destDir: '/qunit'
-  }),
+    pickFiles('vendor/qunit/qunit', {
+        srcDir: '/',
+        destDir: '/qunit'
+    }),
 
-  pickFiles('vendor/jquery', {
-    files: ['jquery.js'],
-    srcDir: '/',
-    destDir: '/jquery'
-  }),
-  pickFiles('vendor/ember', {
-    files: ['ember.js'],
-    srcDir: '/',
-    destDir: '/ember'
-  }),
+    pickFiles('vendor/jquery', {
+        files: ['jquery.js'],
+        srcDir: '/',
+        destDir: '/jquery'
+    }),
+    pickFiles('vendor/ember', {
+        files: ['ember.js'],
+        srcDir: '/',
+        destDir: '/ember'
+    }),
 
-  pickFiles('vendor/handlebars', {
-    files: ['handlebars.js'],
-    srcDir: '/',
-    destDir: '/handlebars'
-  }),
+    pickFiles('vendor/handlebars', {
+        files: ['handlebars.js'],
+        srcDir: '/',
+        destDir: '/handlebars'
+    }),
 ];
 
 bowerFiles = mergeTrees(bowerFiles);
@@ -169,7 +169,7 @@ var iifeStart = writeFile('iife-start', '(function() {');
 var iifeStop = writeFile('iife-stop', '})();');
 
 var vendoredPackages = {
-  'loader': vendoredPackage('loader')
+    'loader': vendoredPackage('loader')
 };
 
 
@@ -177,116 +177,116 @@ var packages = require('./lib/packages');
 
 //precompile template *.hbs *.handlebars
 var sourceTree = pickFiles("packages", {
-  srcDir: "/",
-  files: ["**/*.hbs"],
-  destDir: '/'
+    srcDir: "/",
+    files: ["**/*.hbs"],
+    destDir: '/'
 });
 var templates = pickFiles(sourceTree, {
-  srcDir: "/",
-  destDir: '/templates'
+    srcDir: "/",
+    destDir: '/templates'
 })
 templates = templateCompiler(templates);
 
 function es6Package(packageName) {
-  var pkg = packages[packageName],
-    libTree;
+    var pkg = packages[packageName],
+        libTree;
 
-  if (pkg['trees']) {
-    return pkg['trees'];
-  }
+    if (pkg['trees']) {
+        return pkg['trees'];
+    }
 
-  var dependencyTrees = packageDependencyTree(packageName);
-  var vendorTrees = packages[packageName].vendorTrees;
+    var dependencyTrees = packageDependencyTree(packageName);
+    var vendorTrees = packages[packageName].vendorTrees;
 
-  libTree = pickFiles('packages/' + packageName + '/lib', {
-    srcDir: '/',
-    destDir: packageName
-  });
+    libTree = pickFiles('packages/' + packageName + '/lib', {
+        srcDir: '/',
+        destDir: packageName
+    });
 
 
-  libTree = moveFile(libTree, {
-    srcFile: packageName + '/main.js',
-    destFile: packageName + '.js'
-  });
+    libTree = moveFile(libTree, {
+        srcFile: packageName + '/main.js',
+        destFile: packageName + '.js'
+    });
 
-  //libTree = mergeTrees([libTree, templateCompilerTree]);
-  //libTree = inlineTemplatePrecompiler(libTree);
-  /*libTree = removeFile(libTree, {
-   srcFile: 'ember-template-compiler.js'
-   });
-   */
-  var libJSHintTree = jshintTree(libTree, {
-    destFile: '/' + packageName + '/tests/lib-jshint.js'
-  });
+    //libTree = mergeTrees([libTree, templateCompilerTree]);
+    //libTree = inlineTemplatePrecompiler(libTree);
+    /*libTree = removeFile(libTree, {
+     srcFile: 'ember-template-compiler.js'
+     });
+     */
+    var libJSHintTree = jshintTree(libTree, {
+        destFile: '/' + packageName + '/tests/lib-jshint.js'
+    });
 
-  var testTree = pickFiles('packages/' + packageName + '/tests', {
-    srcDir: '/',
-    destDir: '/' + packageName + '/tests'
-  });
+    var testTree = pickFiles('packages/' + packageName + '/tests', {
+        srcDir: '/',
+        destDir: '/' + packageName + '/tests'
+    });
 
-  var testJSHintTree = jshintTree(testTree, {
-    destFile: '/' + packageName + '/tests/tests-jshint.js'
-  });
+    var testJSHintTree = jshintTree(testTree, {
+        destFile: '/' + packageName + '/tests/tests-jshint.js'
+    });
 
-  var testTrees;
-  if (disableJSHint) {
-    testTrees = testTree;
-  } else {
-    testTrees = mergeTrees([testTree, libJSHintTree, testJSHintTree]);
-  }
+    var testTrees;
+    if (disableJSHint) {
+        testTrees = testTree;
+    } else {
+        testTrees = mergeTrees([testTree, libJSHintTree, testJSHintTree]);
+    }
 
-  var compiledLib = concatES6([dependencyTrees, libTree], {
-    includeLoader: true,
-    vendorTrees: vendorTrees,
-    inputFiles: [packageName + '/**/*.js', packageName + '.js'],
-    destFile: '/packages/' + packageName + '.js'
-  })
-  var compiledTrees = [compiledLib];
+    var compiledLib = concatES6([dependencyTrees, libTree], {
+        includeLoader: true,
+        vendorTrees: vendorTrees,
+        inputFiles: [packageName + '/**/*.js', packageName + '.js'],
+        destFile: '/packages/' + packageName + '.js'
+    })
+    var compiledTrees = [compiledLib];
 
-  var compiledTest = concatES6(testTrees, {
-    includeLoader: false,
-    inputFiles: ['**/*.js'],
-    destFile: '/packages/' + packageName + '-tests.js'
-  })
-  if (!pkg.skipTests) {
-    compiledTrees.push(compiledTest);
-  }
+    var compiledTest = concatES6(testTrees, {
+        includeLoader: false,
+        inputFiles: ['**/*.js'],
+        destFile: '/packages/' + packageName + '-tests.js'
+    })
+    if (!pkg.skipTests) {
+        compiledTrees.push(compiledTest);
+    }
 
-  compiledTrees = mergeTrees(compiledTrees);
+    compiledTrees = mergeTrees(compiledTrees);
 
-  pkg['trees'] = {lib: libTree, compiledTree: compiledTrees, vendorTrees: vendorTrees};
-  if (!pkg.skipTests) {
-    pkg['trees'].tests = testTrees;
-  }
+    pkg['trees'] = {lib: libTree, compiledTree: compiledTrees, vendorTrees: vendorTrees};
+    if (!pkg.skipTests) {
+        pkg['trees'].tests = testTrees;
+    }
 
-  return pkg.trees;
+    return pkg.trees;
 }
 
 function packageDependencyTree(packageName) {
-  var dependencyTrees = packages[packageName]['dependencyTrees'];
+    var dependencyTrees = packages[packageName]['dependencyTrees'];
 
-  if (dependencyTrees) {
-    return dependencyTrees;
-  } else {
-    dependencyTrees = [];
-  }
+    if (dependencyTrees) {
+        return dependencyTrees;
+    } else {
+        dependencyTrees = [];
+    }
 
-  var requiredDependencies = packages[packageName]['requirements'] || [];
-  var vendoredDependencies = packages[packageName]['vendorRequirements'] || [];
-  var libTrees = [];
-  var vendorTrees = [];
+    var requiredDependencies = packages[packageName]['requirements'] || [];
+    var vendoredDependencies = packages[packageName]['vendorRequirements'] || [];
+    var libTrees = [];
+    var vendorTrees = [];
 
-  vendoredDependencies.forEach(function (dependency) {
-    vendorTrees.push(vendoredPackages[dependency]);
-  });
+    vendoredDependencies.forEach(function (dependency) {
+        vendorTrees.push(vendoredPackages[dependency]);
+    });
 
-  requiredDependencies.forEach(function (dependency) {
-    libTrees.concat(packageDependencyTree(dependency));
-    libTrees.push(es6Package(dependency).lib);
-  }, this);
+    requiredDependencies.forEach(function (dependency) {
+        libTrees.concat(packageDependencyTree(dependency));
+        libTrees.push(es6Package(dependency).lib);
+    }, this);
 
-  packages[packageName]['vendorTrees'] = mergeTrees(vendorTrees, {overwrite: true});
-  return packages[packageName]['dependencyTrees'] = mergeTrees(libTrees, {overwrite: true});
+    packages[packageName]['vendorTrees'] = mergeTrees(vendorTrees, {overwrite: true});
+    return packages[packageName]['dependencyTrees'] = mergeTrees(libTrees, {overwrite: true});
 }
 
 var vendorTrees = [];
@@ -295,27 +295,27 @@ var testTrees = [];
 var compiledPackageTrees = [];
 
 for (var packageName in packages) {
-  es6Package(packageName);
-  var currentPackage = packages[packageName];
-  var packagesTrees = currentPackage['trees'];
+    es6Package(packageName);
+    var currentPackage = packages[packageName];
+    var packagesTrees = currentPackage['trees'];
 
-  if (currentPackage['vendorRequirements']) {
-    currentPackage['vendorRequirements'].forEach(function (dependency) {
-      vendorTrees.push(vendoredPackages[dependency]);
-    });
-  }
+    if (currentPackage['vendorRequirements']) {
+        currentPackage['vendorRequirements'].forEach(function (dependency) {
+            vendorTrees.push(vendoredPackages[dependency]);
+        });
+    }
 
-  if (packagesTrees.lib) {
-    sourceTrees.push(packagesTrees.lib);
-  }
+    if (packagesTrees.lib) {
+        sourceTrees.push(packagesTrees.lib);
+    }
 
-  if (packagesTrees.compiledTree) {
-    compiledPackageTrees.push(packagesTrees.compiledTree);
-  }
+    if (packagesTrees.compiledTree) {
+        compiledPackageTrees.push(packagesTrees.compiledTree);
+    }
 
-  if (packagesTrees.tests) {
-    testTrees.push(packagesTrees.tests);
-  }
+    if (packagesTrees.tests) {
+        testTrees.push(packagesTrees.tests);
+    }
 }
 
 compiledPackageTrees = mergeTrees(compiledPackageTrees);
@@ -325,71 +325,79 @@ testTrees = mergeTrees(testTrees);
 
 
 var compiledSource = concatES6(sourceTrees, {
-  includeLoader: true,
-  bootstrapModule: 'bricksui',
-  vendorTrees: vendorTrees,
-  inputFiles: ['**/*.js'],
-  destFile: '/bricksui.js'
+    includeLoader: true,
+    bootstrapModule: 'bricksui',
+    vendorTrees: vendorTrees,
+    inputFiles: ['**/*.js'],
+    destFile: '/bricksui.js'
 });
 var debugSource = concatES6(sourceTrees, {
-  includeLoader: true,
-  bootstrapModule: 'bricksui',
-  vendorTrees: vendorTrees,
-  inputFiles: ['**/*.js'],
-  destFile: '/bricksui-debug.js'
+    includeLoader: true,
+    bootstrapModule: 'bricksui',
+    vendorTrees: vendorTrees,
+    inputFiles: ['**/*.js'],
+    destFile: '/bricksui-debug.js'
 });
 // debug 版本
 var prodCompiledSource = removeFile(debugSource, {
-  srcFile: 'bricksui-debug.js',
+    srcFile: 'bricksui-debug.js',
 });
 
 prodCompiledSource = concatES6(prodCompiledSource, {
-  includeLoader: true,
-  bootstrapModule: 'bricksui',
-  vendorTrees: vendorTrees,
-  inputFiles: ['**/*.js'],
-  destFile: '/bricksui.prod.js',
-  defeatureifyOptions: {stripDebug: true}
+    includeLoader: true,
+    bootstrapModule: 'bricksui',
+    vendorTrees: vendorTrees,
+    inputFiles: ['**/*.js'],
+    destFile: '/bricksui.prod.js',
+    defeatureifyOptions: {stripDebug: true}
 });
 
 var minCompiledSource = moveFile(prodCompiledSource, {
-  srcFile: 'bricksui.prod.js',
-  destFile: 'bricksui.min.js',
+    srcFile: 'bricksui.prod.js',
+    destFile: 'bricksui.min.js',
 });
 minCompiledSource = uglifyJavaScript(minCompiledSource);
 //单元测试
 var compiledTests = concatES6(testTrees, {
-  includeLoader: true,
-  inputFiles: ['**/*.js'],
-  destFile: '/bricksui-tests.js'
+    includeLoader: true,
+    inputFiles: ['**/*.js'],
+    destFile: '/bricksui-tests.js'
 });
 
 
 var distTrees = [templates, compiledSource, compiledTests, testConfig, bowerFiles];
 
 if (env !== 'test') {
-  distTrees.push(prodCompiledSource);
-  distTrees.push(minCompiledSource);
-  //distTrees.push(compiledPackageTrees);
+    distTrees.push(prodCompiledSource);
+    distTrees.push(minCompiledSource);
+    //distTrees.push(compiledPackageTrees);
 }
 
 distTrees = mergeTrees(distTrees);
 
 var vendorsOptions = require('./lib/vendors');
-var VenderCompiler=require('./lib/vendorCompiler');
-var compiledTree=new VenderCompiler(vendorsOptions,'./vendor').exec();
+var VenderCompiler = require('./lib/vendorCompiler');
+var compiledTree = new VenderCompiler(vendorsOptions, './vendor').exec();
 
 
 distTrees = replace(distTrees, {
-  files: [ '**/*.js' ],
-  patterns: [
-    { match: /VERSION_STRING_PLACEHOLDER/g, replacement: calculateVersion }
-  ]
+    files: [ '**/*.js' ],
+    patterns: [
+        { match: /VERSION_STRING_PLACEHOLDER/g, replacement: calculateVersion }
+    ]
 });
-distTrees = mergeTrees([distTrees, compiledTree]);
+
+var bricksuiTree = pickFiles(distTrees, {
+    files: ['bricksui.js'],
+    srcDir: '/',
+    destDir: 'bricksui'
+});
+
+
+distTrees = mergeTrees([bricksuiTree, distTrees, compiledTree]);
 
 var distExportTree = exportTree(distTrees, {
-  destDir: 'live-dist'
+    destDir: 'live-dist'
 });
 
 module.exports = mergeTrees([yuidocTree, distTrees, distExportTree]);
