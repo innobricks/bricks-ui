@@ -126,6 +126,18 @@ var yuidocTree = yuidocCompiler('./packages/', {
 });
 
 
+var testConfig = pickFiles('tests', {
+    srcDir: '/',
+    files: ['**/*.*'],
+    destDir: '/tests'
+});
+
+//testConfig = replace(testConfig, {
+//    files: [ 'tests/ember_configuration.js' ],
+//    patterns: [
+//        { match: /\{\{FEATURES\}\}/g, replacement: JSON.stringify(defeatureifyConfig().enabled) }
+//    ]
+//});
 
 var bowerFiles = [
     pickFiles('vendor/qunit/qunit', {
@@ -353,7 +365,7 @@ var compiledTests = concatES6(testTrees, {
 });
 
 
-var distTrees = [templates, compiledSource, compiledTests, bowerFiles];
+var distTrees = [templates, compiledSource, compiledTests, testConfig, bowerFiles];
 
 if (env !== 'test') {
     distTrees.push(prodCompiledSource);
@@ -382,7 +394,7 @@ var bricksuiTree = pickFiles(distTrees, {
 });
 
 
-distTrees = mergeTrees([bricksuiTree, distTrees, compiledTree]);
+distTrees = mergeTrees([bricksuiTree,compiledTree, distTrees]);
 
 var distExportTree = exportTree(distTrees, {
     destDir: 'live-dist'
