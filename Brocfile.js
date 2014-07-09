@@ -126,18 +126,6 @@ var yuidocTree = yuidocCompiler('./packages/', {
 });
 
 
-var testConfig = pickFiles('tests', {
-    srcDir: '/',
-    files: ['**/*.*'],
-    destDir: '/tests'
-});
-
-testConfig = replace(testConfig, {
-    files: [ 'tests/ember_configuration.js' ],
-    patterns: [
-        { match: /\{\{FEATURES\}\}/g, replacement: JSON.stringify(defeatureifyConfig().enabled) }
-    ]
-});
 
 var bowerFiles = [
     pickFiles('vendor/qunit/qunit', {
@@ -365,7 +353,7 @@ var compiledTests = concatES6(testTrees, {
 });
 
 
-var distTrees = [templates, compiledSource, compiledTests, testConfig, bowerFiles];
+var distTrees = [templates, compiledSource, compiledTests, bowerFiles];
 
 if (env !== 'test') {
     distTrees.push(prodCompiledSource);

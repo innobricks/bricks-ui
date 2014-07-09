@@ -5,7 +5,6 @@
     testing: true
   };
   window.ENV = window.ENV || {};
-  ENV.FEATURES = {{FEATURES}};
 
   // Test for "hooks in ENV.EMBER_LOAD_HOOKS['hookName'] get executed"
   ENV.EMBER_LOAD_HOOKS = ENV.EMBER_LOAD_HOOKS || {};
