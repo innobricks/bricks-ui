@@ -20,7 +20,8 @@ swapHelpers({
     "bs-tabs": "bu-tabs",
     "bs-tabs-panes": "bu-tabs-panes",
     "bs-tooltip": "bu-tooltip",
-    "bs-wizard": "bu-wizard"
+    "bs-wizard": "bu-wizard",
+    "table-component": "bu-table"
 });
 
 Ember.onLoad("Ember.Application", function (Application) {

@@ -7,6 +7,8 @@ node_modules/
 !/vendor/assets
 live-dist/
 .idea/
+
 publish_to_bower/
 publish_to_docs/
 publish_to_build/
+**/npm-debug.log
