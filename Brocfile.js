@@ -121,7 +121,8 @@ var yuidocTree = yuidocCompiler('./packages/', {
             "packages/bricksui-i18n/lib",
             "packages/bricksui-thirdpart/lib"
         ],
-        "themedir": "vendor/yuidoc-theme-blue"
+        "themedir": "vendor/yuidoc-theme-blue",
+        "quiet":true
     }
 });
 
@@ -132,12 +133,12 @@ var testConfig = pickFiles('tests', {
     destDir: '/tests'
 });
 
-testConfig = replace(testConfig, {
-    files: [ 'tests/ember_configuration.js' ],
-    patterns: [
-        { match: /\{\{FEATURES\}\}/g, replacement: JSON.stringify(defeatureifyConfig().enabled) }
-    ]
-});
+//testConfig = replace(testConfig, {
+//    files: [ 'tests/ember_configuration.js' ],
+//    patterns: [
+//        { match: /\{\{FEATURES\}\}/g, replacement: JSON.stringify(defeatureifyConfig().enabled) }
+//    ]
+//});
 
 var bowerFiles = [
     pickFiles('vendor/qunit/qunit', {
@@ -394,7 +395,7 @@ var bricksuiTree = pickFiles(distTrees, {
 });
 
 
-distTrees = mergeTrees([bricksuiTree, distTrees, compiledTree]);
+distTrees = mergeTrees([bricksuiTree,compiledTree, distTrees]);
 
 var distExportTree = exportTree(distTrees, {
     destDir: 'live-dist'

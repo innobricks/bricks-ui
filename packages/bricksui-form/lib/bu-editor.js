@@ -1,4 +1,6 @@
-var get = Ember.get, set = Ember.set;
+var get = Ember.get,
+    set = Ember.set
+    ;
 
 /**
  @module bricksui
@@ -118,6 +120,15 @@ var get = Ember.get, set = Ember.set;
  //填写过滤规则
  //,filterRules: {}
  ```
+ ####warn:某些情况下，如果umeditor基准路径不正确，可以设置 中的 UMEDITOR_HOME_URL参数
+ ```javascrript
+ //全局编辑器基准路径
+ window.UMEDITOR_CONFIG = {
+
+        //为编辑器实例添加一个路径，这个不能被注释
+        UMEDITOR_HOME_URL : URL
+ }
+ ```
  @class BuEditor
  @namespace Ember
  @extends Ember.Component
@@ -168,11 +179,17 @@ var BuEditor = Ember.Component.extend({
         wordCount: false,
         //关闭elementPath
         elementPathEnabled: false,
+        initialFrameWidth: "100%",
         //默认的编辑区域高度
         initialFrameHeight: 300
         //更多其他参数，请参考umeditor.config.js中的配置项
     },
 
+
+    init: function () {
+        this._super.apply(this, arguments);
+        this._parseOptions();
+    },
 
     /**
      绑定到文本域的字段
@@ -219,6 +236,19 @@ var BuEditor = Ember.Component.extend({
     }),
 
 
+    _parseOptions: function () {
+        var options = get(this, 'options');
+        if (typeof options === 'string') {
+            try {
+                options = JSON.parse(options);
+                set(this, 'options', options);
+            } catch (e) {
+
+            }
+        }
+    },
+
+
     /**
      将textarea转换为UMeditor实例
      @private
@@ -229,13 +259,11 @@ var BuEditor = Ember.Component.extend({
             defaultOptions = get(this, 'defaultOptions'),
             editor;
 
-        if (typeof options === 'string') {
-            options = JSON.parse(options);
-        }
+
         //TODO toolbar属性合并
         options = Ember.$.extend(true, {}, options, defaultOptions);
 
-        editor = this._editor = UM.getEditor(this.get('elementD'), options);
+        editor = this._editor = UM.getEditor(this.get('elementId'), options);
 
         this._attachEvent(editor);
     }.on('didInsertElement'),

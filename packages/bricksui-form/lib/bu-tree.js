@@ -196,7 +196,6 @@ export default Ember.Component.extend({
      */
     _destroyElement: function () {
         var treeId = get(this, 'treeId');
-
         Ember.$.fn.zTree.destroy(treeId);
     }.on('destroyElement'),
 
