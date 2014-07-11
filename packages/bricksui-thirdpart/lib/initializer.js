@@ -20,6 +20,7 @@ swapHelpers({
     "bs-tabs": "bu-tabs",
     "bs-tabs-panes": "bu-tabs-panes",
     "bs-tooltip": "bu-tooltip",
+    "bs-modal":"bu-modal",
     "bs-wizard": "bu-wizard",
     "table-component": "bu-table"
 });
