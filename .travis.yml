@@ -1,16 +1,17 @@
----
 rvm:
 - 2.1
 node_js:
-- "0.10"
+- '0.10'
 install:
-- "npm install"
+- npm install
 after_success:
-  - broccoli build dist
+- broccoli build dist
+- "./bin/bower_bricksui_build"
 script:
-  - npm test
+- npm test
 env:
   global:
   - BROCCOLI_ENV=production
+  - secure: YAA/wzYH4q5gCASkso/dveQn0BeZq+UtShjPvxL+JruQg6Z4gqs9XyDfUfowt8OHtNm1OWdmFCHx/HFgt60d+TePuP9fRWVflAs4HwlqrFN4UnmllUcaK23p0lciBD4TYU+DFW7r+GZlhRblrjux1VDuitmNrUYrxbts9JowxE0=
   matrix:
-    - TEST_SUITE=each-package-tests
+  - TEST_SUITE=each-package-tests
