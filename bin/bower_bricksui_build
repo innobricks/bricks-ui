@@ -10,10 +10,10 @@ INNOBOWER_REPO_SLUG="innobower/bricksui"
 USER="inno-bricks"
 
 # This ensure that no directories within dist will be copied when script is run.
-INCLUDED_FILES=`find dist -maxdepth 1 -type f`
+#INCLUDED_FILES=`find dist/bricksui/*`
 
 echo -e "INNOBOWER_REPO_SLUG: ${INNOBOWER_REPO_SLUG}\n"
-echo -e "INCLUDED_FILES: ${INCLUDED_FILES}\n"
+#echo -e "INCLUDED_FILES: ${INCLUDED_FILES}\n"
 echo -e "CURRENT_BRANCH: ${TRAVIS_BRANCH}\n"
 
 # Set channel to publish to.  If no suitable branch is found exit successfully.
@@ -36,8 +36,9 @@ echo -e "CHANNEL: ${CHANNEL}\n"
 
 # sending output to /dev/null to prevent GH_TOKEN leak on error
 git clone  https://${USER}:${GH_TOKEN}@github.com/${INNOBOWER_REPO_SLUG}.git bower_bricksui &> /dev/null
-rm -rf bower_bricksui/*
-cp -r ${INCLUDED_FILES} bower_bricksui/
+rm -rf bower_bricksui/* &> /dev/null
+#cp -r ${INCLUDED_FILES} bower_bricksui/
+cp -r dist/bricksui/* bower_bricksui/
 cd bower_bricksui
 git remote rm origin
 
@@ -47,6 +48,5 @@ git add -A
 git commit -m "Bricks-UI Bower Auto build for https://github.com/innobricks/bricks-ui/commits/${TRAVIS_COMMIT}."
 
 # sending output to /dev/null to prevent GH_TOKEN leak on error
-git push -fq origin ${CHANNEL} &> /dev/null
+git push -fq origin master &> /dev/null
 echo -e "Done\n"
-
