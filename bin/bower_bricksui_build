@@ -35,7 +35,7 @@ esac
 echo -e "CHANNEL: ${CHANNEL}\n"
 
 # sending output to /dev/null to prevent GH_TOKEN leak on error
-git clone --branch ${CHANNEL} https://${USER}:${GH_TOKEN}@github.com/${INNOBOWER_REPO_SLUG}.git bower_bricksui &> /dev/null
+git clone  https://${USER}:${GH_TOKEN}@github.com/${INNOBOWER_REPO_SLUG}.git bower_bricksui &> /dev/null
 rm -rf bower_bricksui/*
 cp -r ${INCLUDED_FILES} bower_bricksui/
 cd bower_bricksui
