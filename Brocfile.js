@@ -394,6 +394,12 @@ var bricksuiTree = pickFiles(distTrees, {
     destDir: 'bricksui'
 });
 
+var bricksuiTree = pickFiles('lib/', {
+    files: ['package.json','ember-cli-bricks-ui.js'],
+    srcDir: '/',
+    destDir: 'bricksui'
+});
+
 
 distTrees = mergeTrees([bricksuiTree,compiledTree, distTrees]);
 
