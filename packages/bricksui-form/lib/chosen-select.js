@@ -33,7 +33,7 @@ var ChosenSelect = Ember.EasyForm.Select.reopen({
     attributeBindings: ['data-placeholder'],
 
     init: function () {
-        this._super();
+        this._super.apply(this, arguments);
         this.set('prompt', ' ');  //对于chosen组件，需要存在一个为空的promt
 
         //once elements trigger blur event,the parentView will show validated result,

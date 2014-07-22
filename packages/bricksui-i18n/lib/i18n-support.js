@@ -42,6 +42,7 @@ var tryRequire = function (moduleName) {
         result
         ;
 
+    Ember.assert("global function 'require' can not be undefined", require !== undefined);
     try {
         result = require(moduleName);
     } finally {
@@ -76,7 +77,7 @@ var requireLang = function (parsedName) {
         localeLang = tryRequire(moduleMatcher.longMatch);
         localeName = parsedName.fullName;
     }
-    Ember.warn("Could not find module " + moduleMatcher.shortMatch + " or " + moduleMatcher.shortMatch, localeLang !== undefined);
+//    Ember.warn("Could not find module " + moduleMatcher.shortMatch + " or " + moduleMatcher.shortMatch, localeLang !== undefined);
     if (localeLang && localeLang["default"]) {
         localeLang = localeLang["default"];
     }
@@ -120,7 +121,7 @@ var initLang = function () {
     var parsedName = getLang();
     var locale = requireLang(parsedName);
 
-    if (!locale) {
+    if (!locale.localeLang && !BricksUI.I18n.lang[locale.localeName]) {
         locale = requireLang(BricksUI.ENV.DEFAULT_LANG);
     }
 

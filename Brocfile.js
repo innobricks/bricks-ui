@@ -121,7 +121,8 @@ var yuidocTree = yuidocCompiler('./packages/', {
             "packages/bricksui-i18n/lib",
             "packages/bricksui-thirdpart/lib"
         ],
-        "themedir": "vendor/yuidoc-theme-blue"
+        "themedir": "vendor/yuidoc-theme-blue",
+        "quiet":true
     }
 });
 
