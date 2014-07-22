@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-git config user.email "503335889@qq.com"
-git config user.name "inno-bricks"
+git config --global user.email "503335889@qq.com"
+git config --global user.name "inno-bricks"
 
 # This specifies the repository we are going to work with.  This will most likely be set to 'bricks-ui'
 INNOBOWER_REPO_SLUG="innobower/bricksui"
