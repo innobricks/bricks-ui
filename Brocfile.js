@@ -122,7 +122,7 @@ var yuidocTree = yuidocCompiler('./packages/', {
             "packages/bricksui-thirdpart/lib"
         ],
         "themedir": "vendor/yuidoc-theme-blue",
-        "quiet":true
+        "quiet": true
     }
 });
 
@@ -395,13 +395,20 @@ var bricksuiTree = pickFiles(distTrees, {
 });
 
 var bricksuiTree = pickFiles('lib/', {
-    files: ['package.json','ember-cli-bricks-ui.js'],
+    files: ['package.json', 'ember-cli-bricks-ui.js'],
     srcDir: '/',
     destDir: 'bricksui'
 });
 
+bricksuiTree = replace(bricksuiTree, {
+    files: [ '**/*.js' ],
+    patterns: [
+        { match: /VERSION_STRING_PLACEHOLDER/g, replacement: calculateVersion }
+    ]
+});
 
-distTrees = mergeTrees([bricksuiTree,compiledTree, distTrees]);
+
+distTrees = mergeTrees([bricksuiTree, compiledTree, distTrees]);
 
 var distExportTree = exportTree(distTrees, {
     destDir: 'live-dist'
