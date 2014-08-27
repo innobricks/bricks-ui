@@ -12,6 +12,6 @@ script:
 env:
   global:
   - BROCCOLI_ENV=production
-  - secure: YAA/wzYH4q5gCASkso/dveQn0BeZq+UtShjPvxL+JruQg6Z4gqs9XyDfUfowt8OHtNm1OWdmFCHx/HFgt60d+TePuP9fRWVflAs4HwlqrFN4UnmllUcaK23p0lciBD4TYU+DFW7r+GZlhRblrjux1VDuitmNrUYrxbts9JowxE0=
+  - secure: xUbB+Xvhal5c8J8sAtI+5PxG2083bINLgvDSH6gIiVS6C5Da/gAj0dHEKlw4pJ9kGmFWgZ1P5rxL7FCqRVZIdhdV+nuzTybza9eRBVHcc5QYoSQUr2QRagQ0tOJhIqbTF0nDhMu6CdMnwydOo6gjucHViUrEHifFY1aZbaU7RfE=
   matrix:
   - TEST_SUITE=each-package-tests

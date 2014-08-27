@@ -394,7 +394,7 @@ var bricksuiTree = pickFiles(distTrees, {
     destDir: 'bricksui'
 });
 
-var bricksuiTree = pickFiles('lib/', {
+var bricksCliTree = pickFiles('lib/', {
     files: ['package.json', 'ember-cli-bricks-ui.js'],
     srcDir: '/',
     destDir: 'bricksui'
@@ -408,7 +408,7 @@ bricksuiTree = replace(bricksuiTree, {
 });
 
 
-distTrees = mergeTrees([bricksuiTree, compiledTree, distTrees]);
+distTrees = mergeTrees([bricksuiTree, bricksCliTree, compiledTree, distTrees]);
 
 var distExportTree = exportTree(distTrees, {
     destDir: 'live-dist'
