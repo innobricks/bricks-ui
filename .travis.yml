@@ -9,6 +9,11 @@ after_success:
 - "./bin/bower_bricksui_build"
 script:
 - npm test
+
+cache:
+  directories:
+    - node_modules
+
 env:
   global:
   - BROCCOLI_ENV=production
