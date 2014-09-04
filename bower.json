@@ -1,29 +1,29 @@
 {
-  "name": "bricks-ui",
-  "dependencies": {
-    "ember": "~1.5.0",
-    "ember-data": "~1.0.0-beta.7",
-    "handlebars": "~1.3.0",
-    "jquery": ">= 1.7 <= 2.1",
-    "qunit": "~1.12.0",
-    "loader": "git://github.com/stefanpenner/loader.js#1.0.0",
-    "ember-easyForm": "http://builds.dockyard.com/ember-easyForm/release/ember-easyForm.js",
-    "ember-validations": "http://builds.dockyard.com/ember-validations/release/ember-validations.js",
-    "ember-i18n": "~2.0.0",
-    "jquery-cookie": "~1.4.1",
-    "moment": ">=2.4.0",
-    "chosen": "git://github.com/bricks-vendor/chosen_dist",
-    "bootstrap3-datetimepicker": "git://github.com/bricks-vendor/bootstrap-datetimepicker.git#v3.0zhsp",
-    "yuidoc-theme-blue": "https://github.com/bricks-vendor/yuidoc-theme-blue.git#v0.1.8b",
-    "bootstrap-for-ember": "https://github.com/bricks-vendor/bootstrap-for-ember.git#bricksui",
-    "bootstrap-daterangepicker": "~1.3.7",
-    "ztree_v3": "https://github.com/bricks-vendor/zTree_v3.git#bricksV",
-    "umeditor": "https://github.com/bricks-vendor/umeditor-bower.git",
-    "bootstrap": "~3.1.1",
-    "ember-table": "~0.2.1"
-  },
-  "resolutions": {
-    "ember": "^1.0",
-    "bootstrap": ">= 3.0"
-  }
+    "name": "bricks-ui",
+    "dependencies": {
+        "ember": "~1.5.0",
+        "ember-data": "~1.0.0-beta.7",
+        "handlebars": "~1.3.0",
+        "jquery": ">= 1.7 <= 2.1",
+        "qunit": "~1.12.0",
+        "loader": "git://github.com/stefanpenner/loader.js#1.0.0",
+        "ember-easyForm": "http://builds.dockyard.com/ember-easyForm/release/ember-easyForm.js",
+        "ember-validations": "http://builds.dockyard.com/ember-validations/release/ember-validations.js",
+        "ember-i18n": "~2.0.0",
+        "jquery-cookie": "~1.4.1",
+        "momentjs": "~2.5.1",
+        "chosen": "git://github.com/bricks-vendor/chosen_dist",
+        "bootstrap3-datetimepicker": "git://github.com/bricks-vendor/bootstrap-datetimepicker.git#v3.0zhsp",
+        "yuidoc-theme-blue": "https://github.com/bricks-vendor/yuidoc-theme-blue.git#v0.1.8b",
+        "bootstrap-for-ember": "https://github.com/bricks-vendor/bootstrap-for-ember.git#bricksui",
+        "bootstrap-daterangepicker": "~1.3.7",
+        "ztree_v3": "https://github.com/bricks-vendor/zTree_v3.git#bricksV",
+        "umeditor": "https://github.com/bricks-vendor/umeditor-bower.git",
+        "bootstrap": "~3.1.1",
+        "ember-table": "~0.2.1"
+    },
+    "resolutions": {
+        "ember": "^1.0",
+        "bootstrap": ">= 3.0"
+    }
 }
