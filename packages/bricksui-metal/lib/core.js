@@ -53,7 +53,11 @@ var DEFAULT_ENV = {
      * @type String
      * @default zh-cn
      */
-    DEFAULT_LANG: 'zh-cn'
+    DEFAULT_LANG: {
+        fullName: "zh-cn",
+        language: "zh",
+        area: "china"
+    }
 };
 
 /**

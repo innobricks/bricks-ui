@@ -30,7 +30,7 @@ export default function swapHelpers(hash) {
     for (var helper in hash) {
         var tmp = helpers[helper];
         Ember.assert("helper:" + helper + " does not exist !", tmp);
-        delete helpers[helper];
+//        delete helpers[helper];
         helpers[hash[helper]] = tmp;
     }
 }
