@@ -4,6 +4,7 @@ import BuEditor from './bu-editor';
 import BuDatePicker from './bu-datepicker';
 import BuDateRange from './bu-daterange';
 import BuTree from './bu-tree';
+import BuSelect from './bu-select';
 /**
  * 向模板中注册
  *  控制器
@@ -16,11 +17,12 @@ import BuTree from './bu-tree';
  *    bu-tree
  */
 export default
-    function initFormController(container, application) {
-        container.register('controller:checkboxItem', CheckboxItemController);
-        container.register('controller:radioItem', RadioItemController);
-        container.register('component:bu-editor', BuEditor);
-        container.register('component:bu-datepicker', BuDatePicker);
-        container.register('component:bu-daterange', BuDateRange);
-        container.register('component:bu-tree', BuTree);
-    }
+function initFormController(container, application) {
+  container.register('controller:checkboxItem', CheckboxItemController);
+  container.register('controller:radioItem', RadioItemController);
+  container.register('component:bu-editor', BuEditor);
+  container.register('component:bu-datepicker', BuDatePicker);
+  container.register('component:bu-daterange', BuDateRange);
+  container.register('component:bu-tree', BuTree);
+  container.register('component:bu-select', BuSelect);
+}

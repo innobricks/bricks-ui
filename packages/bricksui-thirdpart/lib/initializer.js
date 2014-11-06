@@ -22,6 +22,7 @@ swapHelpers({
     "bs-tooltip": "bu-tooltip",
     "bs-wizard": "bu-wizard",
     "table-component": "bu-table"
+
 });
 
 Ember.onLoad("Ember.Application", function (Application) {
